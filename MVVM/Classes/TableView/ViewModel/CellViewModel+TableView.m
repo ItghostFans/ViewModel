@@ -1,0 +1,68 @@
+//
+//  CellViewModel+TableView.m
+//  AFNetworking
+//
+//  Created by ItghostFan on 2024/2/4.
+//
+
+#import "CellViewModel+TableView.h"
+
+#import <objc/runtime.h>
+
+#import "TableViewModelCell.h"
+
+@interface CellViewModel ()
+@property (strong, nonatomic, readonly) NSMutableDictionary<__kindof NSNumber *, __kindof NSNumber *> *widthHeights;
+@property (assign, nonatomic) CGSize tableCellSize;               // 最后一次tableCellHeightForWidth的size。
+@end
+
+@implementation CellViewModel (TableView)
+
+- (NSMutableDictionary<__kindof NSNumber *, __kindof NSNumber *> *)widthHeights {
+    NSMutableDictionary<__kindof NSNumber *, __kindof NSNumber *> *widthHeights = objc_getAssociatedObject(self, @selector(widthHeights));
+    if (!widthHeights) {
+        widthHeights = NSMutableDictionary.new;
+        objc_setAssociatedObject(self, @selector(widthHeights), widthHeights, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return widthHeights;
+}
+
+#pragma mark - ITableCellViewModel
+
+- (void)setTableIndexPath:(NSIndexPath *)tableIndexPath {
+    objc_setAssociatedObject(self, @selector(tableIndexPath), tableIndexPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSIndexPath *)tableIndexPath {
+    return objc_getAssociatedObject(self, @selector(tableIndexPath));
+}
+
+- (CGSize)tableCellSize {
+    NSValue *tableCellSize = objc_getAssociatedObject(self, @selector(tableCellSize));
+    return [tableCellSize CGSizeValue];
+}
+
+- (void)setTableCellSize:(CGSize)tableCellSize {
+    objc_setAssociatedObject(self, @selector(tableCellSize), [NSValue valueWithCGSize:tableCellSize], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (Class)tableCellClass {
+    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
+    return TableViewModelCell.class;
+}
+
+- (CGFloat)tableCellHeightForWidth:(CGFloat)width {
+    NSNumber *height;
+    @synchronized (self.widthHeights) {
+        height = self.widthHeights[@(width)];
+        if (!height) {
+            CGFloat contentWidth = width;
+            height = @([self.tableCellClass heightForWidth:&contentWidth viewModel:self]);
+            self.widthHeights[@(width)] = height;
+            self.tableCellSize = CGSizeMake(contentWidth, height.doubleValue);
+        }
+    }
+    return height.doubleValue;
+}
+
+@end
