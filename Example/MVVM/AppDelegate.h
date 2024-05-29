@@ -1,5 +1,5 @@
 //
-//  BASEViewController.h
+//  AppDelegate.h
 //  MVVM
 //
 //  Created by ItghostFans on 05/29/2024.
@@ -8,6 +8,8 @@
 
 @import UIKit;
 
-@interface BASEViewController : UIViewController
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 @end

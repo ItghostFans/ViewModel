@@ -1,18 +1,18 @@
 //
-//  BASEViewController.m
+//  ViewController.m
 //  MVVM
 //
 //  Created by ItghostFans on 05/29/2024.
 //  Copyright (c) 2024 ItghostFans. All rights reserved.
 //
 
-#import "BASEViewController.h"
+#import "ViewController.h"
 
-@interface BASEViewController ()
+@interface ViewController ()
 
 @end
 
-@implementation BASEViewController
+@implementation ViewController
 
 - (void)viewDidLoad
 {

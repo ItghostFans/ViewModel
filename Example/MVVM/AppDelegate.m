@@ -1,14 +1,14 @@
 //
-//  BASEAppDelegate.m
+//  AppDelegate.m
 //  MVVM
 //
 //  Created by ItghostFans on 05/29/2024.
 //  Copyright (c) 2024 ItghostFans. All rights reserved.
 //
 
-#import "BASEAppDelegate.h"
+#import "AppDelegate.h"
 
-@implementation BASEAppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
