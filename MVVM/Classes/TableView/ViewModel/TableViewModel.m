@@ -137,7 +137,6 @@
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
         [indexPathes addObject:[NSIndexPath indexPathForRow:idx inSection:section]];
     }];
-    [self.tableView beginUpdates];
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
             for (CellViewModel *cellViewModel in news) {
@@ -158,9 +157,6 @@
             break;
         }
         case NSKeyValueChangeReplacement: {
-            for (BaseViewModels *sectionViewModel in news) {
-                [self addKvoSectionViewModel:sectionViewModel];
-            }
             [self.tableView reloadRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
@@ -168,7 +164,6 @@
             break;
         }
     }
-    [self.tableView endUpdates];
 }
 
 #pragma mark - Private

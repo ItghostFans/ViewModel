@@ -185,9 +185,6 @@ UICollectionViewDelegate>
             break;
         }
         case NSKeyValueChangeReplacement: {
-            for (BaseViewModels *sectionViewModel in news) {
-                [self addKvoSectionViewModel:sectionViewModel];
-            }
             [self.collectionView reloadItemsAtIndexPaths:indexPathes];
             break;
         }
