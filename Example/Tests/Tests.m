@@ -2,8 +2,8 @@
 //  MVVMTests.m
 //  MVVMTests
 //
-//  Created by fanchunxing1 on 05/29/2024.
-//  Copyright (c) 2024 fanchunxing1. All rights reserved.
+//  Created by ItghostFans on 05/29/2024.
+//  Copyright (c) 2024 ItghostFans. All rights reserved.
 //
 
 // https://github.com/Specta/Specta

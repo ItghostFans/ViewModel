@@ -1,6 +1,6 @@
 # MVVM
 
-[![CI Status](https://img.shields.io/travis/fanchunxing1/MVVM.svg?style=flat)](https://travis-ci.org/fanchunxing1/MVVM)
+[![CI Status](https://img.shields.io/travis/ItghostFans/MVVM.svg?style=flat)](https://travis-ci.org/ItghostFans/MVVM)
 [![Version](https://img.shields.io/cocoapods/v/MVVM.svg?style=flat)](https://cocoapods.org/pods/MVVM)
 [![License](https://img.shields.io/cocoapods/l/MVVM.svg?style=flat)](https://cocoapods.org/pods/MVVM)
 [![Platform](https://img.shields.io/cocoapods/p/MVVM.svg?style=flat)](https://cocoapods.org/pods/MVVM)
@@ -22,7 +22,7 @@ pod 'MVVM'
 
 ## Author
 
-fanchunxing1, fanchunxing1@joyy.com
+ItghostFan, ItghostFans@gmail.com
 
 ## License
 
