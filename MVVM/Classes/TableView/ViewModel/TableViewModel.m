@@ -143,7 +143,7 @@
             for (CellViewModel *cellViewModel in news) {
                 [self registerCellClass:cellViewModel.tableCellClass];
             }
-            [self.tableView reloadData];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
         case NSKeyValueChangeInsertion: {

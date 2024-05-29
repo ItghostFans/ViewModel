@@ -112,7 +112,7 @@ UICollectionViewDelegate>
                                       observer:self] takeUntil:viewModel.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         RACTupleUnpack(id object OS_UNUSED, NSDictionary *change) = x;
         @strongify(self, viewModel);
-        [self onCellsChange:change object:viewModel observer:self];
+        [self onItemsChange:change object:viewModel observer:self];
     }];
 }
 
@@ -155,7 +155,7 @@ UICollectionViewDelegate>
     }
 }
 
-- (void)onCellsChange:(NSDictionary<NSKeyValueChangeKey,id> *)change object:(id)object observer:(id)observer {
+- (void)onItemsChange:(NSDictionary<NSKeyValueChangeKey,id> *)change object:(id)object observer:(id)observer {
     NSKeyValueChange valueChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
     NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
     NSArray *news = change[NSKeyValueChangeNewKey];
@@ -170,7 +170,7 @@ UICollectionViewDelegate>
             for (CellViewModel *cellViewModel in news) {
                 [self registerCellClass:cellViewModel.collectionCellClass];
             }
-            [self.collectionView reloadData];
+            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
             break;
         }
         case NSKeyValueChangeInsertion: {
