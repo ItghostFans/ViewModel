@@ -9,19 +9,13 @@
 
 @implementation CellViewModel
 
+@synthesize delegate = _delegate;
+
 - (instancetype)init {
     if (self = [super init]) {
         _deselectAfterDidSelect = YES;
     }
     return self;
-}
-
-- (void)setDelegate:(id<ICellViewModelDelegate>)delegate {
-    [super setDelegate:delegate];
-}
-
-- (id<ICellViewModelDelegate>)delegate {
-    return (id<ICellViewModelDelegate>)[super delegate];
 }
 
 @end

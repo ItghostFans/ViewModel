@@ -271,9 +271,6 @@ UICollectionViewDelegate>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];
-    if ([cellViewModel.delegate respondsToSelector:@selector(didSelectedViewModel:atIndexPath:)]) {
-        [cellViewModel.delegate didSelectedViewModel:cellViewModel atIndexPath:indexPath];
-    }
     if (cellViewModel.deselectAfterDidSelect) {
         [collectionView deselectItemAtIndexPath:indexPath animated:NO];
     }

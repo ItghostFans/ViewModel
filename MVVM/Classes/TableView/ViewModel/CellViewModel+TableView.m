@@ -29,10 +29,6 @@
 
 #pragma mark - ITableCellViewModel
 
-- (void)setTableIndexPath:(NSIndexPath *)tableIndexPath {
-    objc_setAssociatedObject(self, @selector(tableIndexPath), tableIndexPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (NSIndexPath *)tableIndexPath {
     return objc_getAssociatedObject(self, @selector(tableIndexPath));
 }
@@ -59,7 +55,6 @@
             CGFloat contentWidth = width;
             height = @([self.tableCellClass heightForWidth:&contentWidth viewModel:self]);
             self.widthHeights[@(width)] = height;
-            self.tableCellSize = CGSizeMake(contentWidth, height.doubleValue);
         }
     }
     return height.doubleValue;

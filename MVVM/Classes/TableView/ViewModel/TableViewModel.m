@@ -6,20 +6,15 @@
 //
 
 #import "TableViewModel.h"
+#import "TableViewModel+UITableViewDelegate.h"
+#import "TableViewModel+UITableViewDataSource.h"
 
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
 
 #import "CellViewModel+TableView.h"
-#import "TableViewModelCell.h"
-#import "TableHeaderView.h"
-#import "TableFooterView.h"
 
-@interface CellViewModel ()
-@property (weak, nonatomic) NSIndexPath *tableIndexPath;
-@end
-
-@interface TableViewModel () <UITableViewDelegate, UITableViewDataSource>
+@interface TableViewModel ()
 
 @property (strong, nonatomic) NSMutableSet *registeredCellIdentifiers;
 @property (strong, nonatomic) NSMutableSet *registeredHeaderFooterIdentifiers;
@@ -27,6 +22,8 @@
 @end
 
 @implementation TableViewModel
+
+@synthesize delegate = _delegate;
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -61,16 +58,12 @@
             [self registerCellClass:cellViewModel.tableCellClass];
         }
     }
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-}
-
-- (void)setDelegate:(id<ITableViewModelDelegate>)delegate {
-    [super setDelegate:delegate];
-}
-
-- (id<ITableViewModelDelegate>)delegate {
-    return (id<ITableViewModelDelegate>)super.delegate;
+    if (!_tableView.delegate) {
+        _tableView.delegate = self;
+    }
+    if (!_tableView.dataSource) {
+        _tableView.dataSource = self;
+    }
 }
 
 #pragma mark - KVO Handler
@@ -181,95 +174,6 @@
     if (identifier && ![_registeredHeaderFooterIdentifiers containsObject:identifier]) {
         [self.tableView registerClass:class forHeaderFooterViewReuseIdentifier:identifier];
         [_registeredHeaderFooterIdentifiers addObject:identifier];
-    }
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.sectionViewModels[indexPath.section][indexPath.row] tableCellHeightForWidth:CGRectGetWidth(tableView.frame)];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.row];
-    cellViewModel.tableIndexPath = indexPath;
-    ((TableViewModelCell *)cell).viewModel = cellViewModel;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.row];
-    if ([cellViewModel.delegate respondsToSelector:@selector(didSelectedViewModel:atIndexPath:)]) {
-        [cellViewModel.delegate didSelectedViewModel:cellViewModel atIndexPath:indexPath];
-    }
-    if (cellViewModel.deselectAfterDidSelect) {
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    }
-    if ([self.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
-        [self.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-    }
-}
-
-/// mark - Header
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    if (sectionViewModel.tableHeaderClass) {
-        return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(sectionViewModel.tableHeaderClass)];
-    }
-    return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return [sectionViewModel tableHeaderHeightForWidth:CGRectGetWidth(tableView.bounds)];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    ((TableHeaderView *)view).viewModel = sectionViewModel;
-}
-
-/// mark - Footer
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    if (sectionViewModel.tableFooterClass) {
-        return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(sectionViewModel.tableFooterClass)];
-    }
-    return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return [sectionViewModel tableFooterHeightForWidth:CGRectGetWidth(tableView.bounds)];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    ((TableFooterView *)view).viewModel = sectionViewModel;
-}
-
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sectionViewModels.viewModels.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.row];
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(cellViewModel.tableCellClass) forIndexPath:indexPath];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.sectionViewModels[section] viewModels].count;
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if ([self.delegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
-        [self.delegate scrollViewDidScroll:scrollView];
     }
 }
 

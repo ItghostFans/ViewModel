@@ -13,8 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ITableViewModelDelegate <UITableViewDelegate, IBaseViewModelDelegate>
-
+@protocol ITableViewModelDelegate <IBaseViewModelDelegate>
 @end
 
 @class CellViewModel;

@@ -12,11 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class CellViewModel;
 
 @protocol ICellViewModelDelegate <IBaseViewModelDelegate>
-
-@optional
-
-- (void)didSelectedViewModel:(CellViewModel *)viewModel atIndexPath:(NSIndexPath *)indexPath;
-
 @end
 
 @interface CellViewModel : BaseViewModel
