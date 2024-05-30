@@ -6,19 +6,15 @@
 //
 
 #import "CollectionViewModel.h"
+#import "CollectionViewModel+UICollectionViewDelegate.h"
+#import "CollectionViewModel+UICollectionViewDataSource.h"
 
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
 
 #import "CellViewModel+CollectionView.h"
-#import "CollectionViewModelCell.h"
-#import "CollectionHeaderView.h"
-#import "CollectionFooterView.h"
 
-@interface CollectionViewModel () <
-UICollectionViewDelegateFlowLayout,
-UICollectionViewDataSource,
-UICollectionViewDelegate>
+@interface CollectionViewModel ()
 
 @property (strong, nonatomic, nonnull) NSMutableSet *registeredCellIdentifiers;
 @property (strong, nonatomic, nonnull) NSMutableSet *registeredHeaderIdentifiers;
@@ -191,91 +187,6 @@ UICollectionViewDelegate>
         default: {
             break;
         }
-    }
-}
-
-#pragma mark - UICollectionViewDelegateFlowLayout
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];
-    return [cellViewModel collectionCellSizeForSize:collectionView.frame.size];
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return sectionViewModel.collectionMinimumInteritemSpacing;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return sectionViewModel.collectionMinimumLineSpacing;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return [sectionViewModel collectionHeaderSizeForSize:collectionView.frame.size];
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return [sectionViewModel collectionFooterSizeForSize:collectionView.frame.size];
-}
-
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.sectionViewModels.viewModels.count;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.sectionViewModels[section] viewModels].count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(cellViewModel.collectionCellClass) forIndexPath:indexPath];
-}
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
-        return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(sectionViewModel.collectionHeaderClass) forIndexPath:indexPath];
-    }
-    if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
-        SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
-        return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(sectionViewModel.collectionFooterClass) forIndexPath:indexPath];
-    }
-    return nil;
-}
-
-#pragma mark - UICollectionViewDelegate
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];
-    cellViewModel.collectionIndexPath = indexPath;
-    ((CollectionViewModelCell *)cell).viewModel = cellViewModel;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
-    sectionViewModel.collectionIndexPath = indexPath;
-    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
-        ((CollectionHeaderView *)view).viewModel = sectionViewModel;
-        return;
-    }
-    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
-        ((CollectionFooterView *)view).viewModel = sectionViewModel;
-        return;
-    }
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];
-    if (cellViewModel.deselectAfterDidSelect) {
-        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-    }
-    if ([self.delegate respondsToSelector:@selector(collectionView:didSelectItemAtIndexPath:)]) {
-        [self.delegate collectionView:collectionView didSelectItemAtIndexPath:indexPath];
     }
 }
 

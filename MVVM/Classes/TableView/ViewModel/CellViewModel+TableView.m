@@ -9,6 +9,8 @@
 
 #import <objc/runtime.h>
 
+#import "WeakifyProxy.h"
+#import "TableViewModel.h"
 #import "TableViewModelCell.h"
 
 @interface CellViewModel ()
@@ -30,7 +32,24 @@
 #pragma mark - ITableCellViewModel
 
 - (NSIndexPath *)tableIndexPath {
-    return objc_getAssociatedObject(self, @selector(tableIndexPath));
+    for (NSUInteger section = 0; section < self.tableViewModel.sectionViewModels.viewModels.count; ++section) {
+        SectionViewModel *sectionViewModel = self.tableViewModel.sectionViewModels.viewModels[section];
+        for (NSUInteger row = 0; row < sectionViewModel.viewModels.count; ++row) {
+            CellViewModel *cellViewModel = sectionViewModel.viewModels[row];
+            if (cellViewModel == self) {
+                return [NSIndexPath indexPathForRow:row inSection:section];
+            }
+        }
+    }
+    return nil;
+}
+
+- (TableViewModel *)tableViewModel {
+    return [objc_getAssociatedObject(self, @selector(tableViewModel)) target];
+}
+
+- (void)setTableViewModel:(TableViewModel *)tableViewModel {
+    objc_setAssociatedObject(self, @selector(tableViewModel), [[WeakifyProxy alloc] initWithTarget:tableViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGSize)tableCellSize {
