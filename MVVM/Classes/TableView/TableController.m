@@ -1,29 +1,30 @@
 //
-//  TableViewController.m
+//  TableController.m
 //  iOSAbility
 //
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import "TableViewController.h"
+#import "TableController.h"
 
 #import "TableViewModel.h"
+#import "TableControllerViewModel.h"
 
-@interface TableViewController ()
+@interface TableController ()
 
 @property (strong, nonatomic) UITableView *tableView;
 
 @end
 
-@implementation TableViewController
+@implementation TableController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)setViewModel:(TableViewModel *)viewModel {
+- (void)setViewModel:(TableControllerViewModel *)viewModel {
     _viewModel = viewModel;
-    _viewModel.tableView = self.tableView;
+    _viewModel.tableViewModel.tableView = self.tableView;
 }
 
 #pragma mark - Getter

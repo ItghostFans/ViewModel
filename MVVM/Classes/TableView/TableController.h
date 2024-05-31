@@ -1,5 +1,5 @@
 //
-//  TableViewController.h
+//  TableController.h
 //  iOSAbility
 //
 //  Created by ItghostFan on 2024/2/4.
@@ -9,13 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TableViewModel;
+@class TableControllerViewModel;
 
-@interface TableViewController : UIViewController
+@interface TableController : UIViewController
 
 @property (strong, nonatomic, nonnull, readonly) UITableView *tableView;
 
-@property (strong, nonatomic, nullable) TableViewModel *viewModel;
+@property (strong, nonatomic, nullable) TableControllerViewModel *viewModel;
 
 @end
 

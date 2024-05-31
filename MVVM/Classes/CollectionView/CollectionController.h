@@ -9,13 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CollectionViewModel;
+@class CollectionControllerViewModel;
 
 @interface CollectionController : UIViewController
 
 @property (strong, nonatomic, readonly) UICollectionView *collectionView;
 
-@property (strong, nonatomic, nullable) CollectionViewModel *viewModel;
+@property (strong, nonatomic, nullable) CollectionControllerViewModel *viewModel;
 
 @end
 

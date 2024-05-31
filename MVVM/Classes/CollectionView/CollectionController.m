@@ -8,6 +8,7 @@
 #import "CollectionController.h"
 
 #import "CollectionViewModel.h"
+#import "CollectionControllerViewModel.h"
 
 @interface CollectionController ()
 
@@ -24,9 +25,9 @@
 
 #pragma mark - Setter
 
-- (void)setViewModel:(CollectionViewModel *)viewModel {
+- (void)setViewModel:(CollectionControllerViewModel *)viewModel {
     _viewModel = viewModel;
-    _viewModel.collectionView = self.collectionView;
+    _viewModel.collectionViewModel.collectionView = self.collectionView;
 }
 
 #pragma mark - Getter
