@@ -166,7 +166,7 @@
             for (CellViewModel *cellViewModel in news) {
                 [self registerCellClass:cellViewModel.collectionCellClass];
             }
-            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
+//            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
             break;
         }
         case NSKeyValueChangeInsertion: {
