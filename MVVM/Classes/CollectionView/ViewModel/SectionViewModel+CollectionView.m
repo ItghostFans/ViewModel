@@ -59,6 +59,22 @@
     objc_setAssociatedObject(self, @selector(collectionViewModel), [[WeakifyProxy alloc] initWithTarget:collectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (CGFloat)collectionMinimumLineSpacing {
+    return [objc_getAssociatedObject(self, @selector(collectionMinimumLineSpacing)) doubleValue];
+}
+
+- (void)setCollectionMinimumLineSpacing:(CGFloat)collectionMinimumLineSpacing {
+    objc_setAssociatedObject(self, @selector(collectionMinimumLineSpacing), @(collectionMinimumLineSpacing), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)collectionMinimumInteritemSpacing {
+    return [objc_getAssociatedObject(self, @selector(collectionMinimumInteritemSpacing)) doubleValue];
+}
+
+- (void)setCollectionMinimumInteritemSpacing:(CGFloat)collectionMinimumInteritemSpacing {
+    objc_setAssociatedObject(self, @selector(collectionMinimumInteritemSpacing), @(collectionMinimumInteritemSpacing), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (Class)collectionHeaderClass {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return CollectionHeaderView.class;

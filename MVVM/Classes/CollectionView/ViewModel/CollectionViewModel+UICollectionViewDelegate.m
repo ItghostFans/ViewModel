@@ -15,17 +15,21 @@
 @implementation CollectionViewModel (UICollectionViewDelegate)
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];
+    SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
+    CellViewModel *cellViewModel = sectionViewModel[indexPath.item];
+    cellViewModel.collectionSectionViewModel = sectionViewModel;
     ((CollectionViewModelCell *)cell).viewModel = cellViewModel;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
     SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+        sectionViewModel.collectionViewModel = self;
         ((CollectionHeaderView *)view).viewModel = sectionViewModel;
         return;
     }
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+        sectionViewModel.collectionViewModel = self;
         ((CollectionFooterView *)view).viewModel = sectionViewModel;
         return;
     }

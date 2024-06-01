@@ -7,6 +7,7 @@
 
 #import "TableViewModel+UITableViewDelegate.h"
 
+#import "SectionViewModel+TableView.h"
 #import "CellViewModel+TableView.h"
 
 #import "TableViewModelCell.h"
@@ -20,7 +21,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.row];
+    SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
+    CellViewModel *cellViewModel = sectionViewModel[indexPath.row];
+    cellViewModel.tableSectionViewModel = sectionViewModel;
     ((TableViewModelCell *)cell).viewModel = cellViewModel;
 }
 
@@ -48,6 +51,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
+    sectionViewModel.tableViewModel = self;
     ((TableHeaderView *)view).viewModel = sectionViewModel;
 }
 
@@ -68,6 +72,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
+    sectionViewModel.tableViewModel = self;
     ((TableFooterView *)view).viewModel = sectionViewModel;
 }
 
