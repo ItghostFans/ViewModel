@@ -9,6 +9,8 @@
 
 #import <objc/runtime.h>
 
+#import "WeakifyProxy.h"
+#import "TableViewModel.h"
 #import "TableHeaderView.h"
 #import "TableFooterView.h"
 
@@ -42,11 +44,16 @@
 #pragma mark - ITableSectionViewModel
 
 - (NSInteger)tableSection {
-    return [objc_getAssociatedObject(self, @selector(tableSection)) integerValue];
+    NSUInteger section = [self.tableViewModel.sectionViewModels.viewModels indexOfObject:self];
+    return section;
 }
 
-- (void)setTableSection:(NSInteger)tableSection {
-    objc_setAssociatedObject(self, @selector(tableSection), @(tableSection), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (TableViewModel *)tableViewModel {
+    return [objc_getAssociatedObject(self, @selector(tableViewModel)) target];
+}
+
+- (void)setTableViewModel:(TableViewModel *)tableViewModel {
+    objc_setAssociatedObject(self, @selector(tableViewModel), [[WeakifyProxy alloc] initWithTarget:tableViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (Class)tableHeaderClass {

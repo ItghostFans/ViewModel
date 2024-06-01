@@ -9,6 +9,8 @@
 
 #import <objc/runtime.h>
 
+#import "WeakifyProxy.h"
+#import "CollectionViewModel.h"
 #import "CollectionHeaderView.h"
 #import "CollectionFooterView.h"
 
@@ -42,7 +44,19 @@
 #pragma mark - ICollectionSectionViewModel
 
 - (NSIndexPath *)collectionIndexPath {
-    return objc_getAssociatedObject(self, @selector(collectionIndexPath));
+    NSUInteger section = [self.collectionViewModel.sectionViewModels.viewModels indexOfObject:self];
+    if (section == NSNotFound) {
+        return nil;
+    }
+    return [NSIndexPath indexPathForItem:0 inSection:section];
+}
+
+- (CollectionViewModel *)collectionViewModel {
+    return [objc_getAssociatedObject(self, @selector(collectionViewModel)) target];
+}
+
+- (void)setCollectionViewModel:(CollectionViewModel *)collectionViewModel {
+    objc_setAssociatedObject(self, @selector(collectionViewModel), [[WeakifyProxy alloc] initWithTarget:collectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (Class)collectionHeaderClass {

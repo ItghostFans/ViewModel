@@ -12,6 +12,7 @@
 #import "WeakifyProxy.h"
 #import "CollectionViewModel.h"
 #import "CollectionViewModelCell.h"
+#import "SectionViewModel+CollectionView.h"
 
 @interface CellViewModel ()
 
@@ -33,16 +34,16 @@
 #pragma mark - ICollectionCellViewModel
 
 - (NSIndexPath *)collectionIndexPath {
-    for (NSUInteger section = 0; section < self.collectionViewModel.sectionViewModels.viewModels.count; ++section) {
-        SectionViewModel *sectionViewModel = self.collectionViewModel.sectionViewModels.viewModels[section];
-        for (NSUInteger item = 0; item < sectionViewModel.viewModels.count; ++item) {
-            CellViewModel *cellViewModel = sectionViewModel.viewModels[item];
-            if (cellViewModel == self) {
-                return [NSIndexPath indexPathForItem:item inSection:section];
-            }
-        }
+    NSUInteger section = [self.collectionSectionViewModel.viewModels indexOfObject:self];
+    if (section == NSNotFound) {
+        return nil;
     }
-    return nil;
+    SectionViewModel *sectionViewModel = self.collectionSectionViewModel[section];
+    NSUInteger item = [sectionViewModel.viewModels indexOfObject:self];
+    if (item == NSNotFound) {
+        return nil;
+    }
+    return [NSIndexPath indexPathForItem:item inSection:section];
 }
 
 - (Class)collectionCellClass {
@@ -50,12 +51,12 @@
     return CollectionViewModelCell.class;
 }
 
-- (CollectionViewModel *)collectionViewModel {
-    return [objc_getAssociatedObject(self, @selector(collectionViewModel)) target];
+- (SectionViewModel *)collectionSectionViewModel {
+    return [objc_getAssociatedObject(self, @selector(collectionSectionViewModel)) target];
 }
 
-- (void)setCollectionViewModel:(CollectionViewModel *)collectionViewModel {
-    objc_setAssociatedObject(self, @selector(collectionViewModel), [[WeakifyProxy alloc] initWithTarget:collectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setCollectionSectionViewModel:(SectionViewModel *)collectionSectionViewModel {
+    objc_setAssociatedObject(self, @selector(collectionSectionViewModel), [[WeakifyProxy alloc] initWithTarget:collectionSectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGSize)collectionCellSizeForSize:(CGSize)size {

@@ -9,13 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TableViewModel;
+@class SectionViewModel;
 
 @protocol ITableCellViewModel <NSObject>
 
 @property (weak, nonatomic, nullable, readonly) NSIndexPath *tableIndexPath;
 
-@property (weak, nonatomic, nullable) TableViewModel *tableViewModel;
+@property (weak, nonatomic, nullable) SectionViewModel *tableSectionViewModel;
 
 - (CGFloat)tableCellHeightForWidth:(CGFloat)width;
 

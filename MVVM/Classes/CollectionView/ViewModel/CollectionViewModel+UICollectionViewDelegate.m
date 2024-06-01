@@ -21,7 +21,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
     SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
-    sectionViewModel.collectionIndexPath = indexPath;
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
         ((CollectionHeaderView *)view).viewModel = sectionViewModel;
         return;

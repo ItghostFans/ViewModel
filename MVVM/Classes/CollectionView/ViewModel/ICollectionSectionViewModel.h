@@ -9,12 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CollectionViewModel;
+
 @protocol ICollectionSectionViewModel <NSObject>
 
-@property (weak, nonatomic, nullable) NSIndexPath *collectionIndexPath;
-
-@property (assign, nonatomic, readonly) CGSize collectionHeaderSize;               // 最后一次collectionHeaderSizeForSize:的size。
-@property (assign, nonatomic, readonly) CGSize collectionFooterSize;               // 最后一次collectionFooterSizeForSize:的size。
+@property (weak, nonatomic, nullable, readonly) NSIndexPath *collectionIndexPath;
+@property (weak, nonatomic, nullable) CollectionViewModel *collectionViewModel;
 
 @property (assign, nonatomic) CGFloat collectionMinimumLineSpacing;
 @property (assign, nonatomic) CGFloat collectionMinimumInteritemSpacing;

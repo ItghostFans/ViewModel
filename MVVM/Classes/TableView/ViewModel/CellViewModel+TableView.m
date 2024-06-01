@@ -32,24 +32,24 @@
 #pragma mark - ITableCellViewModel
 
 - (NSIndexPath *)tableIndexPath {
-    for (NSUInteger section = 0; section < self.tableViewModel.sectionViewModels.viewModels.count; ++section) {
-        SectionViewModel *sectionViewModel = self.tableViewModel.sectionViewModels.viewModels[section];
-        for (NSUInteger row = 0; row < sectionViewModel.viewModels.count; ++row) {
-            CellViewModel *cellViewModel = sectionViewModel.viewModels[row];
-            if (cellViewModel == self) {
-                return [NSIndexPath indexPathForRow:row inSection:section];
-            }
-        }
+    NSUInteger section = [self.tableSectionViewModel.viewModels indexOfObject:self];
+    if (section == NSNotFound) {
+        return nil;
     }
-    return nil;
+    SectionViewModel *sectionViewModel = self.tableSectionViewModel[section];
+    NSUInteger row = [sectionViewModel.viewModels indexOfObject:self];
+    if (row == NSNotFound) {
+        return nil;
+    }
+    return [NSIndexPath indexPathForRow:row inSection:section];
 }
 
-- (TableViewModel *)tableViewModel {
-    return [objc_getAssociatedObject(self, @selector(tableViewModel)) target];
+- (SectionViewModel *)tableSectionViewModel {
+    return [objc_getAssociatedObject(self, @selector(tableSectionViewModel)) target];
 }
 
-- (void)setTableViewModel:(TableViewModel *)tableViewModel {
-    objc_setAssociatedObject(self, @selector(tableViewModel), [[WeakifyProxy alloc] initWithTarget:tableViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setTableSectionViewModel:(SectionViewModel *)tableSectionViewModel {
+    objc_setAssociatedObject(self, @selector(tableSectionViewModel), [[WeakifyProxy alloc] initWithTarget:tableSectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGSize)tableCellSize {

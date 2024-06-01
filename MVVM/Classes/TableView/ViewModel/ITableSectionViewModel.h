@@ -9,9 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TableViewModel;
+
 @protocol ITableSectionViewModel <NSObject>
 
-@property (assign, nonatomic) NSInteger tableSection;
+@property (assign, nonatomic, readonly) NSInteger tableSection;
+@property (weak, nonatomic, nullable) TableViewModel *tableViewModel;
+
 @property (strong, nonatomic, nullable, readonly) Class tableHeaderClass;
 @property (strong, nonatomic, nullable, readonly) Class tableFooterClass;
 
