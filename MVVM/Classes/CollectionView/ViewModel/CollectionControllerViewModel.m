@@ -9,4 +9,11 @@
 
 @implementation CollectionControllerViewModel
 
+- (instancetype)initWithCollectionViewModel:(CollectionViewModel *)collectionViewModel {
+    if (self = [super init]) {
+        _collectionViewModel = collectionViewModel;
+    }
+    return self;
+}
+
 @end

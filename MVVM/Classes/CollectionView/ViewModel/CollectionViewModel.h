@@ -1,6 +1,6 @@
 //
 //  CollectionViewModel.h
-//  iOSAbility
+//  MVVM
 //
 //  Created by ItghostFan on 2024/2/4.
 //

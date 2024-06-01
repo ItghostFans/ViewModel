@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, nullable, readonly) TableViewModel *tableViewModel;
 
+- (instancetype)initWithTableViewModel:(TableViewModel *)tableViewModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -13,7 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CollectionControllerViewModel : BaseViewModel
 
-@property (strong, nonatomic, nullable) CollectionViewModel *collectionViewModel;
+@property (strong, nonatomic, nullable, readonly) CollectionViewModel *collectionViewModel;
+
+- (instancetype)initWithCollectionViewModel:(CollectionViewModel *)collectionViewModel;
 
 @end
 

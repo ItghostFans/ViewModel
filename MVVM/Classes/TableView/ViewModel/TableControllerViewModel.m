@@ -9,4 +9,11 @@
 
 @implementation TableControllerViewModel
 
+- (instancetype)initWithTableViewModel:(TableViewModel *)tableViewModel {
+    if (self = [super init]) {
+        _tableViewModel = tableViewModel;
+    }
+    return self;
+}
+
 @end

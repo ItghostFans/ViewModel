@@ -4,6 +4,7 @@ platform :ios, '13.0'
 
 target 'MVVM_Example' do
   pod 'MVVM', :path => '../'
+  pod 'Masonry'
 
   target 'MVVM_Tests' do
     inherit! :search_paths

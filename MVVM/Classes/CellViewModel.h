@@ -1,6 +1,6 @@
 //
 //  CellViewModel.h
-//  iOSAbility
+//  MVVM
 //
 //  Created by ItghostFan on 2024/2/4.
 //
@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CellViewModel : BaseViewModel
 
 @property (weak, nonatomic, nullable) id<ICellViewModelDelegate> delegate;
+
 @property (assign, nonatomic) BOOL deselectAfterDidSelect;       // Default is YES.
 
 @end
