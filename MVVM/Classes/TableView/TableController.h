@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TableController : UIViewController
 
 @property (strong, nonatomic, nonnull, readonly) UITableView *tableView;
-
 @property (strong, nonatomic, nullable) TableControllerViewModel *viewModel;
 
 @end

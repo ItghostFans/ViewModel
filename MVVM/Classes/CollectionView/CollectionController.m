@@ -13,7 +13,6 @@
 @interface CollectionController ()
 
 @property (strong, nonatomic) UICollectionView *collectionView;
-@property (strong, nonatomic) UICollectionViewFlowLayout *flowLayout;
 
 @end
 

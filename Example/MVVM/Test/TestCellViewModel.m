@@ -2,7 +2,7 @@
 //  TestCellViewModel.m
 //  MVVM_Example
 //
-//  Created by ItghostFan on 2024/6/1.
+//  Created by ItghostFan on 2024/6/2.
 //  Copyright © 2024 fanchunxing1. All rights reserved.
 //
 
@@ -14,9 +14,13 @@
 
 @synthesize delegate = _delegate;
 
+#pragma mark - TableView
+
 - (Class)tableCellClass {
     return TestTableViewModelCell.class;
 }
+
+#pragma mark - CollectionView
 
 - (Class)collectionCellClass {
     return TestCollectionViewModelCell.class;
