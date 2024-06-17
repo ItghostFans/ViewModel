@@ -38,8 +38,7 @@
 #pragma mark - TableViewModelCell
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestTableCellViewModel *)viewModel {
-    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
-    return 0.0f;
+    return 30.0f;
 }
 
 @end

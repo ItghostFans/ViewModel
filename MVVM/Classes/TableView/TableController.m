@@ -33,6 +33,8 @@
     if (!_tableView) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView = tableView;
+        // 为了兼容部分iOS系统会有35像素的tableHeaderView的height占位。
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(UIScreen.mainScreen.bounds), 0.0001f)];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.allowsSelection = NO;

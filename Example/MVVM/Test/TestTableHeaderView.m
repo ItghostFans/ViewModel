@@ -38,7 +38,6 @@
 #pragma mark - TableHeaderView
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestSectionViewModel *)viewModel {
-    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return 0.0f;
 }
 

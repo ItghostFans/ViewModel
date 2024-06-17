@@ -73,7 +73,7 @@
         if (!height) {
             CGFloat contentWidth = width;
             CGFloat headerHeight = [self.tableHeaderClass heightForWidth:&contentWidth viewModel:self];
-            height = @(headerHeight > 0.0f ? headerHeight : 0.0f);
+            height = @(headerHeight > 0.0f ? headerHeight : 0.0001f);
             self.headerWidthHeights[@(width)] = height;
         }
     }
@@ -88,7 +88,7 @@
         if (!height) {
             CGFloat contentWidth = width;
             CGFloat footerHeight = [self.tableFooterClass heightForWidth:&contentWidth viewModel:self];
-            height = @(footerHeight > 0.0f ? footerHeight : 0.0f);
+            height = @(footerHeight > 0.0f ? footerHeight : 0.0001f);
             self.footerWidthHeights[@(width)] = height;
         }
     }
