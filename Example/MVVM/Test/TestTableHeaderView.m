@@ -38,7 +38,7 @@
 #pragma mark - TableHeaderView
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestSectionViewModel *)viewModel {
-    return 0.0f;
+    return 10.0f;
 }
 
 @end

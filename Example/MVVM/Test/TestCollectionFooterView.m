@@ -38,8 +38,8 @@
 #pragma mark - CollectionFooterView
 
 + (CGSize)footerSizeForSize:(CGSize *)size viewModel:(TestSectionViewModel *)viewModel {
-    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
-    return CGSizeZero;
+//    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
+    return CGSizeMake(1.0f, size->width);
 }
 
 @end

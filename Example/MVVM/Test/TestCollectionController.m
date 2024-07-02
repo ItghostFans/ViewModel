@@ -9,6 +9,10 @@
 #import "TestCollectionController.h"
 #import "TestCollectionControllerViewModel.h"
 
+#import "CollectionViewModel.h"
+
+#import <Masonry/Masonry.h>
+
 @interface TestCollectionController ()
 // TODO: 添加需要的View，建议使用懒加载
 @end
@@ -19,6 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view addSubview:self.collectionView];
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    self.viewModel.collectionViewModel.collectionView = self.collectionView;
 }
 
 #pragma mark - Public

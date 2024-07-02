@@ -50,6 +50,12 @@
     }];
     self.openCollectionButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         @strongify(self);
+        CollectionViewModel *viewModel = CollectionViewModel.new;
+        [viewModel.sectionViewModels addViewModel:self.sectionViewModel];
+        TestCollectionControllerViewModel *controllerViewModel = [[TestCollectionControllerViewModel alloc] initWithCollectionViewModel:viewModel];
+        TestCollectionController *controller = [TestCollectionController new];
+        controller.viewModel = controllerViewModel;
+        [self.navigationController pushViewController:controller animated:YES];
         return [RACSignal return:nil];
     }];
 }
