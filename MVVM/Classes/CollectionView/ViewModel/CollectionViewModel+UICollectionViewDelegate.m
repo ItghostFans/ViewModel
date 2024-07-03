@@ -21,6 +21,13 @@
     ((CollectionViewModelCell *)cell).viewModel = cellViewModel;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
+    CellViewModel *cellViewModel = sectionViewModel[indexPath.item];
+    cellViewModel.collectionSectionViewModel = nil;
+    ((CollectionViewModelCell *)cell).viewModel = nil;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
     SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
@@ -31,6 +38,20 @@
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
         sectionViewModel.collectionViewModel = self;
         ((CollectionFooterView *)view).viewModel = sectionViewModel;
+        return;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingSupplementaryView:(UICollectionReusableView *)view forElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+    SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
+    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+        sectionViewModel.collectionViewModel = nil;
+        ((CollectionHeaderView *)view).viewModel = nil;
+        return;
+    }
+    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+        sectionViewModel.collectionViewModel = nil;
+        ((CollectionFooterView *)view).viewModel = nil;
         return;
     }
 }

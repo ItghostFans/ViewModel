@@ -27,6 +27,13 @@
     ((TableViewModelCell *)cell).viewModel = cellViewModel;
 }
 
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
+    CellViewModel *cellViewModel = sectionViewModel[indexPath.row];
+    cellViewModel.tableSectionViewModel = nil;
+    ((TableViewModelCell *)cell).viewModel = nil;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.row];
     if (cellViewModel.deselectAfterDidSelect) {
@@ -55,6 +62,12 @@
     ((TableHeaderView *)view).viewModel = sectionViewModel;
 }
 
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
+    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
+    sectionViewModel.tableViewModel = nil;
+    ((TableHeaderView *)view).viewModel = nil;
+}
+
 /// mark - Footer
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -74,6 +87,12 @@
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
     sectionViewModel.tableViewModel = self;
     ((TableFooterView *)view).viewModel = sectionViewModel;
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section {
+    SectionViewModel *sectionViewModel = self.sectionViewModels[section];
+    sectionViewModel.tableViewModel = nil;
+    ((TableFooterView *)view).viewModel = nil;
 }
 
 @end
