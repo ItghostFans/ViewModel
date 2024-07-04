@@ -15,8 +15,16 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
+                                               green:((self.hash & 0x0000FF00) >> 8)  / 255.0f
+                                                blue:((self.hash & 0x000000FF) >> 0)  / 255.0f
+                                               alpha:1.0f];
     }
     return self;
+}
+
+- (void)setViewModel:(___VARIABLE_productName___SectionViewModel *)viewModel {
+    [super setViewModel:viewModel];
 }
 
 #pragma mark - Public

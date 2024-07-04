@@ -15,8 +15,16 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
+                                               green:((self.hash & 0x0000FF00) >> 8)  / 255.0f
+                                                blue:((self.hash & 0x000000FF) >> 0)  / 255.0f
+                                               alpha:1.0f];
     }
     return self;
+}
+
+- (void)setViewModel:(___VARIABLE_productName___TableCellViewModel *)viewModel {
+    [super setViewModel:viewModel];
 }
 
 #pragma mark - Public
