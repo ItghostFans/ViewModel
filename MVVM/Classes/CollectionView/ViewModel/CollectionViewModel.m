@@ -143,7 +143,7 @@
                 [self addKvoSectionViewModel:sectionViewModel];
                 sectionViewModel.collectionViewModel = self;
             }
-//            [self.collectionView insertSections:indexes];
+            [self.collectionView insertSections:indexes];
             break;
         }
         case NSKeyValueChangeRemoval: {
