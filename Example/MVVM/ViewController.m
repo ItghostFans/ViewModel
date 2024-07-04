@@ -35,7 +35,7 @@
     [super viewDidLoad];
     _sectionViewModel = [TestSectionViewModel new];
     [_sectionViewModel addViewModel:TestCellViewModel.new];
-    [_sectionViewModel addViewModel:TestCellViewModel.new];
+//    [_sectionViewModel addViewModel:TestCellViewModel.new];
 	// Do any additional setup after loading the view, typically from a nib.
     @weakify(self);
     self.openTableButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {

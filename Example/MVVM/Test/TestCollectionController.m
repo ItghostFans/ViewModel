@@ -13,6 +13,9 @@
 
 #import <Masonry/Masonry.h>
 
+#import "CollectionFlowLayout.h"
+#import "TestCellViewModel.h"
+
 @interface TestCollectionController ()
 // TODO: 添加需要的View，建议使用懒加载
 @end
@@ -24,10 +27,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.collectionView];
+//    self.collectionView.collectionViewLayout = CollectionFlowLayout.new;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     self.viewModel.collectionViewModel.collectionView = self.collectionView;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.viewModel.collectionViewModel.sectionViewModels[0] addViewModel:TestCellViewModel.new];
+//    });
 }
 
 #pragma mark - Public
