@@ -13,6 +13,7 @@
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
 
 #import "CellViewModel+CollectionView.h"
+#import "SectionViewModel+CollectionView.h"
 
 @interface CollectionViewModel ()
 
@@ -121,27 +122,34 @@
 //    NSArray *olds = change[NSKeyValueChangeOldKey];
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
-            for (BaseViewModels *sectionViewModel in news) {
+            for (SectionViewModel *sectionViewModel in news) {
                 [self addKvoSectionViewModel:sectionViewModel];
+                sectionViewModel.collectionViewModel = self;
             }
             [self.collectionView reloadData];
             break;
         }
         case NSKeyValueChangeInsertion: {
-            for (BaseViewModels *sectionViewModel in news) {
+            for (SectionViewModel *sectionViewModel in news) {
                 [self addKvoSectionViewModel:sectionViewModel];
+                sectionViewModel.collectionViewModel = self;
             }
 //            [self.collectionView insertSections:indexes];
             break;
         }
         case NSKeyValueChangeRemoval: {
+            [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+                SectionViewModel *sectionViewModel = self.sectionViewModels[idx];
+                sectionViewModel.collectionViewModel = nil;
+            }];
             [self.collectionView deleteSections:indexes];
             break;
         }
         case NSKeyValueChangeReplacement: {
-            for (BaseViewModels *sectionViewModel in news) {
-                [self addKvoSectionViewModel:sectionViewModel];
-            }
+//            for (SectionViewModel *sectionViewModel in news) {
+//                [self addKvoSectionViewModel:sectionViewModel];
+//                sectionViewModel.collectionViewModel = self;
+//            }
             [self.collectionView reloadSections:indexes];
             break;
         }
@@ -165,6 +173,7 @@
         case NSKeyValueChangeSetting: {
             for (CellViewModel *cellViewModel in news) {
                 [self registerCellClass:cellViewModel.collectionCellClass];
+                cellViewModel.collectionSectionViewModel = _sectionViewModels[section];
             }
 //            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section]];
             break;
@@ -172,11 +181,16 @@
         case NSKeyValueChangeInsertion: {
             for (CellViewModel *cellViewModel in news) {
                 [self registerCellClass:cellViewModel.collectionCellClass];
+                cellViewModel.collectionSectionViewModel = _sectionViewModels[section];
             }
             [self.collectionView insertItemsAtIndexPaths:indexPathes];
             break;
         }
         case NSKeyValueChangeRemoval: {
+            for (NSIndexPath *indexPath in indexPathes) {
+                CellViewModel *cellViewModel = _sectionViewModels[indexPath.section][indexPath.row];
+                cellViewModel.collectionSectionViewModel = nil;
+            }
             [self.collectionView deleteItemsAtIndexPaths:indexPathes];
             break;
         }

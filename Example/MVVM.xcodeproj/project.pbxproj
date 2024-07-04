@@ -26,16 +26,16 @@
 		786895872C0C280F00F0E842 /* TestCollectionCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895862C0C280F00F0E842 /* TestCollectionCellViewModel.m */; };
 		7868958A2C0C281700F0E842 /* TestCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895882C0C281700F0E842 /* TestCollectionController.m */; };
 		7868958D2C0C281F00F0E842 /* TestCollectionControllerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868958C2C0C281F00F0E842 /* TestCollectionControllerViewModel.m */; };
-		786895902C0C282B00F0E842 /* TestCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868958F2C0C282B00F0E842 /* TestCollectionFooterView.m */; };
-		786895932C0C283500F0E842 /* TestCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895912C0C283500F0E842 /* TestCollectionHeaderView.m */; };
-		786895962C0C283E00F0E842 /* TestCollectionViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895952C0C283E00F0E842 /* TestCollectionViewModelCell.m */; };
 		7868959C2C0C284F00F0E842 /* TestTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868959B2C0C284F00F0E842 /* TestTableCellViewModel.m */; };
 		7868959F2C0C285700F0E842 /* TestTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868959D2C0C285700F0E842 /* TestTableController.m */; };
 		786895A22C0C286300F0E842 /* TestTableControllerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895A12C0C286300F0E842 /* TestTableControllerViewModel.m */; };
-		786895A52C0C286B00F0E842 /* TestTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895A42C0C286B00F0E842 /* TestTableFooterView.m */; };
-		786895A82C0C287300F0E842 /* TestTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895A62C0C287300F0E842 /* TestTableHeaderView.m */; };
-		786895AB2C0C287D00F0E842 /* TestTableViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895AA2C0C287D00F0E842 /* TestTableViewModelCell.m */; };
 		78705E2D2C0C28F0001DF510 /* TestSectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78705E2B2C0C28F0001DF510 /* TestSectionViewModel.m */; };
+		788B94252C36C7C6009157CB /* TestCollectionViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 788B94242C36C7C6009157CB /* TestCollectionViewModelCell.m */; };
+		78D0DFE42C36C8D2005AE705 /* TestCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D0DFE32C36C8D2005AE705 /* TestCollectionFooterView.m */; };
+		78D0DFEA2C36C925005AE705 /* TestCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D0DFE82C36C925005AE705 /* TestCollectionHeaderView.m */; };
+		78D0DFED2C36C9EC005AE705 /* TestTableViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D0DFEC2C36C9EC005AE705 /* TestTableViewModelCell.m */; };
+		78D0DFF02C36CA0C005AE705 /* TestTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D0DFEE2C36CA0C005AE705 /* TestTableHeaderView.m */; };
+		78D0DFF32C36CA19005AE705 /* TestTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D0DFF22C36CA19005AE705 /* TestTableFooterView.m */; };
 		8092BCDFE267C742F26C41E6 /* Pods_MVVM_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE4D90A7EE01CE863AA501 /* Pods_MVVM_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -84,26 +84,26 @@
 		786895892C0C281700F0E842 /* TestCollectionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionController.h; sourceTree = "<group>"; };
 		7868958B2C0C281F00F0E842 /* TestCollectionControllerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionControllerViewModel.h; sourceTree = "<group>"; };
 		7868958C2C0C281F00F0E842 /* TestCollectionControllerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionControllerViewModel.m; sourceTree = "<group>"; };
-		7868958E2C0C282B00F0E842 /* TestCollectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionFooterView.h; sourceTree = "<group>"; };
-		7868958F2C0C282B00F0E842 /* TestCollectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionFooterView.m; sourceTree = "<group>"; };
-		786895912C0C283500F0E842 /* TestCollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionHeaderView.m; sourceTree = "<group>"; };
-		786895922C0C283500F0E842 /* TestCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionHeaderView.h; sourceTree = "<group>"; };
-		786895942C0C283E00F0E842 /* TestCollectionViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionViewModelCell.h; sourceTree = "<group>"; };
-		786895952C0C283E00F0E842 /* TestCollectionViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionViewModelCell.m; sourceTree = "<group>"; };
 		7868959A2C0C284F00F0E842 /* TestTableCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableCellViewModel.h; sourceTree = "<group>"; };
 		7868959B2C0C284F00F0E842 /* TestTableCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableCellViewModel.m; sourceTree = "<group>"; };
 		7868959D2C0C285700F0E842 /* TestTableController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableController.m; sourceTree = "<group>"; };
 		7868959E2C0C285700F0E842 /* TestTableController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableController.h; sourceTree = "<group>"; };
 		786895A02C0C286300F0E842 /* TestTableControllerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableControllerViewModel.h; sourceTree = "<group>"; };
 		786895A12C0C286300F0E842 /* TestTableControllerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableControllerViewModel.m; sourceTree = "<group>"; };
-		786895A32C0C286B00F0E842 /* TestTableFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableFooterView.h; sourceTree = "<group>"; };
-		786895A42C0C286B00F0E842 /* TestTableFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableFooterView.m; sourceTree = "<group>"; };
-		786895A62C0C287300F0E842 /* TestTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableHeaderView.m; sourceTree = "<group>"; };
-		786895A72C0C287300F0E842 /* TestTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableHeaderView.h; sourceTree = "<group>"; };
-		786895A92C0C287D00F0E842 /* TestTableViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableViewModelCell.h; sourceTree = "<group>"; };
-		786895AA2C0C287D00F0E842 /* TestTableViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableViewModelCell.m; sourceTree = "<group>"; };
 		78705E2B2C0C28F0001DF510 /* TestSectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestSectionViewModel.m; sourceTree = "<group>"; };
 		78705E2C2C0C28F0001DF510 /* TestSectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSectionViewModel.h; sourceTree = "<group>"; };
+		788B94232C36C7C6009157CB /* TestCollectionViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionViewModelCell.h; sourceTree = "<group>"; };
+		788B94242C36C7C6009157CB /* TestCollectionViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionViewModelCell.m; sourceTree = "<group>"; };
+		78D0DFE22C36C8D2005AE705 /* TestCollectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionFooterView.h; sourceTree = "<group>"; };
+		78D0DFE32C36C8D2005AE705 /* TestCollectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionFooterView.m; sourceTree = "<group>"; };
+		78D0DFE82C36C925005AE705 /* TestCollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionHeaderView.m; sourceTree = "<group>"; };
+		78D0DFE92C36C925005AE705 /* TestCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionHeaderView.h; sourceTree = "<group>"; };
+		78D0DFEB2C36C9EC005AE705 /* TestTableViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableViewModelCell.h; sourceTree = "<group>"; };
+		78D0DFEC2C36C9EC005AE705 /* TestTableViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableViewModelCell.m; sourceTree = "<group>"; };
+		78D0DFEE2C36CA0C005AE705 /* TestTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableHeaderView.m; sourceTree = "<group>"; };
+		78D0DFEF2C36CA0C005AE705 /* TestTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableHeaderView.h; sourceTree = "<group>"; };
+		78D0DFF12C36CA19005AE705 /* TestTableFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableFooterView.h; sourceTree = "<group>"; };
+		78D0DFF22C36CA19005AE705 /* TestTableFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableFooterView.m; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AEDE4D90A7EE01CE863AA501 /* Pods_MVVM_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVM_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC12947A47640DE5566E2A5 /* Pods-MVVM_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVM_Example.release.xcconfig"; path = "Target Support Files/Pods-MVVM_Example/Pods-MVVM_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -250,24 +250,24 @@
 				786895892C0C281700F0E842 /* TestCollectionController.h */,
 				7868958B2C0C281F00F0E842 /* TestCollectionControllerViewModel.h */,
 				7868958C2C0C281F00F0E842 /* TestCollectionControllerViewModel.m */,
-				7868958E2C0C282B00F0E842 /* TestCollectionFooterView.h */,
-				7868958F2C0C282B00F0E842 /* TestCollectionFooterView.m */,
-				786895912C0C283500F0E842 /* TestCollectionHeaderView.m */,
-				786895922C0C283500F0E842 /* TestCollectionHeaderView.h */,
-				786895942C0C283E00F0E842 /* TestCollectionViewModelCell.h */,
-				786895952C0C283E00F0E842 /* TestCollectionViewModelCell.m */,
+				78D0DFE22C36C8D2005AE705 /* TestCollectionFooterView.h */,
+				78D0DFE32C36C8D2005AE705 /* TestCollectionFooterView.m */,
+				78D0DFE82C36C925005AE705 /* TestCollectionHeaderView.m */,
+				78D0DFE92C36C925005AE705 /* TestCollectionHeaderView.h */,
+				788B94232C36C7C6009157CB /* TestCollectionViewModelCell.h */,
+				788B94242C36C7C6009157CB /* TestCollectionViewModelCell.m */,
 				7868959A2C0C284F00F0E842 /* TestTableCellViewModel.h */,
 				7868959B2C0C284F00F0E842 /* TestTableCellViewModel.m */,
 				7868959D2C0C285700F0E842 /* TestTableController.m */,
 				7868959E2C0C285700F0E842 /* TestTableController.h */,
 				786895A02C0C286300F0E842 /* TestTableControllerViewModel.h */,
 				786895A12C0C286300F0E842 /* TestTableControllerViewModel.m */,
-				786895A32C0C286B00F0E842 /* TestTableFooterView.h */,
-				786895A42C0C286B00F0E842 /* TestTableFooterView.m */,
-				786895A62C0C287300F0E842 /* TestTableHeaderView.m */,
-				786895A72C0C287300F0E842 /* TestTableHeaderView.h */,
-				786895A92C0C287D00F0E842 /* TestTableViewModelCell.h */,
-				786895AA2C0C287D00F0E842 /* TestTableViewModelCell.m */,
+				78D0DFF12C36CA19005AE705 /* TestTableFooterView.h */,
+				78D0DFF22C36CA19005AE705 /* TestTableFooterView.m */,
+				78D0DFEE2C36CA0C005AE705 /* TestTableHeaderView.m */,
+				78D0DFEF2C36CA0C005AE705 /* TestTableHeaderView.h */,
+				78D0DFEB2C36C9EC005AE705 /* TestTableViewModelCell.h */,
+				78D0DFEC2C36C9EC005AE705 /* TestTableViewModelCell.m */,
 				78705E2B2C0C28F0001DF510 /* TestSectionViewModel.m */,
 				78705E2C2C0C28F0001DF510 /* TestSectionViewModel.h */,
 			);
@@ -471,20 +471,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				786895962C0C283E00F0E842 /* TestCollectionViewModelCell.m in Sources */,
 				6003F59E195388D20070C39A /* AppDelegate.m in Sources */,
 				78705E2D2C0C28F0001DF510 /* TestSectionViewModel.m in Sources */,
 				786895A22C0C286300F0E842 /* TestTableControllerViewModel.m in Sources */,
 				7868959F2C0C285700F0E842 /* TestTableController.m in Sources */,
 				6003F5A7195388D20070C39A /* ViewController.m in Sources */,
+				78D0DFEA2C36C925005AE705 /* TestCollectionHeaderView.m in Sources */,
 				786895872C0C280F00F0E842 /* TestCollectionCellViewModel.m in Sources */,
-				786895902C0C282B00F0E842 /* TestCollectionFooterView.m in Sources */,
-				786895932C0C283500F0E842 /* TestCollectionHeaderView.m in Sources */,
 				7868959C2C0C284F00F0E842 /* TestTableCellViewModel.m in Sources */,
-				786895A52C0C286B00F0E842 /* TestTableFooterView.m in Sources */,
 				7868958A2C0C281700F0E842 /* TestCollectionController.m in Sources */,
-				786895A82C0C287300F0E842 /* TestTableHeaderView.m in Sources */,
-				786895AB2C0C287D00F0E842 /* TestTableViewModelCell.m in Sources */,
+				788B94252C36C7C6009157CB /* TestCollectionViewModelCell.m in Sources */,
+				78D0DFE42C36C8D2005AE705 /* TestCollectionFooterView.m in Sources */,
+				78D0DFED2C36C9EC005AE705 /* TestTableViewModelCell.m in Sources */,
+				78D0DFF32C36CA19005AE705 /* TestTableFooterView.m in Sources */,
+				78D0DFF02C36CA0C005AE705 /* TestTableHeaderView.m in Sources */,
 				786895842C0C280600F0E842 /* TestCellViewModel.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				7868958D2C0C281F00F0E842 /* TestCollectionControllerViewModel.m in Sources */,

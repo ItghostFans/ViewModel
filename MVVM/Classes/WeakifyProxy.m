@@ -14,6 +14,9 @@
 @implementation WeakifyProxy
 
 - (instancetype)initWithTarget:(id)target {
+    if (!target) {
+        return nil;
+    }
     _target = target;
     return self;
 }

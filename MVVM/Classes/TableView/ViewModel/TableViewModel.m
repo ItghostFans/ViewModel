@@ -13,6 +13,7 @@
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
 
 #import "CellViewModel+TableView.h"
+#import "SectionViewModel+TableView.h"
 
 @interface TableViewModel ()
 
@@ -89,27 +90,34 @@
     [self.tableView beginUpdates];
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
-            for (BaseViewModels *sectionViewModel in news) {
+            for (SectionViewModel *sectionViewModel in news) {
                 [self addKvoSectionViewModel:sectionViewModel];
+                sectionViewModel.tableViewModel = self;
             }
             [self.tableView reloadData];
             break;
         }
         case NSKeyValueChangeInsertion: {
-            for (BaseViewModels *sectionViewModel in news) {
+            for (SectionViewModel *sectionViewModel in news) {
                 [self addKvoSectionViewModel:sectionViewModel];
+                sectionViewModel.tableViewModel = self;
             }
             [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
         case NSKeyValueChangeRemoval: {
+            [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+                SectionViewModel *sectionViewModel = self.sectionViewModels[idx];
+                sectionViewModel.tableViewModel = nil;
+            }];
             [self.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
         case NSKeyValueChangeReplacement: {
-            for (BaseViewModels *sectionViewModel in news) {
-                [self addKvoSectionViewModel:sectionViewModel];
-            }
+//            for (SectionViewModel *sectionViewModel in news) {
+//                [self addKvoSectionViewModel:sectionViewModel];
+//                sectionViewModel.tableViewModel = self;
+//            }
             [self.tableView reloadSections:indexes withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
@@ -134,6 +142,7 @@
         case NSKeyValueChangeSetting: {
             for (CellViewModel *cellViewModel in news) {
                 [self registerCellClass:cellViewModel.tableCellClass];
+                cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
 //            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
             break;
@@ -141,11 +150,16 @@
         case NSKeyValueChangeInsertion: {
             for (CellViewModel *cellViewModel in news) {
                 [self registerCellClass:cellViewModel.tableCellClass];
+                cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
             [self.tableView insertRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
         case NSKeyValueChangeRemoval: {
+            for (NSIndexPath *indexPath in indexPathes) {
+                CellViewModel *cellViewModel = _sectionViewModels[indexPath.section][indexPath.row];
+                cellViewModel.tableSectionViewModel = nil;
+            }
             [self.tableView deleteRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
