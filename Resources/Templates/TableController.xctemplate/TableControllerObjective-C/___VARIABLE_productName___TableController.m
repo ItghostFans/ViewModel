@@ -14,6 +14,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.tableView];
     self.tableView.frame = self.view.bounds;
     self.viewModel.tableViewModel.tableView = self.tableView;

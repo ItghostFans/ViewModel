@@ -15,10 +15,10 @@
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        self.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
-                                               green:((self.hash & 0x0000FF00) >> 8)  / 255.0f
-                                                blue:((self.hash & 0x000000FF) >> 0)  / 255.0f
-                                               alpha:1.0f];
+        self.contentView.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
+                                                           green:((self.hash & 0x0000FF00) >> 8)  / 255.0f
+                                                            blue:((self.hash & 0x000000FF) >> 0)  / 255.0f
+                                                           alpha:1.0f];
     }
     return self;
 }
