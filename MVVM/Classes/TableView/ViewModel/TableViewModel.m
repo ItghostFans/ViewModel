@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSMutableSet *registeredCellIdentifiers;
 @property (strong, nonatomic) NSMutableSet *registeredHeaderFooterIdentifiers;
 
+@property (strong, nonatomic, nullable) RACCompoundDisposable *disposableBag;
+
 @end
 
 @implementation TableViewModel
@@ -40,13 +42,20 @@
 
 - (void)setTableView:(UITableView *)tableView {
     @weakify(self);
-    [[[_sectionViewModels rac_valuesAndChangesForKeyPath:@keypath(_sectionViewModels.viewModels)
-                                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial
-                                      observer:self] takeUntil:_sectionViewModels.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-        RACTupleUnpack(id object OS_UNUSED, NSDictionary *change) = x;
-        @strongify(self);
-        [self onSectionsChange:change object:self.sectionViewModels observer:self];
-    }];
+    if (_disposableBag) {
+        [_disposableBag dispose];
+    }
+    if (tableView) {
+        _disposableBag = RACCompoundDisposable.new;
+        [_disposableBag addDisposable:
+         [[[_sectionViewModels rac_valuesAndChangesForKeyPath:@keypath(_sectionViewModels.viewModels)
+                                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial
+                                                     observer:self] takeUntil:_sectionViewModels.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+            RACTupleUnpack(id object OS_UNUSED, NSDictionary *change) = x;
+            @strongify(self);
+            [self onSectionsChange:change object:self.sectionViewModels observer:self];
+        }]];
+    }
     
     [_registeredCellIdentifiers removeAllObjects];
     [_registeredHeaderFooterIdentifiers removeAllObjects];
