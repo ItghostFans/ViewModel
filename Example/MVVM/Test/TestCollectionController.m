@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.collectionView];
 //    self.collectionView.collectionViewLayout = CollectionFlowLayout.new;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
