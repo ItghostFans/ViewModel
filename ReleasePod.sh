@@ -10,4 +10,4 @@ git push origin --tags
 
 # repo='cocoapods'
 podName='ViewModel'
-pod trunk push '$podName.podspec' --allow-warnings --verbose
+pod trunk push $podName.podspec --allow-warnings --verbose
