@@ -6,7 +6,8 @@ git push origin $tag
 git push origin --tags
 
 #pod repo list
+#pod trunk register ItghostFans@gmail.com ItghostFans --verbose
 
-repo='cocoapods'
+# repo='cocoapods'
 podName='ViewModel'
-pod repo push $repo $ViewModel'.podspec'
+pod trunk push '$podName.podspec' --allow-warnings --verbose
