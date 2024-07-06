@@ -2,11 +2,11 @@ use_frameworks!
 
 platform :ios, '13.0'
 
-target 'MVVM_Example' do
-  pod 'MVVM', :path => '../'
+target 'ViewModel_Example' do
+  pod 'ViewModel', :path => '../'
   pod 'Masonry'
 
-  target 'MVVM_Tests' do
+  target 'ViewModel_Tests' do
     inherit! :search_paths
 
     pod 'Specta'
