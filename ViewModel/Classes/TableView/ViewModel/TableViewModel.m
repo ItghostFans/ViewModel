@@ -14,6 +14,7 @@
 
 #import "CellViewModel+TableView.h"
 #import "SectionViewModel+TableView.h"
+#import "UITableView+ViewModel.h"
 
 @interface TableViewModel ()
 
@@ -111,7 +112,7 @@
                 [self addKvoSectionViewModel:sectionViewModel];
                 sectionViewModel.tableViewModel = self;
             }
-            [self.tableView insertSections:indexes withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView insertSections:indexes withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         case NSKeyValueChangeRemoval: {
@@ -119,7 +120,7 @@
                 SectionViewModel *sectionViewModel = self.sectionViewModels[idx];
                 sectionViewModel.tableViewModel = nil;
             }];
-            [self.tableView deleteSections:indexes withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView deleteSections:indexes withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -127,7 +128,7 @@
 //                [self addKvoSectionViewModel:sectionViewModel];
 //                sectionViewModel.tableViewModel = self;
 //            }
-            [self.tableView reloadSections:indexes withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadSections:indexes withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         default: {
@@ -153,7 +154,7 @@
                 [self registerCellClass:cellViewModel.tableCellClass];
                 cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
-//            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+//            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         case NSKeyValueChangeInsertion: {
@@ -161,7 +162,7 @@
                 [self registerCellClass:cellViewModel.tableCellClass];
                 cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
-            [self.tableView insertRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView insertRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         case NSKeyValueChangeRemoval: {
@@ -169,11 +170,11 @@
                 CellViewModel *cellViewModel = _sectionViewModels[indexPath.section][indexPath.row];
                 cellViewModel.tableSectionViewModel = nil;
             }
-            [self.tableView deleteRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView deleteRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         case NSKeyValueChangeReplacement: {
-            [self.tableView reloadRowsAtIndexPaths:indexPathes withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         default: {

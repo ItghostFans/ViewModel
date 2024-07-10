@@ -12,6 +12,8 @@
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 
+#import <ViewModel/UITableView+ViewModel.h>
+
 #import "TableViewModel.h"
 #import "TestCellViewModel.h"
 #import "TestSectionViewModel.h"
@@ -43,7 +45,7 @@
             TestSectionViewModel *sectionViewModel = TestSectionViewModel.new;
             [sectionViewModel addViewModel:TestCellViewModel.new];
             [self.viewModel.tableViewModel.sectionViewModels addViewModel:sectionViewModel];
-        } completion:^(BOOL finished) {
+        } rowAnimation:(UITableViewRowAnimationRight)  completion:^(BOOL finished) {
         }];
         return [RACSignal return:nil];
     }];
@@ -55,7 +57,7 @@
             if (sectionViewModel) {
                 [sectionViewModel addViewModel:TestCellViewModel.new];
             }
-        } completion:^(BOOL finished) {
+        } rowAnimation:(UITableViewRowAnimationLeft) completion:^(BOOL finished) {
         }];
         return [RACSignal return:nil];
     }];
