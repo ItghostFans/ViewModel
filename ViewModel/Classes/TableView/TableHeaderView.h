@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TableHeaderView : UITableViewHeaderFooterView
 
-@property (strong, nonatomic, nullable) SectionViewModel *viewModel;
+@property (weak, nonatomic, nullable) SectionViewModel *viewModel;
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(SectionViewModel *)viewModel;
 

@@ -14,7 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestCollectionFooterView : CollectionFooterView
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
 @property (weak, nonatomic, nullable) TestSectionViewModel *viewModel;
+#pragma clang diagnostic pop
 
 + (CGSize)footerSizeForSize:(CGSize *)size viewModel:(TestSectionViewModel *)viewModel;
 

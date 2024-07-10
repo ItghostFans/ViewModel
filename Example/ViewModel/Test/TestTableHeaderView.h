@@ -14,7 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestTableHeaderView : TableHeaderView
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
 @property (weak, nonatomic, nullable) TestSectionViewModel *viewModel;
+#pragma clang diagnostic pop
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestSectionViewModel *)viewModel;
 

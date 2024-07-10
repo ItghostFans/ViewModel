@@ -14,7 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestCollectionController : CollectionController
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
 @property (strong, nonatomic, nullable) TestCollectionControllerViewModel *viewModel;
+#pragma clang diagnostic pop
 
 @end
 
