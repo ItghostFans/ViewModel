@@ -12,5 +12,6 @@ git push origin --tags
 #pod trunk register ItghostFans@gmail.com ItghostFans --verbose
 
 # repo='cocoapods'
-podName='ViewModel'
+podspec=`ls *.podspec`
+podName = ${podspec%.*}
 pod trunk push $podName.podspec --allow-warnings --verbose
