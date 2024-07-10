@@ -8,7 +8,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ___VARIABLE_productName___TableController : TableController
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
 @property (strong, nonatomic, nullable) ___VARIABLE_productName___TableControllerViewModel *viewModel;
+#pragma clang diagnostic pop
 
 @end
 

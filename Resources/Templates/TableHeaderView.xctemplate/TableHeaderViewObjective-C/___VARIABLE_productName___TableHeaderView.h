@@ -8,7 +8,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ___VARIABLE_productName___TableHeaderView : TableHeaderView
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
 @property (weak, nonatomic, nullable) ___VARIABLE_productName___SectionViewModel *viewModel;
+#pragma clang diagnostic pop
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(___VARIABLE_productName___SectionViewModel *)viewModel;
 

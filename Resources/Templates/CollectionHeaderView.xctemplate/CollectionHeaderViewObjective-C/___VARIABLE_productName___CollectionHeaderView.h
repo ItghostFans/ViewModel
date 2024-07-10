@@ -8,7 +8,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ___VARIABLE_productName___CollectionHeaderView : CollectionHeaderView
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
 @property (weak, nonatomic, nullable) ___VARIABLE_productName___SectionViewModel *viewModel;
+#pragma clang diagnostic pop
 
 + (CGSize)headerSizeForSize:(CGSize *)size viewModel:(___VARIABLE_productName___SectionViewModel *)viewModel;
 
