@@ -27,8 +27,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
-    CellViewModel *cellViewModel = sectionViewModel[indexPath.row];
     ((TableViewModelCell *)cell).viewModel = nil;
 }
 
