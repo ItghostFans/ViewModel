@@ -13,5 +13,5 @@ git push origin --tags
 
 # repo='cocoapods'
 podspec=`ls *.podspec`
-podName = ${podspec%.*}
+podName=${podspec%.*}
 pod trunk push $podName.podspec --allow-warnings --verbose
