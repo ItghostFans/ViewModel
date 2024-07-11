@@ -13,7 +13,7 @@
 
 #import <Masonry/Masonry.h>
 
-#import "CollectionFlowLayout.h"
+#import "ColumnRowFlowLayout.h"
 #import "TestCellViewModel.h"
 
 #import <Masonry/Masonry.h>
@@ -36,7 +36,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.collectionView];
-//    self.collectionView.collectionViewLayout = CollectionFlowLayout.new;
+    self.collectionView.collectionViewLayout = ColumnRowFlowLayout.new;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.addSectionButton.mas_bottom);
         make.leading.trailing.bottom.equalTo(self.view);

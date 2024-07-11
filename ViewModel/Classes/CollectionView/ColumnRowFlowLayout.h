@@ -1,5 +1,5 @@
 //
-//  CollectionFlowLayout.h
+//  ColumnRowFlowLayout.h
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/7/3.
@@ -11,9 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CollectionFlowLayout : UICollectionViewFlowLayout
+@interface ColumnRowFlowLayout : UICollectionViewFlowLayout
 
 @property (weak, nonatomic, nullable) CollectionViewModel *viewModel;
+@property (assign, nonatomic) NSUInteger columnCount;
+@property (assign, nonatomic) NSUInteger rowCount;
 
 @end
 
