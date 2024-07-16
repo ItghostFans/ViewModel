@@ -19,6 +19,7 @@
 #import "TestCollectionController.h"
 #import "TableViewModel.h"
 #import "CollectionViewModel.h"
+#import "SectionViewModel+CollectionView.h"
 
 @interface ViewController ()
 
@@ -34,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _sectionViewModel = [TestSectionViewModel new];
+    _sectionViewModel.collectionMinimumLineSpacing = 5.0f;
+    _sectionViewModel.collectionMinimumInteritemSpacing = 10.0f;
     [_sectionViewModel addViewModel:TestCellViewModel.new];
 //    [_sectionViewModel addViewModel:TestCellViewModel.new];
 	// Do any additional setup after loading the view, typically from a nib.

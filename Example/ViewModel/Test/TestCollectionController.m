@@ -36,7 +36,16 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.collectionView];
-    self.collectionView.collectionViewLayout = ColumnRowFlowLayout.new;
+    ColumnRowFlowLayout *collectionViewFlowLayout = ColumnRowFlowLayout.new;
+    collectionViewFlowLayout.columnCount = 3;
+    collectionViewFlowLayout.rowCount = 10;
+    self.collectionView.collectionViewLayout = collectionViewFlowLayout;
+    collectionViewFlowLayout.viewModel = self.viewModel.collectionViewModel;
+    
+    self.collectionView.contentInset = UIEdgeInsetsMake(3, 4, 0, 6);
+    self.collectionView.pagingEnabled = YES;
+    ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).scrollDirection = UICollectionViewScrollDirectionVertical;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.addSectionButton.mas_bottom);
         make.leading.trailing.bottom.equalTo(self.view);
