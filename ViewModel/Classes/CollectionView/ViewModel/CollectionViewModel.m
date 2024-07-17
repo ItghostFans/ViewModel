@@ -172,7 +172,7 @@
     NSKeyValueChange valueChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
     NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
     NSArray *news = change[NSKeyValueChangeNewKey];
-//    NSArray *olds = change[NSKeyValueChangeOldKey];
+    NSArray *olds = change[NSKeyValueChangeOldKey];
     NSMutableArray<__kindof NSIndexPath *> *indexPathes = NSMutableArray.new;
     NSInteger section = [self.sectionViewModels.viewModels indexOfObject:object];
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
@@ -196,8 +196,7 @@
             break;
         }
         case NSKeyValueChangeRemoval: {
-            for (NSIndexPath *indexPath in indexPathes) {
-                CellViewModel *cellViewModel = _sectionViewModels[indexPath.section][indexPath.row];
+            for (CellViewModel *cellViewModel in olds) {
                 cellViewModel.collectionSectionViewModel = nil;
             }
             [self.collectionView deleteItemsAtIndexPaths:indexPathes];

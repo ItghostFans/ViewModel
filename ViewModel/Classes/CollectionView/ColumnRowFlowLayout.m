@@ -127,45 +127,52 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     return CGSizeMake(pageSize.width * self.pageCount, pageSize.height);
 }
 
+#define ASSIGN_IF_LARGE_THAN(value, left) \
+    left = !left ? value : [left compare:value] == NSOrderedDescending ? value : left;
+
+
 - (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
+    NSIndexPath *targetIndexPath = nil;
     for (UICollectionViewUpdateItem *updateItem in updateItems) {
-        NSUInteger targetSection = updateItem.indexPathAfterUpdate.section;
         switch (updateItem.updateAction) {
             case UICollectionUpdateActionMove: {
-                targetSection = updateItem.indexPathBeforeUpdate.section;
-            }
-            case UICollectionUpdateActionInsert: {
-                NSUInteger page = 0;
-                for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count; ++section) {
-                    SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
-                    NSUInteger itemCount = sectionViewModel.viewModels.count;
-                    for (NSUInteger item = 0; item < itemCount; ++item) {
-                        CellViewModel *cellViewModel = sectionViewModel[item];
-                        if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
-                            page += 1;
-                        }
-                        if (targetSection <= section) { // 变化后面的所有布局需要重新计算。
-                            UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
-                            CGPoint point = [self pointOfItem:item section:section page:page];
-                            CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
-                            attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
-                        }
-                    }
-                    if (itemCount > 0) {
-                        page += 1;
-                    }
-                }
+                ASSIGN_IF_LARGE_THAN(updateItem.indexPathBeforeUpdate, targetIndexPath);
                 break;
             }
-            case UICollectionUpdateActionDelete: {
+            case UICollectionUpdateActionInsert: {
+                ASSIGN_IF_LARGE_THAN(updateItem.indexPathAfterUpdate, targetIndexPath);
+                break;
+            }
+            case UICollectionUpdateActionDelete: {  // 之前的可以复用。
                 break;
             }
             case UICollectionUpdateActionReload: {
+                targetIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
                 break;
             }
             default: {
                 break;
             }
+        }
+    }
+    NSUInteger page = 0;
+    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count; ++section) {
+        SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
+        NSUInteger itemCount = sectionViewModel.viewModels.count;
+        for (NSUInteger item = 0; item < itemCount; ++item) {
+            CellViewModel *cellViewModel = sectionViewModel[item];
+            if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
+                page += 1;
+            }
+            if (targetIndexPath.section <= section) { // 变化后面的所有布局需要重新计算。
+                UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
+                CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
+                CGPoint point = [self pointOfItem:item section:section page:page];
+                attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
+            }
+        }
+        if (itemCount > 0) {
+            page += 1;
         }
     }
 }

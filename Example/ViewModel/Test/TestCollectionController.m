@@ -26,6 +26,7 @@
 @interface TestCollectionController ()
 @property (weak, nonatomic) UIButton *addSectionButton;
 @property (weak, nonatomic) UIButton *addRowButton;
+@property (weak, nonatomic) UIButton *deleteRowButton;
 @end
 
 @implementation TestCollectionController
@@ -73,7 +74,22 @@
             @strongify(self);
             SectionViewModel *sectionViewModel = self.viewModel.collectionViewModel.sectionViewModels.viewModels.firstObject;
             if (sectionViewModel) {
-                [sectionViewModel addViewModel:TestCellViewModel.new];
+                [sectionViewModel insertViewModel:TestCellViewModel.new atIndex:0];
+                [sectionViewModel insertViewModel:TestCellViewModel.new atIndex:0];
+//                [sectionViewModel addViewModel:TestCellViewModel.new];
+//                [sectionViewModel addViewModel:TestCellViewModel.new];
+            }
+        } completion:^(BOOL finished) {
+        }];
+        return [RACSignal return:nil];
+    }];
+    self.deleteRowButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+        @strongify(self);
+        [self.viewModel.collectionViewModel.collectionView performBatchUpdates:^{
+            @strongify(self);
+            SectionViewModel *sectionViewModel = self.viewModel.collectionViewModel.sectionViewModels.viewModels.firstObject;
+            if (sectionViewModel.viewModels.count) {
+                [sectionViewModel removeViewModelsAtIndexes:[NSIndexSet indexSetWithIndex:0]];
             }
         } completion:^(BOOL finished) {
         }];
@@ -92,6 +108,7 @@
 - (UIButton *)addSectionButton {
     if (!_addSectionButton) {
         UIButton *addSectionButton = UIButton.new;
+        addSectionButton.backgroundColor = UIColor.grayColor;
         [self.view addSubview:addSectionButton];
         _addSectionButton = addSectionButton;
         [_addSectionButton setTitle:@"Add Section" forState:(UIControlStateNormal)];
@@ -107,16 +124,33 @@
 - (UIButton *)addRowButton {
     if (!_addRowButton) {
         UIButton *addRowButton = UIButton.new;
+        addRowButton.backgroundColor = UIColor.grayColor;
         [self.view addSubview:addRowButton];
         _addRowButton = addRowButton;
         [_addRowButton setTitle:@"Add Item" forState:(UIControlStateNormal)];
         [_addRowButton setTitleColor:UIColor.blackColor forState:(UIControlStateNormal)];
         [_addRowButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.leading.equalTo(self.addSectionButton.mas_trailing);
+            make.leading.equalTo(self.addSectionButton.mas_trailing).offset(2.0f);
         }];
     }
     return _addRowButton;
+}
+
+- (UIButton *)deleteRowButton {
+    if (!_deleteRowButton) {
+        UIButton *deleteRowButton = UIButton.new;
+        deleteRowButton.backgroundColor = UIColor.grayColor;
+        [self.view addSubview:deleteRowButton];
+        _deleteRowButton = deleteRowButton;
+        [_deleteRowButton setTitle:@"Delete Item" forState:(UIControlStateNormal)];
+        [_deleteRowButton setTitleColor:UIColor.blackColor forState:(UIControlStateNormal)];
+        [_deleteRowButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+            make.leading.equalTo(self.addRowButton.mas_trailing).offset(2.0f);
+        }];
+    }
+    return _deleteRowButton;
 }
 
 @end
