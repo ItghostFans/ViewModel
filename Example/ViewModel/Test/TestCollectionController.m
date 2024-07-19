@@ -40,8 +40,6 @@
     ColumnRowFlowLayout *collectionViewFlowLayout = ColumnRowFlowLayout.new;
     collectionViewFlowLayout.columnCount = 3;
     collectionViewFlowLayout.rowCount = 10;
-    self.collectionView.collectionViewLayout = collectionViewFlowLayout;
-    collectionViewFlowLayout.viewModel = self.viewModel.collectionViewModel;
     
     self.collectionView.contentInset = UIEdgeInsetsMake(3, 4, 0, 6);
     self.collectionView.pagingEnabled = YES;
@@ -51,6 +49,8 @@
         make.top.equalTo(self.addSectionButton.mas_bottom);
         make.leading.trailing.bottom.equalTo(self.view);
     }];
+    self.collectionView.collectionViewLayout = collectionViewFlowLayout;
+    collectionViewFlowLayout.viewModel = self.viewModel.collectionViewModel;
     self.viewModel.collectionViewModel.collectionView = self.collectionView;
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [self.viewModel.collectionViewModel.sectionViewModels[0] addViewModel:TestCellViewModel.new];

@@ -38,8 +38,9 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 
 - (void)setViewModel:(CollectionViewModel *)viewModel {
     _viewModel = viewModel;
+    [self.collectionView.superview layoutIfNeeded];
     NSAssert(self.collectionView, @"Should Set CollectionViewLayout First!");
-    NSAssert(CGRectIsEmpty(self.collectionView.frame), @"Should Layout CollectionView First!");
+    NSAssert(!CGRectIsEmpty(self.collectionView.frame), @"Should Layout CollectionView First!");
     // Item.
     NSUInteger page = 0;
 //    NSAssert(_viewModel.sectionViewModels.viewModels.count == self.collectionView.numberOfSections, @"%s Sections Should Equal(%ld, %ld)!", __FUNCTION__, _viewModel.sectionViewModels.viewModels.count, self.collectionView.numberOfSections);
