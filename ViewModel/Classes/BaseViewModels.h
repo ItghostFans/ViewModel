@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeViewModels:(NSArray *)viewModels;
 - (void)removeAllViewModels;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
+- (NSUInteger)indexOfViewModel:(id)viewModel;
 
 @end
 

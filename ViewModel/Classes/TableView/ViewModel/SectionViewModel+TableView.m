@@ -43,9 +43,8 @@
 
 #pragma mark - ITableSectionViewModel
 
-- (NSInteger)tableSection {
-    NSUInteger section = [self.tableViewModel.sectionViewModels.viewModels indexOfObject:self];
-    return section;
+- (NSInteger)tableSectionIndex {
+    return [self.tableViewModel.sectionViewModels indexOfViewModel:self];
 }
 
 - (TableViewModel *)tableViewModel {

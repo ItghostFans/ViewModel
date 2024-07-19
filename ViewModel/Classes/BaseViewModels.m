@@ -67,4 +67,8 @@
     return [self.viewModels objectAtIndex:idx];
 }
 
+- (NSUInteger)indexOfViewModel:(id)viewModel {
+    return [self.viewModels indexOfObject:viewModel];
+}
+
 @end

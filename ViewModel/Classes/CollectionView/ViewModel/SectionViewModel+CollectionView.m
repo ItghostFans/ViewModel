@@ -43,12 +43,8 @@
 
 #pragma mark - ICollectionSectionViewModel
 
-- (NSIndexPath *)collectionIndexPath {
-    NSUInteger section = [self.collectionViewModel.sectionViewModels.viewModels indexOfObject:self];
-    if (section == NSNotFound) {
-        return nil;
-    }
-    return [NSIndexPath indexPathForItem:0 inSection:section];
+- (NSUInteger)collectionSectionIndex {
+    return [self.collectionViewModel.sectionViewModels indexOfViewModel:self];
 }
 
 - (CollectionViewModel *)collectionViewModel {

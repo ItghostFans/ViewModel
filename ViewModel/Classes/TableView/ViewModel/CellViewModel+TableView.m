@@ -32,16 +32,15 @@
 #pragma mark - ITableCellViewModel
 
 - (NSIndexPath *)tableIndexPath {
-    NSUInteger section = [self.tableSectionViewModel.viewModels indexOfObject:self];
+    NSUInteger section = self.tableSectionViewModel.tableSectionIndex;
     if (section == NSNotFound) {
         return nil;
     }
-    SectionViewModel *sectionViewModel = self.tableSectionViewModel[section];
-    NSUInteger row = [sectionViewModel.viewModels indexOfObject:self];
-    if (row == NSNotFound) {
+    NSUInteger item = [self.tableSectionViewModel indexOfViewModel:self];
+    if (item == NSNotFound) {
         return nil;
     }
-    return [NSIndexPath indexPathForRow:row inSection:section];
+    return [NSIndexPath indexPathForItem:item inSection:section];
 }
 
 - (SectionViewModel *)tableSectionViewModel {

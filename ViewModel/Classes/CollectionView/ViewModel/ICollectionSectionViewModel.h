@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ICollectionSectionViewModel <NSObject>
 
-@property (weak, nonatomic, nullable, readonly) NSIndexPath *collectionIndexPath;
+@property (assign, nonatomic, readonly) NSUInteger collectionSectionIndex;
 @property (weak, nonatomic, nullable) CollectionViewModel *collectionViewModel;
 
 @property (assign, nonatomic) CGFloat collectionMinimumLineSpacing;

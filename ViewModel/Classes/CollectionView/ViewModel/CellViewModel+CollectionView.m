@@ -34,12 +34,11 @@
 #pragma mark - ICollectionCellViewModel
 
 - (NSIndexPath *)collectionIndexPath {
-    NSUInteger section = [self.collectionSectionViewModel.viewModels indexOfObject:self];
+    NSUInteger section = self.collectionSectionViewModel.collectionSectionIndex;
     if (section == NSNotFound) {
         return nil;
     }
-    SectionViewModel *sectionViewModel = self.collectionSectionViewModel[section];
-    NSUInteger item = [sectionViewModel.viewModels indexOfObject:self];
+    NSUInteger item = [self.collectionSectionViewModel indexOfViewModel:self];
     if (item == NSNotFound) {
         return nil;
     }

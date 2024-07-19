@@ -8,6 +8,7 @@
 #import "ColumnRowFlowLayout.h"
 #import "CellViewModel+CollectionView.h"
 #import "SectionViewModel+CollectionView.h"
+#import "CollectionViewModelCell.h"
 
 typedef NSMutableDictionary<__kindof NSIndexPath *, __kindof UICollectionViewLayoutAttributes *> ItemLayoutAttributes;
 typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayoutAttributes *> SectionLayoutAttributes;
@@ -18,6 +19,8 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 @property (strong, nonatomic) ItemLayoutAttributes *itemLayoutAttributes;
 @property (strong, nonatomic) SectionLayoutAttributes *sectionHeaderLayoutAttributes;
 @property (strong, nonatomic) SectionLayoutAttributes *sectionFooterLayoutAttributes;
+
+@property (strong, nonatomic) NSIndexPath *invalidateFromIndexPath;
 
 @end
 
@@ -59,6 +62,32 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
             page += 1;
         }
     }
+}
+
+- (void)reloadIfNeed {
+    if (!_invalidateFromIndexPath) {
+        return;
+    }
+    //    NSArray<__kindof NSIndexPath *> *indexPathsForVisibleItems = self.collectionView.indexPathsForVisibleItems;
+    //    for (NSUInteger section = _invalidateFromIndexPath.section; section < _viewModel.sectionViewModels.viewModels.count; ++section) {
+    //        SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
+    //        NSUInteger itemCount = sectionViewModel.viewModels.count;
+    //        for (NSUInteger item = 0; item < itemCount; ++item) {
+    //            CellViewModel *cellViewModel = sectionViewModel[item];
+    //            if (_invalidateFromIndexPath.section < section || (_invalidateFromIndexPath.section == section && _invalidateFromIndexPath.item <= item)) { // 变化后面的所有布局需要重新计算。
+    //                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
+    //                if ([indexPathsForVisibleItems containsObject:indexPath]) {
+    //                    [(CollectionViewModelCell *)[self.collectionView cellForItemAtIndexPath:indexPath] setViewModel:cellViewModel];
+    //                }
+    //            }
+    //        }
+    //    }
+    NSArray<__kindof NSIndexPath *> *indexPathsForVisibleItems = self.collectionView.indexPathsForVisibleItems;
+    for (NSIndexPath *indexPath in indexPathsForVisibleItems) {
+        CellViewModel *cellViewModel = _viewModel.sectionViewModels[indexPath.section][indexPath.item];
+        [(CollectionViewModelCell *)[self.collectionView cellForItemAtIndexPath:indexPath] setViewModel:cellViewModel];
+    }
+    _invalidateFromIndexPath = nil;
 }
 
 #pragma mark - Super
@@ -132,22 +161,22 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 
 
 - (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
-    NSIndexPath *targetIndexPath = nil;
     for (UICollectionViewUpdateItem *updateItem in updateItems) {
         switch (updateItem.updateAction) {
             case UICollectionUpdateActionMove: {
-                ASSIGN_IF_LARGE_THAN(updateItem.indexPathBeforeUpdate, targetIndexPath);
+                ASSIGN_IF_LARGE_THAN(updateItem.indexPathBeforeUpdate, _invalidateFromIndexPath);
                 break;
             }
             case UICollectionUpdateActionInsert: {
-                ASSIGN_IF_LARGE_THAN(updateItem.indexPathAfterUpdate, targetIndexPath);
+                ASSIGN_IF_LARGE_THAN(updateItem.indexPathAfterUpdate, _invalidateFromIndexPath);
                 break;
             }
             case UICollectionUpdateActionDelete: {  // 之前的可以复用。
+                ASSIGN_IF_LARGE_THAN(updateItem.indexPathBeforeUpdate, _invalidateFromIndexPath);
                 break;
             }
             case UICollectionUpdateActionReload: {
-                targetIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+                _invalidateFromIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
                 break;
             }
             default: {
@@ -155,6 +184,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
             }
         }
     }
+    
     NSUInteger page = 0;
     for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count; ++section) {
         SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
@@ -164,11 +194,19 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
             if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
                 page += 1;
             }
-            if (targetIndexPath.section <= section) { // 变化后面的所有布局需要重新计算。
+            if (_invalidateFromIndexPath.section < section || 
+                (_invalidateFromIndexPath.section == section && _invalidateFromIndexPath.item <= item)) { // 变化后面的所有布局需要重新计算。
                 UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
                 CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
                 CGPoint point = [self pointOfItem:item section:section page:page];
                 attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
+//                CGRect contentFrame =
+//                CGRectMake(self.collectionView.contentOffset.x,
+//                           self.collectionView.contentOffset.y,
+//                           CGRectGetWidth(self.collectionView.bounds) - self.collectionView.contentInset.left - self.collectionView.contentInset.right,
+//                           CGRectGetHeight(self.collectionView.bounds) - self.collectionView.contentInset.top - self.collectionView.contentInset.bottom);
+//                if (CGRectIntersectsRect(self.collectionView.bounds, attribute.frame)) {
+//                }
             }
         }
         if (itemCount > 0) {
@@ -179,6 +217,10 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 
 - (void)finalizeCollectionViewUpdates {
     // TODO: Remove all initialLayoutAttributes
+}
+
+- (void)finalizeLayoutTransition {
+    [super finalizeLayoutTransition];
 }
 
 - (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
