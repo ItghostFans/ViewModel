@@ -69,20 +69,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     if (!_invalidateFromIndexPath) {
         return;
     }
-    //    NSArray<__kindof NSIndexPath *> *indexPathsForVisibleItems = self.collectionView.indexPathsForVisibleItems;
-    //    for (NSUInteger section = _invalidateFromIndexPath.section; section < _viewModel.sectionViewModels.viewModels.count; ++section) {
-    //        SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
-    //        NSUInteger itemCount = sectionViewModel.viewModels.count;
-    //        for (NSUInteger item = 0; item < itemCount; ++item) {
-    //            CellViewModel *cellViewModel = sectionViewModel[item];
-    //            if (_invalidateFromIndexPath.section < section || (_invalidateFromIndexPath.section == section && _invalidateFromIndexPath.item <= item)) { // 变化后面的所有布局需要重新计算。
-    //                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
-    //                if ([indexPathsForVisibleItems containsObject:indexPath]) {
-    //                    [(CollectionViewModelCell *)[self.collectionView cellForItemAtIndexPath:indexPath] setViewModel:cellViewModel];
-    //                }
-    //            }
-    //        }
-    //    }
+    // 只更新可见区域的即可。
     NSArray<__kindof NSIndexPath *> *indexPathsForVisibleItems = self.collectionView.indexPathsForVisibleItems;
     for (NSIndexPath *indexPath in indexPathsForVisibleItems) {
         CellViewModel *cellViewModel = _viewModel.sectionViewModels[indexPath.section][indexPath.item];
@@ -205,13 +192,6 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
                 CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
                 CGPoint point = [self pointOfItem:item section:section page:page];
                 attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
-//                CGRect contentFrame =
-//                CGRectMake(self.collectionView.contentOffset.x,
-//                           self.collectionView.contentOffset.y,
-//                           CGRectGetWidth(self.collectionView.bounds) - self.collectionView.contentInset.left - self.collectionView.contentInset.right,
-//                           CGRectGetHeight(self.collectionView.bounds) - self.collectionView.contentInset.top - self.collectionView.contentInset.bottom);
-//                if (CGRectIntersectsRect(self.collectionView.bounds, attribute.frame)) {
-//                }
             }
         }
         if (itemCount > 0) {
@@ -251,18 +231,15 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 - (void)relayoutAllAttributes {
     // Item.
     NSUInteger page = 0;
-//    NSAssert(_viewModel.sectionViewModels.viewModels.count == self.collectionView.numberOfSections, @"%s Sections Should Equal(%ld, %ld)!", __FUNCTION__, _viewModel.sectionViewModels.viewModels.count, self.collectionView.numberOfSections);
     for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count/*self.collectionView.numberOfSections*/; ++section) {
         SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
         NSUInteger itemCount = sectionViewModel.viewModels.count; // [self.collectionView numberOfItemsInSection:section];
-//        NSAssert(sectionViewModel.viewModels.count == itemCount, @"%s Sections Should Equal(%ld, %ld)!", __FUNCTION__, sectionViewModel.viewModels.count, itemCount);
         for (NSUInteger item = 0; item < itemCount; ++item) {
             CellViewModel *cellViewModel = sectionViewModel[item];
             if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
                 page += 1;
             }
             UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
-//            [layoutAttributes addObject:attribute];
             CGPoint point = [self pointOfItem:item section:section page:page];
             CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
             attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
