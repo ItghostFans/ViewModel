@@ -66,6 +66,8 @@
         [self.viewModel.collectionViewModel.collectionView performBatchUpdates:^{
             @strongify(self);
             TestSectionViewModel *sectionViewModel = TestSectionViewModel.new;
+            sectionViewModel.collectionMinimumLineSpacing = 5.0f;
+            sectionViewModel.collectionMinimumInteritemSpacing = 10.0f;
             [sectionViewModel addViewModel:TestCellViewModel.new];
             [self.viewModel.collectionViewModel.sectionViewModels addViewModel:sectionViewModel];
         } completion:^(BOOL finished) {

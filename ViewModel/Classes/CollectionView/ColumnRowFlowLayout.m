@@ -272,8 +272,8 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
     NSUInteger column = item % _columnCount;
     CGPoint point = CGPointZero;
-    CGFloat minimumInteritemSpacing = 0.0f;
-    CGFloat minimumLineSpacing = 0.0f;
+    CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
+    CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
     switch (self.scrollDirection) {
         case UICollectionViewScrollDirectionVertical: {
             point.x = 0.0f;
@@ -303,7 +303,28 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 - (CGSize)cellSizeOfViewModel:(CellViewModel *)viewModel {
     CGSize cellSize = [viewModel collectionCellSizeForSize:self.collectionView.bounds.size];
     if (CGSizeEqualToSize(cellSize, CGSizeZero)) {
-        // TODO: Itghost 自动计算cellSize
+        CGFloat width = CGRectGetWidth(self.collectionView.bounds);
+        CGFloat height = CGRectGetHeight(self.collectionView.bounds);
+        SectionViewModel *sectionViewModel = viewModel.collectionSectionViewModel;
+        CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
+        CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
+        switch (self.scrollDirection) {
+            case UICollectionViewScrollDirectionVertical: {
+                minimumLineSpacing = sectionViewModel.collectionMinimumLineSpacing;
+                minimumInteritemSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
+                break;
+            }
+            case UICollectionViewScrollDirectionHorizontal: {
+                minimumLineSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
+                minimumInteritemSpacing = sectionViewModel.collectionMinimumLineSpacing;
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        cellSize.width = MAX((width - ((_columnCount - 1) * minimumInteritemSpacing)) / _columnCount, 0.0f);
+        cellSize.height = MAX((height - ((_rowCount - 1) * minimumLineSpacing)) / _rowCount, 0.0f);
     }
     return cellSize;
 }
