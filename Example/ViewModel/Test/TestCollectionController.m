@@ -40,11 +40,15 @@
     ColumnRowFlowLayout *collectionViewFlowLayout = ColumnRowFlowLayout.new;
     collectionViewFlowLayout.columnCount = 3;
     collectionViewFlowLayout.rowCount = 10;
+//    collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    self.collectionView.contentInset = UIEdgeInsetsMake(3, 4, 0, 6);
-    self.collectionView.pagingEnabled = YES;
-    ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).scrollDirection = UICollectionViewScrollDirectionVertical;
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.collectionView.pagingEnabled = YES;        // pagingEnabled为YES时，不要设置contentInset，否则会有不可预期的抖动。
+    self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    self.collectionView.automaticallyAdjustsScrollIndicatorInsets = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.showsVerticalScrollIndicator = NO;
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.addSectionButton.mas_bottom);
         make.leading.trailing.bottom.equalTo(self.view);
@@ -70,6 +74,7 @@
     }];
     self.addRowButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         @strongify(self);
+        [UIView setAnimationsEnabled:NO];
         [self.viewModel.collectionViewModel.collectionView performBatchUpdates:^{
             @strongify(self);
             SectionViewModel *sectionViewModel = self.viewModel.collectionViewModel.sectionViewModels.viewModels.firstObject;
@@ -80,6 +85,7 @@
 //                [sectionViewModel addViewModel:TestCellViewModel.new];
             }
         } completion:^(BOOL finished) {
+            [UIView setAnimationsEnabled:YES];
         }];
         return [RACSignal return:nil];
     }];

@@ -10,6 +10,8 @@
 #import "SectionViewModel+CollectionView.h"
 #import "CollectionViewModelCell.h"
 
+#import <ReactiveObjC/ReactiveObjC.h>
+
 typedef NSMutableDictionary<__kindof NSIndexPath *, __kindof UICollectionViewLayoutAttributes *> ItemLayoutAttributes;
 typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayoutAttributes *> SectionLayoutAttributes;
 
@@ -21,6 +23,9 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 @property (strong, nonatomic) SectionLayoutAttributes *sectionFooterLayoutAttributes;
 
 @property (strong, nonatomic) NSIndexPath *invalidateFromIndexPath;
+
+@property (strong, nonatomic, nullable) RACCompoundDisposable *disposableBag;
+@property (assign, nonatomic) CGRect lastFrame;
 
 @end
 
@@ -37,32 +42,27 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 }
 
 - (void)setViewModel:(CollectionViewModel *)viewModel {
+    if (_disposableBag) {
+        [_disposableBag dispose];
+    }
+    if (viewModel) {
+        _disposableBag = RACCompoundDisposable.new;
+    }
     _viewModel = viewModel;
     [self.collectionView.superview layoutIfNeeded];
     NSAssert(self.collectionView, @"Should Set CollectionViewLayout First!");
     NSAssert(!CGRectIsEmpty(self.collectionView.frame), @"Should Layout CollectionView First!");
-    // Item.
-    NSUInteger page = 0;
-//    NSAssert(_viewModel.sectionViewModels.viewModels.count == self.collectionView.numberOfSections, @"%s Sections Should Equal(%ld, %ld)!", __FUNCTION__, _viewModel.sectionViewModels.viewModels.count, self.collectionView.numberOfSections);
-    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count/*self.collectionView.numberOfSections*/; ++section) {
-        SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
-        NSUInteger itemCount = sectionViewModel.viewModels.count; // [self.collectionView numberOfItemsInSection:section];
-//        NSAssert(sectionViewModel.viewModels.count == itemCount, @"%s Sections Should Equal(%ld, %ld)!", __FUNCTION__, sectionViewModel.viewModels.count, itemCount);
-        for (NSUInteger item = 0; item < itemCount; ++item) {
-            CellViewModel *cellViewModel = sectionViewModel[item];
-            if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
-                page += 1;
-            }
-            UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
-//            [layoutAttributes addObject:attribute];
-            CGPoint point = [self pointOfItem:item section:section page:page];
-            CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
-            attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
+    @weakify(self);
+    [self relayoutAllAttributes];
+    RACDisposable *disposable = [[self.collectionView rac_signalForSelector:@selector(layoutSubviews)] subscribeNext:^(RACTuple * _Nullable x) {
+        @strongify(self);
+        if (!CGRectEqualToRect(self.lastFrame, self.collectionView.frame)) {
+            [self relayoutAllAttributes];
+            [self invalidateLayout];
+            self.lastFrame = self.collectionView.frame;
         }
-        if (itemCount > 0) {
-            page += 1;
-        }
-    }
+    }];
+    [_disposableBag addDisposable:disposable];
 }
 
 - (void)reloadIfNeed {
@@ -244,6 +244,31 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 
 #pragma mark - Layout
 
+- (void)relayoutAllAttributes {
+    // Item.
+    NSUInteger page = 0;
+//    NSAssert(_viewModel.sectionViewModels.viewModels.count == self.collectionView.numberOfSections, @"%s Sections Should Equal(%ld, %ld)!", __FUNCTION__, _viewModel.sectionViewModels.viewModels.count, self.collectionView.numberOfSections);
+    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count/*self.collectionView.numberOfSections*/; ++section) {
+        SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
+        NSUInteger itemCount = sectionViewModel.viewModels.count; // [self.collectionView numberOfItemsInSection:section];
+//        NSAssert(sectionViewModel.viewModels.count == itemCount, @"%s Sections Should Equal(%ld, %ld)!", __FUNCTION__, sectionViewModel.viewModels.count, itemCount);
+        for (NSUInteger item = 0; item < itemCount; ++item) {
+            CellViewModel *cellViewModel = sectionViewModel[item];
+            if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
+                page += 1;
+            }
+            UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
+//            [layoutAttributes addObject:attribute];
+            CGPoint point = [self pointOfItem:item section:section page:page];
+            CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
+            attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
+        }
+        if (itemCount > 0) {
+            page += 1;
+        }
+    }
+}
+
 - (NSUInteger)pageCount {
     NSUInteger pageCount = 0;
     for (NSUInteger section = 0; section < self.collectionView.numberOfSections; ++section) {
@@ -288,8 +313,8 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         }
     }
     
-    point.x += (column + 1) * (minimumInteritemSpacing + cellSize.width) - cellSize.width;
-    point.y += (item % (_rowCount * _columnCount)) / _columnCount * (minimumLineSpacing + cellSize.height) + minimumLineSpacing;
+    point.x += (column) * (minimumInteritemSpacing + cellSize.width);
+    point.y += (item % (_rowCount * _columnCount)) / _columnCount * (minimumLineSpacing + cellSize.height);
     
     return point;
 }
