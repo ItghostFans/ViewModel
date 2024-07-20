@@ -169,7 +169,11 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
                 break;
             }
             case UICollectionUpdateActionInsert: {
-                ASSIGN_IF_LARGE_THAN(updateItem.indexPathAfterUpdate, _invalidateFromIndexPath);
+                if (updateItem.indexPathAfterUpdate.item == NSNotFound) {
+                    ASSIGN_IF_LARGE_THAN([NSIndexPath indexPathForItem:0 inSection:updateItem.indexPathAfterUpdate.section], _invalidateFromIndexPath);
+                } else {
+                    ASSIGN_IF_LARGE_THAN(updateItem.indexPathAfterUpdate, _invalidateFromIndexPath);
+                }
                 break;
             }
             case UICollectionUpdateActionDelete: {  // 之前的可以复用。
