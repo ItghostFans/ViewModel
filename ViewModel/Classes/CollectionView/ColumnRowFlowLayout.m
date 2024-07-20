@@ -83,6 +83,9 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 - (void)prepareLayout {
     NSAssert(_columnCount, @"%s Should Indicate Column Count!");
     NSAssert(_rowCount, @"%s Should Indicate Row Count!");
+    if (self.collectionView.pagingEnabled) {
+        NSAssert(UIEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, UIEdgeInsetsZero), @"UICollectionView.pagingEnabled Should contentInset==UIEdgeInsetsZero!");
+    }
     [super prepareLayout];
 }
 
@@ -276,15 +279,15 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
     switch (self.scrollDirection) {
         case UICollectionViewScrollDirectionVertical: {
-            point.x = 0.0f;
-            point.y = page * CGRectGetHeight(self.collectionView.bounds);
+            point.x = self.contentInset.left;
+            point.y = page * CGRectGetHeight(self.collectionView.bounds) + self.contentInset.top;
             minimumLineSpacing = sectionViewModel.collectionMinimumLineSpacing;
             minimumInteritemSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
             break;
         }
         case UICollectionViewScrollDirectionHorizontal: {
-            point.x = page * CGRectGetWidth(self.collectionView.bounds);
-            point.y = 0.0f;
+            point.x = page * CGRectGetWidth(self.collectionView.bounds) + self.contentInset.left;
+            point.y = self.contentInset.top;
             minimumLineSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
             minimumInteritemSpacing = sectionViewModel.collectionMinimumLineSpacing;
             break;
@@ -323,8 +326,8 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
                 break;
             }
         }
-        cellSize.width = MAX((width - ((_columnCount - 1) * minimumInteritemSpacing)) / _columnCount, 0.0f);
-        cellSize.height = MAX((height - ((_rowCount - 1) * minimumLineSpacing)) / _rowCount, 0.0f);
+        cellSize.width = MAX((width - ((_columnCount - 1) * minimumInteritemSpacing) - self.contentInset.left - self.contentInset.right) / _columnCount, 0.0f);
+        cellSize.height = MAX((height - ((_rowCount - 1) * minimumLineSpacing) - self.contentInset.top - self.contentInset.bottom) / _rowCount, 0.0f);
     }
     return cellSize;
 }

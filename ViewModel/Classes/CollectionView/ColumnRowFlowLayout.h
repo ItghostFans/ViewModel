@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) CollectionViewModel *viewModel;
 @property (assign, nonatomic) NSUInteger columnCount;
 @property (assign, nonatomic) NSUInteger rowCount;
+@property (assign, nonatomic) UIEdgeInsets contentInset;
 
 @end
 

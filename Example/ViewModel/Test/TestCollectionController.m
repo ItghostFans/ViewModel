@@ -42,6 +42,7 @@
     collectionViewFlowLayout.rowCount = 10;
 //    collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    collectionViewFlowLayout.contentInset = UIEdgeInsetsMake(10.0f, 5.0f, 10.0f, 5.0f);
     
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.collectionView.pagingEnabled = YES;        // pagingEnabled为YES时，不要设置contentInset，否则会有不可预期的抖动。
