@@ -129,7 +129,10 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-    return _shouldInvalidateLayoutForBoundsChange;
+    if (_shouldInvalidateLayoutForBoundsChange) {
+        return [super shouldInvalidateLayoutForBoundsChange:newBounds];
+    }
+    return NO;
 }
 
 - (CGSize)collectionViewContentSize {

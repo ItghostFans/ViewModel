@@ -37,7 +37,9 @@
     _sectionViewModel = [TestSectionViewModel new];
     _sectionViewModel.collectionMinimumLineSpacing = 5.0f;
     _sectionViewModel.collectionMinimumInteritemSpacing = 10.0f;
-    [_sectionViewModel addViewModel:TestCellViewModel.new];
+    for (NSInteger index = 0; index < 36; ++index) {
+        [_sectionViewModel addViewModel:TestCellViewModel.new];
+    }
 //    [_sectionViewModel addViewModel:TestCellViewModel.new];
 	// Do any additional setup after loading the view, typically from a nib.
     @weakify(self);
