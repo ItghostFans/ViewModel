@@ -11,6 +11,4 @@
 
 @implementation TestCollectionControllerViewModel
 
-@synthesize delegate = _delegate;
-
 @end

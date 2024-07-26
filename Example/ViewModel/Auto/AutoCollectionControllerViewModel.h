@@ -1,8 +1,8 @@
 //
-//  TestCollectionControllerViewModel.h
+//  AutoCollectionControllerViewModel.h
 //  ViewModel_Example
 //
-//  Created by ItghostFan on 2024/6/2.
+//  Created by ItghostFan on 2024/7/26.
 //  Copyright © 2024 fanchunxing1. All rights reserved.
 //
 
@@ -10,17 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TestCollectionControllerViewModel;
+@class AutoCollectionControllerViewModel;
 
-@protocol ITestCollectionControllerViewModelDelegate <IBaseViewModelDelegate>
+@protocol IAutoCollectionControllerViewModelDelegate <IBaseViewModelDelegate>
 @end
 
-@interface TestCollectionControllerViewModel : CollectionControllerViewModel
+@interface AutoCollectionControllerViewModel : CollectionControllerViewModel
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincompatible-property-type"
 #pragma clang diagnostic ignored "-Wobjc-property-synthesis"
-@property (weak, nonatomic, nullable) id<ITestCollectionControllerViewModelDelegate> delegate;
+@property (weak, nonatomic, nullable) id<IAutoCollectionControllerViewModelDelegate> delegate;
 #pragma clang diagnostic pop
 
 @end

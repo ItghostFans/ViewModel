@@ -11,6 +11,4 @@
 
 @implementation TestTableControllerViewModel
 
-@synthesize delegate = _delegate;
-
 @end

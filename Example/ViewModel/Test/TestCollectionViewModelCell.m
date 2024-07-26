@@ -19,8 +19,6 @@
 
 @implementation TestCollectionViewModelCell
 
-@synthesize viewModel = _viewModel;
-
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
 //        self.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
@@ -34,7 +32,12 @@
 
 - (void)setViewModel:(TestCollectionCellViewModel *)viewModel {
     [super setViewModel:viewModel];
-    self.indexPathLabel.text = [NSString stringWithFormat:@"%@.%@", @(viewModel.collectionIndexPath.section), @(viewModel.collectionIndexPath.item)];
+    [self reloadIndexPath];
+    NSLog(@"%@", self.viewModel.thisName);
+}
+
+- (void)reloadIndexPath {
+    self.indexPathLabel.text = [NSString stringWithFormat:@"%@.%@", @(self.viewModel.collectionIndexPath.section), @(self.viewModel.collectionIndexPath.item)];
 }
 
 #pragma mark - Public

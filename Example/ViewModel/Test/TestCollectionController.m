@@ -31,8 +31,6 @@
 
 @implementation TestCollectionController
 
-@synthesize viewModel = _viewModel;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;

@@ -17,7 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TestSectionViewModel : SectionViewModel
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
+#pragma clang diagnostic ignored "-Wobjc-property-synthesis"
 @property (weak, nonatomic, nullable) id<ITestSectionViewModelDelegate> delegate;
+#pragma clang diagnostic pop
 
 @end
 

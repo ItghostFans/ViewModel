@@ -17,8 +17,6 @@
 
 @implementation TestCollectionFooterView
 
-@synthesize viewModel = _viewModel;
-
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f

@@ -18,8 +18,6 @@
 
 @implementation TestSectionViewModel
 
-@synthesize delegate = _delegate;
-
 #pragma mark - TableView
 
 - (Class)tableHeaderClass {

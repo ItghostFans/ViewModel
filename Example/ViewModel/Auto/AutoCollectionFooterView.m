@@ -1,21 +1,21 @@
 //
-//  TestCollectionHeaderView.m
+//  AutoCollectionFooterView.m
 //  ViewModel_Example
 //
-//  Created by ItghostFan on 2024/7/4.
+//  Created by ItghostFan on 2024/7/26.
 //  Copyright © 2024 fanchunxing1. All rights reserved.
 //
 
-#import "TestCollectionHeaderView.h"
-#import "TestSectionViewModel.h"
+#import "AutoCollectionFooterView.h"
+#import "AutoSectionViewModel.h"
 
 #import <Masonry/Masonry.h>
 
-@interface TestCollectionHeaderView ()
+@interface AutoCollectionFooterView ()
 // TODO: 添加需要的View，建议使用懒加载
 @end
 
-@implementation TestCollectionHeaderView
+@implementation AutoCollectionFooterView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -27,7 +27,7 @@
     return self;
 }
 
-- (void)setViewModel:(TestSectionViewModel *)viewModel {
+- (void)setViewModel:(AutoSectionViewModel *)viewModel {
     [super setViewModel:viewModel];
 }
 
@@ -41,10 +41,11 @@
 
 // TODO: 添加需要的View，建议使用懒加载
 
-#pragma mark - CollectionHeaderView
+#pragma mark - CollectionFooterView
 
-+ (CGSize)headerSizeForSize:(CGSize *)size viewModel:(TestSectionViewModel *)viewModel {
-    return CGSizeMake(10.0f, size->width);
++ (CGSize)footerSizeForSize:(CGSize *)size viewModel:(AutoSectionViewModel *)viewModel {
+    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
+    return CGSizeZero;
 }
 
 @end

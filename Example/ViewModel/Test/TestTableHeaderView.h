@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincompatible-property-type"
+#pragma clang diagnostic ignored "-Wobjc-property-synthesis"
 @property (weak, nonatomic, nullable) TestSectionViewModel *viewModel;
 #pragma clang diagnostic pop
 

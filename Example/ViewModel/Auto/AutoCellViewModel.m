@@ -1,28 +1,26 @@
 //
-//  TestCellViewModel.m
+//  AutoCellViewModel.m
 //  ViewModel_Example
 //
-//  Created by ItghostFan on 2024/6/2.
+//  Created by ItghostFan on 2024/7/26.
 //  Copyright © 2024 fanchunxing1. All rights reserved.
 //
 
-#import "TestCellViewModel.h"
-#import "TestTableCellViewModel.h"
-#import "TestTableViewModelCell.h"
-#import "TestCollectionCellViewModel.h"
-#import "TestCollectionViewModelCell.h"
+#import "AutoCellViewModel.h"
+#import "AutoTableViewModelCell.h"
+#import "AutoCollectionViewModelCell.h"
 
-@interface TestCellViewModel ()
-@property (strong, nonatomic) TestTableCellViewModel *tableCellViewModel;
-@property (strong, nonatomic) TestCollectionCellViewModel *collectionCellViewModel;
+@interface AutoCellViewModel ()
+@property (strong, nonatomic) AutoTableViewModelCell *tableCellViewModel;
+@property (strong, nonatomic) AutoCollectionViewModelCell *collectionCellViewModel;
 @end
 
-@implementation TestCellViewModel
+@implementation AutoCellViewModel
 
 - (instancetype)init {
     if (self = [super init]) {
-        _tableCellViewModel = TestTableCellViewModel.new;
-        _collectionCellViewModel = TestCollectionCellViewModel.new;
+        _tableCellViewModel = AutoTableViewModelCell.new;
+        _collectionCellViewModel = AutoCollectionViewModelCell.new;
     }
     return self;
 }
@@ -30,13 +28,13 @@
 #pragma mark - TableView
 
 - (Class)tableCellClass {
-    return TestTableViewModelCell.class;
+    return AutoTableViewModelCell.class;
 }
 
 #pragma mark - CollectionView
 
 - (Class)collectionCellClass {
-    return TestCollectionViewModelCell.class;
+    return AutoCollectionViewModelCell.class;
 }
 
 #pragma mark - Fowarding
@@ -44,10 +42,10 @@
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
     NSMethodSignature *methodSignature = nil;
     if ([_tableCellViewModel respondsToSelector:aSelector]) {
-        methodSignature = [_tableCellViewModel.class instanceMethodSignatureForSelector:aSelector];
+        methodSignature = [AutoTableViewModelCell instanceMethodSignatureForSelector:aSelector];
     } else
     if ([_collectionCellViewModel respondsToSelector:aSelector]) {
-        methodSignature = [_collectionCellViewModel.class instanceMethodSignatureForSelector:aSelector];
+        methodSignature = [AutoCollectionViewModelCell instanceMethodSignatureForSelector:aSelector];
     }
     return methodSignature;
 }

@@ -1,8 +1,8 @@
 //
-//  TestTableControllerViewModel.h
+//  AutoTableControllerViewModel.h
 //  ViewModel_Example
 //
-//  Created by ItghostFan on 2024/6/2.
+//  Created by ItghostFan on 2024/7/26.
 //  Copyright © 2024 fanchunxing1. All rights reserved.
 //
 
@@ -10,17 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TestTableControllerViewModel;
+@class AutoTableControllerViewModel;
 
-@protocol ITestTableControllerViewModelDelegate <IBaseViewModelDelegate>
+@protocol IAutoTableControllerViewModelDelegate <IBaseViewModelDelegate>
 @end
 
-@interface TestTableControllerViewModel : TableControllerViewModel
+@interface AutoTableControllerViewModel : TableControllerViewModel
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wincompatible-property-type"
 #pragma clang diagnostic ignored "-Wobjc-property-synthesis"
-@property (weak, nonatomic, nullable) id<ITestTableControllerViewModelDelegate> delegate;
+@property (weak, nonatomic, nullable) id<IAutoTableControllerViewModelDelegate> delegate;
 #pragma clang diagnostic pop
 
 @end
