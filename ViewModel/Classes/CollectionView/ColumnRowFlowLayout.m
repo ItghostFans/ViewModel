@@ -72,8 +72,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     // 只更新可见区域的即可。
     NSArray<__kindof NSIndexPath *> *indexPathsForVisibleItems = self.collectionView.indexPathsForVisibleItems;
     for (NSIndexPath *indexPath in indexPathsForVisibleItems) {
-        CellViewModel *cellViewModel = _viewModel.sectionViewModels[indexPath.section][indexPath.item];
-        [(CollectionViewModelCell *)[self.collectionView cellForItemAtIndexPath:indexPath] setViewModel:cellViewModel];
+        [(CollectionViewModelCell *)[self.collectionView cellForItemAtIndexPath:indexPath] reloadIndexPath];
     }
     _invalidateFromIndexPath = nil;
 }
