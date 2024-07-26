@@ -105,13 +105,14 @@
 
 - (void)addKvoSectionViewModel:(BaseViewModels *)viewModel {
     @weakify(self, viewModel);
-    [[[viewModel rac_valuesAndChangesForKeyPath:@keypath(viewModel.viewModels)
-                                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial
-                                      observer:self] takeUntil:viewModel.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
-        RACTupleUnpack(id object OS_UNUSED, NSDictionary *change) = x;
-        @strongify(self, viewModel);
-        [self onItemsChange:change object:viewModel observer:self];
-    }];
+    [_disposableBag addDisposable:
+     [[[viewModel rac_valuesAndChangesForKeyPath:@keypath(viewModel.viewModels)
+                                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial
+                                       observer:self] takeUntil:viewModel.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+         RACTupleUnpack(id object OS_UNUSED, NSDictionary *change) = x;
+         @strongify(self, viewModel);
+         [self onItemsChange:change object:viewModel observer:self];
+     }]];
 }
 
 #pragma mark - KVO
