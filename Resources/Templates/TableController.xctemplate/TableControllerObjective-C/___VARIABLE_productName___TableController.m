@@ -10,8 +10,6 @@
 
 @implementation ___VARIABLE_productName___TableController
 
-@synthesize viewModel = _viewModel;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColor.whiteColor;

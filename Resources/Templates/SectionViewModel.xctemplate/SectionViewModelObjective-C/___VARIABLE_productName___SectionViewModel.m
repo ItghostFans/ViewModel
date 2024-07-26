@@ -12,8 +12,6 @@
 
 @implementation ___VARIABLE_productName___SectionViewModel
 
-@synthesize delegate = _delegate;
-
 #pragma mark - TableView
 
 - (Class)tableHeaderClass {

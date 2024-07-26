@@ -5,6 +5,4 @@
 
 @implementation ___VARIABLE_productName___CollectionControllerViewModel
 
-@synthesize delegate = _delegate;
-
 @end
