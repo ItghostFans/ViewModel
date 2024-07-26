@@ -40,14 +40,6 @@
 - (void)dealloc {
 }
 
-- (void)setDelegate:(id<ICollectionViewModelDelegate>)delegate {
-    [super setDelegate:delegate];
-}
-
-- (id<ICollectionViewModelDelegate>)delegate {
-    return (id<ICollectionViewModelDelegate>)super.delegate;
-}
-
 #pragma mark - Private
 
 - (void)registerCellClass:(Class)class {

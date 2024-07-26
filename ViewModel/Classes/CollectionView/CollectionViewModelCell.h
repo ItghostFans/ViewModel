@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic, nullable) CellViewModel *viewModel;
 
+#pragma mark - Subclass
+
+- (void)reloadIndexPath;
+
 + (CGSize)cellSizeForSize:(CGSize *)size viewModel:(CellViewModel *)viewModel;
 
 @end

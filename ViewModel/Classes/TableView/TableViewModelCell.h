@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Subclass
 
+- (void)reloadIndexPath;
+
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(CellViewModel *)viewModel;
 
 @end

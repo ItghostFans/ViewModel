@@ -27,8 +27,6 @@
 
 @implementation TableViewModel
 
-@synthesize delegate = _delegate;
-
 - (instancetype)init {
     if (self = [super init]) {
         _sectionViewModels = [[BaseViewModels alloc] initWithViewModels:@[]];

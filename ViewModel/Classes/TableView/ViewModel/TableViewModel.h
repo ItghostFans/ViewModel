@@ -20,7 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TableViewModel : BaseViewModel
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
+#pragma clang diagnostic ignored "-Wobjc-property-synthesis"
 @property (weak, nonatomic, nullable) id<ITableViewModelDelegate> delegate;
+#pragma clang diagnostic pop
 
 @property (strong, nonatomic) BaseViewModels *sectionViewModels;
 

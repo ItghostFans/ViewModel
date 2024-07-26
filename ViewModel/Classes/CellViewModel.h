@@ -16,7 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CellViewModel : BaseViewModel
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
+#pragma clang diagnostic ignored "-Wobjc-property-synthesis"
 @property (weak, nonatomic, nullable) id<ICellViewModelDelegate> delegate;
+#pragma clang diagnostic pop
 
 @property (assign, nonatomic) BOOL deselectAfterDidSelect;       // Default is YES.
 

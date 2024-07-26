@@ -9,8 +9,6 @@
 
 @implementation CellViewModel
 
-@synthesize delegate = _delegate;
-
 - (instancetype)init {
     if (self = [super init]) {
         _deselectAfterDidSelect = YES;
