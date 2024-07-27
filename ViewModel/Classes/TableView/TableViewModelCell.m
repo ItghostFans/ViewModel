@@ -9,6 +9,11 @@
 
 @implementation TableViewModelCell
 
+- (void)setViewModel:(CellViewModel *)viewModel {
+    _viewModel = viewModel;
+    [self reloadIndexPath];
+}
+
 #pragma mark - Subclass
 
 - (void)reloadIndexPath {

@@ -13,10 +13,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CellViewModel;
+@class TableViewModel;
+
 @protocol ITableViewModelDelegate <IBaseViewModelDelegate>
 @end
 
-@class CellViewModel;
+@protocol UITableViewModelDataSource <UITableViewDataSource>
+@optional
+- (CellViewModel *)tableView:(UITableView *)tableView cellViewModelForIndexPath:(NSIndexPath *)indexPath;
+- (SectionViewModel *)tableView:(UITableView *)tableView sectionViewModelForSection:(NSInteger)section;
+@end
 
 @interface TableViewModel : BaseViewModel
 
