@@ -22,7 +22,12 @@
 }
 
 - (void)setViewModel:(___VARIABLE_productName___CollectionCellViewModel *)viewModel {
+    BOOL same = self.viewModel == viewModel;
     [super setViewModel:viewModel];
+    if (same) {
+        // 防止这里不必要的UI刷新。
+        return;
+    }
 }
 
 #pragma mark - Public
