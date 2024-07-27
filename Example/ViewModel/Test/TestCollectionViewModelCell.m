@@ -31,8 +31,12 @@
 }
 
 - (void)setViewModel:(TestCollectionCellViewModel *)viewModel {
+    BOOL same = self.viewModel == viewModel;
     [super setViewModel:viewModel];
-    [self reloadIndexPath];
+    if (same) {
+        // 防止这里不必要的UI刷新。
+        return;
+    }
     NSLog(@"%@", self.viewModel.thisName);
 }
 

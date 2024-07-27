@@ -25,7 +25,7 @@
 
 @interface TestCollectionController ()
 @property (weak, nonatomic) UIButton *addSectionButton;
-@property (weak, nonatomic) UIButton *addRowButton;
+@property (weak, nonatomic) UIButton *addItemButton;
 @property (weak, nonatomic) UIButton *deleteRowButton;
 @end
 
@@ -73,7 +73,7 @@
         }];
         return [RACSignal return:nil];
     }];
-    self.addRowButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
+    self.addItemButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         @strongify(self);
         [UIView setAnimationsEnabled:NO];
         [self.viewModel.collectionViewModel.collectionView performBatchUpdates:^{
@@ -128,20 +128,20 @@
     return _addSectionButton;
 }
 
-- (UIButton *)addRowButton {
-    if (!_addRowButton) {
-        UIButton *addRowButton = UIButton.new;
-        addRowButton.backgroundColor = UIColor.grayColor;
-        [self.view addSubview:addRowButton];
-        _addRowButton = addRowButton;
-        [_addRowButton setTitle:@"Add Item" forState:(UIControlStateNormal)];
-        [_addRowButton setTitleColor:UIColor.blackColor forState:(UIControlStateNormal)];
-        [_addRowButton mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UIButton *)addItemButton {
+    if (!_addItemButton) {
+        UIButton *addItemButton = UIButton.new;
+        addItemButton.backgroundColor = UIColor.grayColor;
+        [self.view addSubview:addItemButton];
+        _addItemButton = addItemButton;
+        [_addItemButton setTitle:@"Add Item" forState:(UIControlStateNormal)];
+        [_addItemButton setTitleColor:UIColor.blackColor forState:(UIControlStateNormal)];
+        [_addItemButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
             make.leading.equalTo(self.addSectionButton.mas_trailing).offset(2.0f);
         }];
     }
-    return _addRowButton;
+    return _addItemButton;
 }
 
 - (UIButton *)deleteRowButton {
@@ -154,7 +154,7 @@
         [_deleteRowButton setTitleColor:UIColor.blackColor forState:(UIControlStateNormal)];
         [_deleteRowButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.leading.equalTo(self.addRowButton.mas_trailing).offset(2.0f);
+            make.leading.equalTo(self.addItemButton.mas_trailing).offset(2.0f);
         }];
     }
     return _deleteRowButton;

@@ -12,7 +12,7 @@
 #import <Masonry/Masonry.h>
 
 @interface TestTableViewModelCell ()
-// TODO: 添加需要的View，建议使用懒加载
+@property (weak, nonatomic) UILabel *indexPathLabel;
 @end
 
 @implementation TestTableViewModelCell
@@ -28,7 +28,16 @@
 }
 
 - (void)setViewModel:(TestTableCellViewModel *)viewModel {
+    BOOL same = self.viewModel == viewModel;
     [super setViewModel:viewModel];
+    if (same) {
+        // 防止这里不必要的UI刷新。
+        return;
+    }
+}
+
+- (void)reloadIndexPath {
+    self.indexPathLabel.text = [NSString stringWithFormat:@"%@.%@", @(self.viewModel.tableIndexPath.section), @(self.viewModel.tableIndexPath.item)];
 }
 
 #pragma mark - Public
@@ -39,7 +48,20 @@
 
 #pragma mark - Getter
 
-// TODO: 添加需要的View，建议使用懒加载
+- (UILabel *)indexPathLabel {
+    if (!_indexPathLabel) {
+        UILabel *indexPathLabel = UILabel.new;
+        _indexPathLabel = indexPathLabel;
+        [self.contentView addSubview:_indexPathLabel];
+        _indexPathLabel.textColor = UIColor.redColor;
+        _indexPathLabel.font = [UIFont systemFontOfSize:15.0f];
+        _indexPathLabel.textAlignment = NSTextAlignmentCenter;
+        [_indexPathLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+    }
+    return _indexPathLabel;
+}
 
 #pragma mark - TableViewModelCell
 
