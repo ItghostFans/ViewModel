@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic, nullable) SectionViewModel *viewModel;
 
+#pragma mark - Subclass
+
+- (void)reloadIndexPath;
+
 + (CGSize)headerSizeForSize:(CGSize *)size viewModel:(SectionViewModel *)viewModel;
 
 @end

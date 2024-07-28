@@ -6,10 +6,19 @@
 //
 
 #import "TableHeaderView.h"
-
 #import "SectionViewModel+TableView.h"
 
 @implementation TableHeaderView
+
+- (void)setViewModel:(SectionViewModel *)viewModel {
+    _viewModel = viewModel;
+    [self reloadIndexPath];
+}
+
+#pragma mark - Subclass
+
+- (void)reloadIndexPath {
+}
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(SectionViewModel *)viewModel {
     return 0.0f;

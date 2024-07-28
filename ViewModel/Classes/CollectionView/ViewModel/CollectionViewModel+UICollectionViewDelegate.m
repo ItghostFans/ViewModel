@@ -30,7 +30,7 @@
         ((CollectionHeaderView *)view).viewModel = sectionViewModel;
         return;
     }
-    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+    if ([elementKind isEqualToString:UICollectionElementKindSectionFooter]) {
         ((CollectionFooterView *)view).viewModel = sectionViewModel;
         return;
     }
@@ -41,7 +41,7 @@
         ((CollectionHeaderView *)view).viewModel = nil;
         return;
     }
-    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+    if ([elementKind isEqualToString:UICollectionElementKindSectionFooter]) {
         ((CollectionFooterView *)view).viewModel = nil;
         return;
     }
