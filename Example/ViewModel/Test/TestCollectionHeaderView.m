@@ -8,11 +8,13 @@
 
 #import "TestCollectionHeaderView.h"
 #import "TestSectionViewModel.h"
+#import "SectionViewModel+CollectionView.h"
+#import "CollectionViewModel.h"
 
 #import <Masonry/Masonry.h>
 
 @interface TestCollectionHeaderView ()
-// TODO: 添加需要的View，建议使用懒加载
+@property (weak, nonatomic) UILabel *indexPathLabel;
 @end
 
 @implementation TestCollectionHeaderView
@@ -36,6 +38,10 @@
     }
 }
 
+- (void)reloadIndexPath {
+    self.indexPathLabel.text = [NSString stringWithFormat:@"%@", @(self.viewModel.collectionSectionIndex)];
+}
+
 #pragma mark - Public
 
 #pragma mark - Actions
@@ -44,12 +50,39 @@
 
 #pragma mark - Getter
 
-// TODO: 添加需要的View，建议使用懒加载
+- (UILabel *)indexPathLabel {
+    if (!_indexPathLabel) {
+        UILabel *indexPathLabel = UILabel.new;
+        _indexPathLabel = indexPathLabel;
+        [self addSubview:_indexPathLabel];
+        _indexPathLabel.textColor = UIColor.redColor;
+        _indexPathLabel.font = [UIFont systemFontOfSize:15.0f];
+        _indexPathLabel.textAlignment = NSTextAlignmentCenter;
+        [_indexPathLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+    }
+    return _indexPathLabel;
+}
 
 #pragma mark - CollectionHeaderView
 
 + (CGSize)headerSizeForSize:(CGSize *)size viewModel:(TestSectionViewModel *)viewModel {
-    return CGSizeMake(10.0f, size->width);
+    if ([viewModel.collectionViewModel.collectionView.collectionViewLayout isKindOfClass:UICollectionViewFlowLayout.class]) {
+        UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)viewModel.collectionViewModel.collectionView.collectionViewLayout;
+        switch (flowLayout.scrollDirection) {
+            case UICollectionViewScrollDirectionVertical: {
+                return CGSizeMake(size->height, 30.0f);
+            }
+            case UICollectionViewScrollDirectionHorizontal: {
+                return CGSizeMake(30.0f, size->width);
+            }
+            default: {
+                break;
+            }
+        }
+    }
+    return CGSizeMake(30.0f, size->width);
 }
 
 @end

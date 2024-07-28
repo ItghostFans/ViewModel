@@ -52,8 +52,11 @@
         make.top.equalTo(self.addSectionButton.mas_bottom);
         make.leading.trailing.bottom.equalTo(self.view);
     }];
-    self.collectionView.collectionViewLayout = collectionViewFlowLayout;
-    collectionViewFlowLayout.viewModel = self.viewModel.collectionViewModel;
+//    self.collectionView.collectionViewLayout = collectionViewFlowLayout;
+//    collectionViewFlowLayout.viewModel = self.viewModel.collectionViewModel;
+    if ([self.collectionView.collectionViewLayout isKindOfClass:UICollectionViewFlowLayout.class]) {
+        ((UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout).scrollDirection = UICollectionViewScrollDirectionVertical;
+    }
     self.viewModel.collectionViewModel.collectionView = self.collectionView;
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [self.viewModel.collectionViewModel.sectionViewModels[0] addViewModel:TestCellViewModel.new];

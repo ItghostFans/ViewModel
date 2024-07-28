@@ -8,11 +8,12 @@
 
 #import "TestTableHeaderView.h"
 #import "TestSectionViewModel.h"
+#import "SectionViewModel+TableView.h"
 
 #import <Masonry/Masonry.h>
 
 @interface TestTableHeaderView ()
-// TODO: 添加需要的View，建议使用懒加载
+@property (weak, nonatomic) UILabel *indexPathLabel;
 @end
 
 @implementation TestTableHeaderView
@@ -36,6 +37,10 @@
     }
 }
 
+- (void)reloadIndexPath {
+    self.indexPathLabel.text = [NSString stringWithFormat:@"%@", @(self.viewModel.tableSectionIndex)];
+}
+
 #pragma mark - Public
 
 #pragma mark - Actions
@@ -44,12 +49,25 @@
 
 #pragma mark - Getter
 
-// TODO: 添加需要的View，建议使用懒加载
+- (UILabel *)indexPathLabel {
+    if (!_indexPathLabel) {
+        UILabel *indexPathLabel = UILabel.new;
+        _indexPathLabel = indexPathLabel;
+        [self.contentView addSubview:_indexPathLabel];
+        _indexPathLabel.textColor = UIColor.redColor;
+        _indexPathLabel.font = [UIFont systemFontOfSize:20.0f];
+        _indexPathLabel.textAlignment = NSTextAlignmentCenter;
+        [_indexPathLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+    }
+    return _indexPathLabel;
+}
 
 #pragma mark - TableHeaderView
 
 + (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestSectionViewModel *)viewModel {
-    return 10.0f;
+    return 50.0f;
 }
 
 @end
