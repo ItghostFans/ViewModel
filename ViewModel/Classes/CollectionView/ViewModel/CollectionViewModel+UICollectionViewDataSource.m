@@ -12,11 +12,11 @@
 @implementation CollectionViewModel (UICollectionViewDataSource)
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.sectionViewModels.viewModels.count;
+    return self.sectionViewModels.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.sectionViewModels[section] viewModels].count;
+    return [self.sectionViewModels[section] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

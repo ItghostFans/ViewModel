@@ -52,7 +52,7 @@
         @strongify(self);
         [self.viewModel.tableViewModel.tableView performBatchUpdates:^{
             @strongify(self);
-            SectionViewModel *sectionViewModel = self.viewModel.tableViewModel.sectionViewModels.viewModels.firstObject;
+            SectionViewModel *sectionViewModel = self.viewModel.tableViewModel.sectionViewModels.firstViewModel;
             if (sectionViewModel) {
                 [sectionViewModel addViewModel:TestCellViewModel.new];
             }
@@ -64,8 +64,8 @@
         @strongify(self);
         [self.viewModel.tableViewModel.tableView performBatchUpdates:^{
             @strongify(self);
-            SectionViewModel *sectionViewModel = self.viewModel.tableViewModel.sectionViewModels.viewModels.firstObject;
-            if (sectionViewModel.viewModels.count) {
+            SectionViewModel *sectionViewModel = self.viewModel.tableViewModel.sectionViewModels.firstViewModel;
+            if (sectionViewModel.count) {
                 [sectionViewModel removeViewModelsAtIndexes:[NSIndexSet indexSetWithIndex:0]];
             }
         } completion:^(BOOL finished) {

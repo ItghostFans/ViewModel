@@ -28,7 +28,18 @@
 }
 
 - (void)dealloc {
-    
+}
+
+- (NSUInteger)count {
+    return _viewModels.count;
+}
+
+- (id)firstViewModel {
+    return _viewModels.firstObject;
+}
+
+- (id)lastViewModel {
+    return _viewModels.lastObject;
 }
 
 - (void)addViewModel:(id)viewModel {

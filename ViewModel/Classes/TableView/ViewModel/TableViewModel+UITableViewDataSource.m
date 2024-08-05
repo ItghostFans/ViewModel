@@ -12,7 +12,7 @@
 @implementation TableViewModel (UITableViewDataSource)
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sectionViewModels.viewModels.count;
+    return self.sectionViewModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -21,7 +21,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.sectionViewModels[section] viewModels].count;
+    return [self.sectionViewModels[section] count];
 }
 
 @end

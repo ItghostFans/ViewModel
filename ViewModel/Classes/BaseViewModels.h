@@ -13,10 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseViewModels : BaseViewModel
 
-@property (strong, nonatomic, nonnull, readonly) NSArray *viewModels;
+@property (strong, nonatomic, nonnull, readonly) id viewModels;
+@property (assign, nonatomic, readonly) NSUInteger count;
 
 - (instancetype)initWithViewModels:(NSArray *)viewModels;
 
+- (id)firstViewModel;
+- (id)lastViewModel;
 - (void)addViewModel:(id)viewModel;
 - (void)insertViewModel:(id)viewModel atIndex:(NSUInteger)index;
 - (void)replaceViewModelAtIndex:(NSUInteger)index withViewModel:(id)viewModel;

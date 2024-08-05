@@ -81,7 +81,7 @@
         [UIView setAnimationsEnabled:NO];
         [self.viewModel.collectionViewModel.collectionView performBatchUpdates:^{
             @strongify(self);
-            SectionViewModel *sectionViewModel = self.viewModel.collectionViewModel.sectionViewModels.viewModels.firstObject;
+            SectionViewModel *sectionViewModel = self.viewModel.collectionViewModel.sectionViewModels.firstViewModel;
             if (sectionViewModel) {
                 [sectionViewModel insertViewModel:TestCellViewModel.new atIndex:0];
                 [sectionViewModel insertViewModel:TestCellViewModel.new atIndex:0];
@@ -97,8 +97,8 @@
         @strongify(self);
         [self.viewModel.collectionViewModel.collectionView performBatchUpdates:^{
             @strongify(self);
-            SectionViewModel *sectionViewModel = self.viewModel.collectionViewModel.sectionViewModels.viewModels.firstObject;
-            if (sectionViewModel.viewModels.count) {
+            SectionViewModel *sectionViewModel = self.viewModel.collectionViewModel.sectionViewModels.firstViewModel;
+            if (sectionViewModel.count) {
                 [sectionViewModel removeViewModelsAtIndexes:[NSIndexSet indexSetWithIndex:0]];
             }
         } completion:^(BOOL finished) {

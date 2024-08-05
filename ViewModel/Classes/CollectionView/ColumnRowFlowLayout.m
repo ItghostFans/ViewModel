@@ -184,9 +184,9 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     }
     
     NSUInteger page = 0;
-    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count; ++section) {
+    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.count; ++section) {
         SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
-        NSUInteger itemCount = sectionViewModel.viewModels.count;
+        NSUInteger itemCount = sectionViewModel.count;
         for (NSUInteger item = 0; item < itemCount; ++item) {
             CellViewModel *cellViewModel = sectionViewModel[item];
             if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
@@ -237,9 +237,9 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 - (void)relayoutAllAttributes {
     // Item.
     NSUInteger page = 0;
-    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.viewModels.count/*self.collectionView.numberOfSections*/; ++section) {
+    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.count/*self.collectionView.numberOfSections*/; ++section) {
         SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
-        NSUInteger itemCount = sectionViewModel.viewModels.count; // [self.collectionView numberOfItemsInSection:section];
+        NSUInteger itemCount = sectionViewModel.count; // [self.collectionView numberOfItemsInSection:section];
         for (NSUInteger item = 0; item < itemCount; ++item) {
             CellViewModel *cellViewModel = sectionViewModel[item];
             if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
