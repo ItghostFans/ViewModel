@@ -3,8 +3,6 @@
 #import "___VARIABLE_productName___CollectionViewModelCell.h"
 #import "___VARIABLE_productName___CollectionCellViewModel.h"
 
-#import <Masonry/Masonry.h>
-
 @interface ___VARIABLE_productName___CollectionViewModelCell ()
 // TODO: 添加需要的View，建议使用懒加载
 @end

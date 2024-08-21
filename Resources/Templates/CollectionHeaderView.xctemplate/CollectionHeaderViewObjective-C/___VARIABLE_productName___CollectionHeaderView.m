@@ -3,8 +3,6 @@
 #import "___VARIABLE_productName___CollectionHeaderView.h"
 #import "___VARIABLE_productName___SectionViewModel.h"
 
-#import <Masonry/Masonry.h>
-
 @interface ___VARIABLE_productName___CollectionHeaderView ()
 // TODO: 添加需要的View，建议使用懒加载
 @end

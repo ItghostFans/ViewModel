@@ -3,8 +3,6 @@
 #import "___VARIABLE_productName___TableViewModelCell.h"
 #import "___VARIABLE_productName___TableCellViewModel.h"
 
-#import <Masonry/Masonry.h>
-
 @interface ___VARIABLE_productName___TableViewModelCell ()
 // TODO: 添加需要的View，建议使用懒加载
 @end
