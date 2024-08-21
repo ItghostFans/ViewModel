@@ -2,8 +2,8 @@
 
 #import "___VARIABLE_productName___SectionViewModel.h"
 
-#import "SectionViewModel+TableView.h"
-#import "SectionViewModel+CollectionView.h"
+#import <ViewModel/SectionViewModel+TableView.h>
+#import <ViewModel/SectionViewModel+CollectionView.h>
 
 #import "___VARIABLE_productName___TableHeaderView.h"
 #import "___VARIABLE_productName___TableFooterView.h"

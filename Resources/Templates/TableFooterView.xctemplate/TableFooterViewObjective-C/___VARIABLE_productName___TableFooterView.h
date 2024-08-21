@@ -1,6 +1,6 @@
 //___FILEHEADER___
 
-#import "TableFooterView.h"
+#import <ViewModel/TableFooterView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

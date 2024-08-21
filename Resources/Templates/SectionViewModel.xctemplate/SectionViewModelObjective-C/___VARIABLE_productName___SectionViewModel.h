@@ -1,6 +1,6 @@
 //___FILEHEADER___
 
-#import "SectionViewModel.h"
+#import <ViewModel/SectionViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

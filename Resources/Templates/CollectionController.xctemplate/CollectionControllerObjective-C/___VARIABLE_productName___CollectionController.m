@@ -2,7 +2,7 @@
 
 #import "___VARIABLE_productName___CollectionController.h"
 #import "___VARIABLE_productName___CollectionControllerViewModel.h"
-#import "CollectionViewModel.h"
+#import <ViewModel/CollectionViewModel.h>
 
 @interface ___VARIABLE_productName___CollectionController ()
 // TODO: 添加需要的View，建议使用懒加载

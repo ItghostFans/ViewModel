@@ -2,7 +2,7 @@
 
 #import "___VARIABLE_productName___TableController.h"
 #import "___VARIABLE_productName___TableControllerViewModel.h"
-#import "TableViewModel.h"
+#import <ViewModel/TableViewModel.h>
 
 @interface ___VARIABLE_productName___TableController ()
 // TODO: 添加需要的View，建议使用懒加载

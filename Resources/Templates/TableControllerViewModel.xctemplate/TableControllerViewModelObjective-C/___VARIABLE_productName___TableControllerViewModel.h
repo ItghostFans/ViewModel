@@ -1,6 +1,6 @@
 //___FILEHEADER___
 
-#import "TableControllerViewModel.h"
+#import <ViewModel/TableControllerViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

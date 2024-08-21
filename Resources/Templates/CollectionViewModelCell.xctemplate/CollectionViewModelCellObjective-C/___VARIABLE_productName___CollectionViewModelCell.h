@@ -1,6 +1,6 @@
 //___FILEHEADER___
 
-#import "CollectionViewModelCell.h"
+#import <ViewModel/CollectionViewModelCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
