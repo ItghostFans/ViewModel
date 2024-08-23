@@ -56,7 +56,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     [self relayoutAllAttributes];
     RACDisposable *disposable = [[self.collectionView rac_signalForSelector:@selector(layoutSubviews)] subscribeNext:^(RACTuple * _Nullable x) {
         @strongify(self);
-        if (!CGRectEqualToRect(self.lastFrame, self.collectionView.frame)) {
+        if (!CGRectEqualToRect(self.lastFrame, self.collectionView.frame) || !CGPointEqualToPoint(self.lastFrame.origin, self.collectionView.frame.origin)) {
             [self relayoutAllAttributes];
             [self invalidateLayout];
             self.lastFrame = self.collectionView.frame;
@@ -81,10 +81,9 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 #pragma mark - Super
 
 - (void)prepareLayout {
-    NSAssert(_columnCount, @"%s Should Indicate Column Count!");
-    NSAssert(_rowCount, @"%s Should Indicate Row Count!");
+    NSAssert(_columnCount || _rowCount, @"%s Should Indicate Column Count Or !");
     if (self.collectionView.pagingEnabled) {
-        NSAssert(UIEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, UIEdgeInsetsZero), @"UICollectionView.pagingEnabled Should contentInset==UIEdgeInsetsZero!");
+        NSAssert(UIEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, UIEdgeInsetsZero), @"UICollectionView.pagingEnabled Should contentInset == UIEdgeInsetsZero!");
     }
     [super prepareLayout];
 }
@@ -139,20 +138,21 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     if (!self.collectionView) {
         return CGSizeZero;
     }
-    CGSize pageSize = self.collectionView.bounds.size;
-    pageSize.height -= self.collectionView.contentInset.top + self.collectionView.contentInset.bottom;
-    pageSize.width -= self.collectionView.contentInset.left + self.collectionView.contentInset.right;
-    switch (self.scrollDirection) {
-        case UICollectionViewScrollDirectionVertical: {
-            return CGSizeMake(pageSize.width, pageSize.height * self.pageCount);
+//    if (self.collectionView.pagingEnabled) {
+        CGSize pageSize = self.pageSize;
+        pageSize.height -= self.collectionView.contentInset.top + self.collectionView.contentInset.bottom;
+        pageSize.width -= self.collectionView.contentInset.left + self.collectionView.contentInset.right;
+        switch (self.scrollDirection) {
+            case UICollectionViewScrollDirectionVertical: {
+                return CGSizeMake(pageSize.width, pageSize.height * self.pageCount);
+            }
         }
-    }
-    return CGSizeMake(pageSize.width * self.pageCount, pageSize.height);
+        return CGSizeMake(pageSize.width * self.pageCount, pageSize.height);
+//    }
 }
 
 #define ASSIGN_IF_LARGE_THAN(value, left) \
     left = !left ? value : [left compare:value] == NSOrderedDescending ? value : left;
-
 
 - (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
     for (UICollectionViewUpdateItem *updateItem in updateItems) {
@@ -283,13 +283,13 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     switch (self.scrollDirection) {
         case UICollectionViewScrollDirectionVertical: {
             point.x = self.contentInset.left;
-            point.y = page * CGRectGetHeight(self.collectionView.bounds) + self.contentInset.top;
+            point.y = page * self.pageSize.height + self.contentInset.top;
             minimumLineSpacing = sectionViewModel.collectionMinimumLineSpacing;
             minimumInteritemSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
             break;
         }
         case UICollectionViewScrollDirectionHorizontal: {
-            point.x = page * CGRectGetWidth(self.collectionView.bounds) + self.contentInset.left;
+            point.x = page * self.pageSize.width + self.contentInset.left;
             point.y = self.contentInset.top;
             minimumLineSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
             minimumInteritemSpacing = sectionViewModel.collectionMinimumLineSpacing;
@@ -307,10 +307,10 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 }
 
 - (CGSize)cellSizeOfViewModel:(CellViewModel *)viewModel {
-    CGSize cellSize = [viewModel collectionCellSizeForSize:self.collectionView.bounds.size];
+    CGSize cellSize = [viewModel collectionCellSizeForSize:self.pageSize];
     if (CGSizeEqualToSize(cellSize, CGSizeZero)) {
-        CGFloat width = CGRectGetWidth(self.collectionView.bounds);
-        CGFloat height = CGRectGetHeight(self.collectionView.bounds);
+        CGFloat width = self.pageSize.width;
+        CGFloat height = self.pageSize.height;
         SectionViewModel *sectionViewModel = viewModel.collectionSectionViewModel;
         CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
         CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
@@ -329,10 +329,25 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
                 break;
             }
         }
-        cellSize.width = MAX((width - ((_columnCount - 1) * minimumInteritemSpacing) - self.contentInset.left - self.contentInset.right) / _columnCount, 0.0f);
-        cellSize.height = MAX((height - ((_rowCount - 1) * minimumLineSpacing) - self.contentInset.top - self.contentInset.bottom) / _rowCount, 0.0f);
+        if (_columnCount) {
+            cellSize.width = MAX((width - ((_columnCount - 1) * minimumInteritemSpacing) - self.contentInset.left - self.contentInset.right) / _columnCount, 0.0f);
+        }
+        if (_rowCount) {
+            cellSize.height = MAX((height - ((_rowCount - 1) * minimumLineSpacing) - self.contentInset.top - self.contentInset.bottom) / _rowCount, 0.0f);
+        }
+        if (cellSize.width == 0.0f) {
+            cellSize.width = cellSize.height;
+        }
+        if (cellSize.height == 0.0f) {
+            cellSize.height = cellSize.width;
+        }
     }
     return cellSize;
+}
+
+- (CGSize)pageSize {
+    CGRect pageFrame = CGRectIntersection(self.collectionView.bounds, CGRectMake(0.0f, 0.0f, CGFLOAT_MAX, CGFLOAT_MAX));
+    return pageFrame.size;
 }
 
 @end

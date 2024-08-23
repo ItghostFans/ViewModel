@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)performBatchUpdates:(void (^)(void))updates
                rowAnimation:(UITableViewRowAnimation)rowAnimation
-                 completion:(void (^)(BOOL))completion;
+                 completion:(void (^)(BOOL finished))completion;
 
 @end
 

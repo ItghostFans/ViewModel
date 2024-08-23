@@ -72,13 +72,13 @@
 }
 
 - (Class)collectionHeaderClass {
-    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
-    return CollectionHeaderView.class;
+//    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
+    return nil;
 }
 
 - (Class)collectionFooterClass {
-    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
-    return CollectionFooterView.class;
+//    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
+    return nil;
 }
 
 - (CGSize)collectionHeaderSizeForSize:(CGSize)size {
