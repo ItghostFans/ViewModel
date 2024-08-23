@@ -26,6 +26,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 
 @property (strong, nonatomic, nullable) RACCompoundDisposable *disposableBag;
 @property (assign, nonatomic) CGRect lastFrame;
+@property (assign, nonatomic) CGSize cellSize;
 
 @end
 
@@ -138,7 +139,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     if (!self.collectionView) {
         return CGSizeZero;
     }
-//    if (self.collectionView.pagingEnabled) {
+    if (self.collectionView.pagingEnabled) {
         CGSize pageSize = self.pageSize;
         pageSize.height -= self.collectionView.contentInset.top + self.collectionView.contentInset.bottom;
         pageSize.width -= self.collectionView.contentInset.left + self.collectionView.contentInset.right;
@@ -148,7 +149,40 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
             }
         }
         return CGSizeMake(pageSize.width * self.pageCount, pageSize.height);
-//    }
+    }
+    NSUInteger itemCount = 0;
+    for (NSUInteger section = 0; section < _viewModel.sectionViewModels.count; ++section) {
+        SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
+        itemCount += sectionViewModel.count;
+    }
+    NSUInteger rowCount = _rowCount;
+    NSUInteger columnCount = _columnCount;
+    if (_columnCount) {
+        rowCount = (itemCount + _columnCount - 1) / _columnCount;
+    }
+    if (_rowCount) {
+        columnCount = (itemCount + _rowCount - 1) / _rowCount;
+    }
+    CGSize contentSize;
+    CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
+    CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
+    switch (self.scrollDirection) {
+        case UICollectionViewScrollDirectionVertical: {
+            minimumLineSpacing = self.minimumLineSpacing;
+            minimumInteritemSpacing = self.minimumInteritemSpacing;
+            break;
+        }
+        case UICollectionViewScrollDirectionHorizontal: {
+            minimumLineSpacing = self.minimumInteritemSpacing;
+            minimumInteritemSpacing = self.minimumLineSpacing;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    contentSize.width = (columnCount * (self.cellSize.width + minimumInteritemSpacing)) - minimumInteritemSpacing + self.contentInset.left + self.contentInset.right;
+    contentSize.height = (rowCount * (self.cellSize.height + minimumLineSpacing)) - minimumLineSpacing + self.contentInset.top + self.contentInset.bottom;
 }
 
 #define ASSIGN_IF_LARGE_THAN(value, left) \
@@ -284,30 +318,52 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         case UICollectionViewScrollDirectionVertical: {
             point.x = self.contentInset.left;
             point.y = page * self.pageSize.height + self.contentInset.top;
-            minimumLineSpacing = sectionViewModel.collectionMinimumLineSpacing;
-            minimumInteritemSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
+            minimumLineSpacing = self.minimumLineSpacing;
+            minimumInteritemSpacing = self.minimumInteritemSpacing;
             break;
         }
         case UICollectionViewScrollDirectionHorizontal: {
             point.x = page * self.pageSize.width + self.contentInset.left;
             point.y = self.contentInset.top;
-            minimumLineSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
-            minimumInteritemSpacing = sectionViewModel.collectionMinimumLineSpacing;
+            minimumLineSpacing = self.minimumInteritemSpacing;
+            minimumInteritemSpacing = self.minimumLineSpacing;
             break;
         }
         default: {
             break;
         }
     }
-    
-    point.x += (column) * (minimumInteritemSpacing + cellSize.width);
-    point.y += (item % (_rowCount * _columnCount)) / _columnCount * (minimumLineSpacing + cellSize.height);
+    if (self.collectionView.pagingEnabled) {
+        point.x += (column) * (minimumInteritemSpacing + cellSize.width);
+        point.y += (item % (_rowCount * _columnCount)) / _columnCount * (minimumLineSpacing + cellSize.height);
+    } else {
+        NSUInteger itemIndex = item;
+        for (NSUInteger index = 0; index < section; ++index) {
+            SectionViewModel *sectionViewModel = _viewModel.sectionViewModels[section];
+            itemIndex += sectionViewModel.count;
+        }
+        NSUInteger rowIndex = 0;
+        NSUInteger columnIndex = 0;
+        if (_columnCount) {
+            columnIndex = itemIndex % _columnCount;
+            rowIndex = itemIndex / _columnCount;
+        }
+        if (_rowCount) {
+            rowIndex = itemIndex % _rowCount;
+            columnIndex = itemIndex / _rowCount;
+        }
+        point.x = (columnIndex * (minimumInteritemSpacing + cellSize.width)) + self.contentInset.left;
+        point.y = (rowIndex * (minimumLineSpacing + cellSize.width)) + self.contentInset.top;
+    }
     
     return point;
 }
 
 - (CGSize)cellSizeOfViewModel:(CellViewModel *)viewModel {
     CGSize cellSize = [viewModel collectionCellSizeForSize:self.pageSize];
+    if (CGSizeEqualToSize(cellSize, CGSizeZero)) {
+        cellSize = self.cellSize;
+    }
     if (CGSizeEqualToSize(cellSize, CGSizeZero)) {
         CGFloat width = self.pageSize.width;
         CGFloat height = self.pageSize.height;
@@ -316,13 +372,13 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
         switch (self.scrollDirection) {
             case UICollectionViewScrollDirectionVertical: {
-                minimumLineSpacing = sectionViewModel.collectionMinimumLineSpacing;
-                minimumInteritemSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
+                minimumLineSpacing = self.minimumLineSpacing;
+                minimumInteritemSpacing = self.minimumInteritemSpacing;
                 break;
             }
             case UICollectionViewScrollDirectionHorizontal: {
-                minimumLineSpacing = sectionViewModel.collectionMinimumInteritemSpacing;
-                minimumInteritemSpacing = sectionViewModel.collectionMinimumLineSpacing;
+                minimumLineSpacing = self.minimumInteritemSpacing;
+                minimumInteritemSpacing = self.minimumLineSpacing;
                 break;
             }
             default: {
@@ -341,6 +397,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         if (cellSize.height == 0.0f) {
             cellSize.height = cellSize.width;
         }
+        self.cellSize = cellSize;
     }
     return cellSize;
 }
