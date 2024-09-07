@@ -22,6 +22,8 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
+		7802FD2E2C8CA4D300357F37 /* AutoCollectionViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7802FD2D2C8CA4D300357F37 /* AutoCollectionViewModelCell.m */; };
+		7802FD312C8CA4DF00357F37 /* AutoTableViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7802FD302C8CA4DF00357F37 /* AutoTableViewModelCell.m */; };
 		786895842C0C280600F0E842 /* TestCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895822C0C280600F0E842 /* TestCellViewModel.m */; };
 		786895872C0C280F00F0E842 /* TestCollectionCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895862C0C280F00F0E842 /* TestCollectionCellViewModel.m */; };
 		7868958A2C0C281700F0E842 /* TestCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895882C0C281700F0E842 /* TestCollectionController.m */; };
@@ -42,14 +44,12 @@
 		78E100282C53651400CB8CB3 /* AutoCollectionControllerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E100272C53651400CB8CB3 /* AutoCollectionControllerViewModel.m */; };
 		78E1002B2C53651D00CB8CB3 /* AutoCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E1002A2C53651D00CB8CB3 /* AutoCollectionFooterView.m */; };
 		78E1002E2C53652600CB8CB3 /* AutoCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E1002C2C53652600CB8CB3 /* AutoCollectionHeaderView.m */; };
-		78E100312C53652E00CB8CB3 /* AutoCollectionViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E100302C53652E00CB8CB3 /* AutoCollectionViewModelCell.m */; };
 		78E100342C53653A00CB8CB3 /* AutoSectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E100322C53653A00CB8CB3 /* AutoSectionViewModel.m */; };
 		78E100372C53654300CB8CB3 /* AutoTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E100362C53654300CB8CB3 /* AutoTableCellViewModel.m */; };
 		78E1003A2C53654C00CB8CB3 /* AutoTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E100382C53654C00CB8CB3 /* AutoTableController.m */; };
 		78E1003D2C53655500CB8CB3 /* AutoTableControllerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E1003C2C53655500CB8CB3 /* AutoTableControllerViewModel.m */; };
 		78E100402C53655E00CB8CB3 /* AutoTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E1003F2C53655E00CB8CB3 /* AutoTableFooterView.m */; };
 		78E100432C53656600CB8CB3 /* AutoTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E100412C53656600CB8CB3 /* AutoTableHeaderView.m */; };
-		78E100462C53656F00CB8CB3 /* AutoTableViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E100452C53656F00CB8CB3 /* AutoTableViewModelCell.m */; };
 		8092BCDFE267C742F26C41E6 /* Pods_ViewModel_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDE4D90A7EE01CE863AA501 /* Pods_ViewModel_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -90,6 +90,10 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7802FD2C2C8CA4D300357F37 /* AutoCollectionViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoCollectionViewModelCell.h; sourceTree = "<group>"; };
+		7802FD2D2C8CA4D300357F37 /* AutoCollectionViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoCollectionViewModelCell.m; sourceTree = "<group>"; };
+		7802FD2F2C8CA4DF00357F37 /* AutoTableViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoTableViewModelCell.h; sourceTree = "<group>"; };
+		7802FD302C8CA4DF00357F37 /* AutoTableViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoTableViewModelCell.m; sourceTree = "<group>"; };
 		786895822C0C280600F0E842 /* TestCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCellViewModel.m; sourceTree = "<group>"; };
 		786895832C0C280600F0E842 /* TestCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCellViewModel.h; sourceTree = "<group>"; };
 		786895852C0C280F00F0E842 /* TestCollectionCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionCellViewModel.h; sourceTree = "<group>"; };
@@ -203,8 +207,6 @@
 		78E1002A2C53651D00CB8CB3 /* AutoCollectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoCollectionFooterView.m; sourceTree = "<group>"; };
 		78E1002C2C53652600CB8CB3 /* AutoCollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoCollectionHeaderView.m; sourceTree = "<group>"; };
 		78E1002D2C53652600CB8CB3 /* AutoCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoCollectionHeaderView.h; sourceTree = "<group>"; };
-		78E1002F2C53652E00CB8CB3 /* AutoCollectionViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoCollectionViewModelCell.h; sourceTree = "<group>"; };
-		78E100302C53652E00CB8CB3 /* AutoCollectionViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoCollectionViewModelCell.m; sourceTree = "<group>"; };
 		78E100322C53653A00CB8CB3 /* AutoSectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoSectionViewModel.m; sourceTree = "<group>"; };
 		78E100332C53653A00CB8CB3 /* AutoSectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoSectionViewModel.h; sourceTree = "<group>"; };
 		78E100352C53654300CB8CB3 /* AutoTableCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoTableCellViewModel.h; sourceTree = "<group>"; };
@@ -217,8 +219,6 @@
 		78E1003F2C53655E00CB8CB3 /* AutoTableFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoTableFooterView.m; sourceTree = "<group>"; };
 		78E100412C53656600CB8CB3 /* AutoTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoTableHeaderView.m; sourceTree = "<group>"; };
 		78E100422C53656600CB8CB3 /* AutoTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoTableHeaderView.h; sourceTree = "<group>"; };
-		78E100442C53656F00CB8CB3 /* AutoTableViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoTableViewModelCell.h; sourceTree = "<group>"; };
-		78E100452C53656F00CB8CB3 /* AutoTableViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoTableViewModelCell.m; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AEDE4D90A7EE01CE863AA501 /* Pods_ViewModel_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViewModel_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC12947A47640DE5566E2A5 /* Pods-ViewModel_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViewModel_Example.release.xcconfig"; path = "Target Support Files/Pods-ViewModel_Example/Pods-ViewModel_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -719,8 +719,6 @@
 				78E1002A2C53651D00CB8CB3 /* AutoCollectionFooterView.m */,
 				78E1002D2C53652600CB8CB3 /* AutoCollectionHeaderView.h */,
 				78E1002C2C53652600CB8CB3 /* AutoCollectionHeaderView.m */,
-				78E1002F2C53652E00CB8CB3 /* AutoCollectionViewModelCell.h */,
-				78E100302C53652E00CB8CB3 /* AutoCollectionViewModelCell.m */,
 				78E100332C53653A00CB8CB3 /* AutoSectionViewModel.h */,
 				78E100322C53653A00CB8CB3 /* AutoSectionViewModel.m */,
 				78E100352C53654300CB8CB3 /* AutoTableCellViewModel.h */,
@@ -733,8 +731,10 @@
 				78E1003F2C53655E00CB8CB3 /* AutoTableFooterView.m */,
 				78E100422C53656600CB8CB3 /* AutoTableHeaderView.h */,
 				78E100412C53656600CB8CB3 /* AutoTableHeaderView.m */,
-				78E100442C53656F00CB8CB3 /* AutoTableViewModelCell.h */,
-				78E100452C53656F00CB8CB3 /* AutoTableViewModelCell.m */,
+				7802FD2C2C8CA4D300357F37 /* AutoCollectionViewModelCell.h */,
+				7802FD2D2C8CA4D300357F37 /* AutoCollectionViewModelCell.m */,
+				7802FD2F2C8CA4DF00357F37 /* AutoTableViewModelCell.h */,
+				7802FD302C8CA4DF00357F37 /* AutoTableViewModelCell.m */,
 			);
 			path = Auto;
 			sourceTree = "<group>";
@@ -947,18 +947,18 @@
 				6003F5A7195388D20070C39A /* ViewController.m in Sources */,
 				78E1002B2C53651D00CB8CB3 /* AutoCollectionFooterView.m in Sources */,
 				78E100252C53650A00CB8CB3 /* AutoCollectionController.m in Sources */,
-				78E100462C53656F00CB8CB3 /* AutoTableViewModelCell.m in Sources */,
+				7802FD312C8CA4DF00357F37 /* AutoTableViewModelCell.m in Sources */,
 				78E100432C53656600CB8CB3 /* AutoTableHeaderView.m in Sources */,
 				78D0DFEA2C36C925005AE705 /* TestCollectionHeaderView.m in Sources */,
 				786895872C0C280F00F0E842 /* TestCollectionCellViewModel.m in Sources */,
 				7868959C2C0C284F00F0E842 /* TestTableCellViewModel.m in Sources */,
 				7868958A2C0C281700F0E842 /* TestCollectionController.m in Sources */,
 				788B94252C36C7C6009157CB /* TestCollectionViewModelCell.m in Sources */,
+				7802FD2E2C8CA4D300357F37 /* AutoCollectionViewModelCell.m in Sources */,
 				78E100402C53655E00CB8CB3 /* AutoTableFooterView.m in Sources */,
 				78D0DFE42C36C8D2005AE705 /* TestCollectionFooterView.m in Sources */,
 				78D0DFED2C36C9EC005AE705 /* TestTableViewModelCell.m in Sources */,
 				78D0DFF32C36CA19005AE705 /* TestTableFooterView.m in Sources */,
-				78E100312C53652E00CB8CB3 /* AutoCollectionViewModelCell.m in Sources */,
 				78D0DFF02C36CA0C005AE705 /* TestTableHeaderView.m in Sources */,
 				786895842C0C280600F0E842 /* TestCellViewModel.m in Sources */,
 				78E1003A2C53654C00CB8CB3 /* AutoTableController.m in Sources */,

@@ -2,14 +2,12 @@
 //  AutoCollectionViewModelCell.m
 //  ViewModel_Example
 //
-//  Created by ItghostFan on 2024/7/26.
+//  Created by ItghostFan on 2024/9/7.
 //  Copyright © 2024 fanchunxing1. All rights reserved.
 //
 
 #import "AutoCollectionViewModelCell.h"
 #import "AutoCollectionCellViewModel.h"
-
-#import <Masonry/Masonry.h>
 
 @interface AutoCollectionViewModelCell ()
 // TODO: 添加需要的View，建议使用懒加载
