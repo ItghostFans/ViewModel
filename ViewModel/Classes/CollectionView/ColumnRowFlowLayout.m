@@ -183,6 +183,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     }
     contentSize.width = (columnCount * (self.cellSize.width + minimumInteritemSpacing)) - minimumInteritemSpacing + self.contentInset.left + self.contentInset.right;
     contentSize.height = (rowCount * (self.cellSize.height + minimumLineSpacing)) - minimumLineSpacing + self.contentInset.top + self.contentInset.bottom;
+    return contentSize;
 }
 
 #define ASSIGN_IF_LARGE_THAN(value, left) \
