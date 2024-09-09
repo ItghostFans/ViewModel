@@ -11,6 +11,10 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+```ruby
+pod 'ReactiveObjC'
+```
+
 ## Installation
 
 ViewModel is available through [CocoaPods](https://cocoapods.org). To install
@@ -19,6 +23,19 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'ViewModel'
 ```
+## Usage
+
+### Step 1
+Copy MVVM templates 'Resources/Templates' to Xcode template directory '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Templates/File Templates/iOS/MVVM'.
+
+### Step 2
+Create Controller/Cell/ViewModel from MVVM templates.
+![](README/Templates.png)
+Just fill class prefix to create subclass.
+![](README/CreateClass.png)
+Last write your business code.
+
+More usage for reading Example code.
 
 ## Author
 

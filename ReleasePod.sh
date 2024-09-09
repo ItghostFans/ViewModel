@@ -4,14 +4,17 @@
 #pod spec edit ReactiveObjC
 
 tag=$1
+podspec=`ls *.podspec`
+podName=${podspec%.*}
+
+sed -i '' "s/\'[0-9]*\.[0-9]*\.[0-9]*.*\'/\'${tag}\'/g" "$podName.podspec"
 git tag $tag
 git push origin $tag
 git push origin --tags
 
+# 前置条件
 #pod repo list
 #pod trunk register ItghostFans@gmail.com ItghostFans --verbose
 
 # repo='cocoapods'
-podspec=`ls *.podspec`
-podName=${podspec%.*}
 pod trunk push $podName.podspec --allow-warnings --verbose
