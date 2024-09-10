@@ -31,8 +31,10 @@ Copy MVVM templates 'Resources/Templates' to Xcode template directory '/Applicat
 ### Step 2
 Create Controller/Cell/ViewModel from MVVM templates.
 ![](README/Templates.png)
-Just fill class prefix to create subclass.
+
+Just fill **class prefix** to create subclass.
 ![](README/CreateClass.png)
+
 Last write your business code.
 
 More usage for reading Example code.
