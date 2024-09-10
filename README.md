@@ -29,7 +29,7 @@ pod 'ViewModel'
 Copy MVVM templates ```Resources/Templates``` to Xcode template directory ```/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Templates/File Templates/iOS/MVVM```.
 
 ### Step 2
-Create Controller/Cell/ViewModel from MVVM templates.
+Create Controller/Cell/ViewModel etc from MVVM templates.
 ![Templates](./README/Templates.png)
 
 Just fill **class prefix** to create subclass.
