@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _sectionViewModel = [TestSectionViewModel new];
+    _sectionViewModel = TestSectionViewModel.new;
     _sectionViewModel.collectionMinimumLineSpacing = 5.0f;
     _sectionViewModel.collectionMinimumInteritemSpacing = 10.0f;
     for (NSInteger index = 0; index < 36; ++index) {
