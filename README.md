@@ -26,20 +26,18 @@ pod 'ViewModel'
 ## Usage
 
 ### Step 1
-Copy MVVM templates 'Resources/Templates' to Xcode template directory '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Templates/File Templates/iOS/MVVM'.
+Copy MVVM templates ```Resources/Templates``` to Xcode template directory ```/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Templates/File Templates/iOS/MVVM```.
 
 ### Step 2
 Create Controller/Cell/ViewModel from MVVM templates.
-![](README/Templates.png)
+![Templates](./README/Templates.png)
 
 Just fill **class prefix** to create subclass.
-![](README/CreateClass.png)
+![CreateClass](./README/CreateClass.png)
 
 Last write your business code.
 
 ## Code
-
-### 
 
 ### CellViewModel
 CellViewModel is abstract logical class for **TableCellViewModel**&**CollectionCellViewModel**.
