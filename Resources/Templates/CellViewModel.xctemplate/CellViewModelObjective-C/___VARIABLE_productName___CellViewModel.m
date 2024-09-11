@@ -35,22 +35,6 @@
     return self;
 }
 
-#pragma mark - TableView
-
-#if __has_include("___VARIABLE_productName___TableCellViewModel.h")
-- (Class)tableCellClass {
-    return ___VARIABLE_productName___TableCellViewModel.class;
-}
-#endif // #if __has_include("___VARIABLE_productName___TableCellViewModel.h")
-
-#pragma mark - CollectionView
-
-#if __has_include("___VARIABLE_productName___CollectionCellViewModel.h")
-- (Class)collectionCellClass {
-    return ___VARIABLE_productName___CollectionCellViewModel.class;
-}
-#endif // #if __has_include("___VARIABLE_productName___CollectionCellViewModel.h")
-
 #pragma mark - Fowarding
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
