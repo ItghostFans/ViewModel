@@ -60,11 +60,6 @@
     objc_setAssociatedObject(self, @selector(tableCellSize), [NSValue valueWithCGSize:tableCellSize], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (Class)tableCellClass {
-    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
-    return TableViewModelCell.class;
-}
-
 - (CGFloat)tableCellHeightForWidth:(CGFloat)width {
     NSNumber *height;
     @synchronized (self.widthHeights) {

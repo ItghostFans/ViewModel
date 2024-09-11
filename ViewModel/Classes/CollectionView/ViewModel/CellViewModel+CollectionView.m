@@ -5,7 +5,7 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import "CellViewModel.h"
+#import "CellViewModel+CollectionView.h"
 
 #import <objc/runtime.h>
 
@@ -43,11 +43,6 @@
         return nil;
     }
     return [NSIndexPath indexPathForItem:item inSection:section];
-}
-
-- (Class)collectionCellClass {
-    NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
-    return CollectionViewModelCell.class;
 }
 
 - (SectionViewModel *)collectionSectionViewModel {
