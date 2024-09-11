@@ -9,6 +9,9 @@ podName=${podspec%.*}
 
 sed -i '' "s/\'[0-9]*\.[0-9]*\.[0-9]*.*\'/\'${tag}\'/g" "$podName.podspec"
 
+git tag -d $tag
+git push --delete origin $tag
+
 git add *
 git commit -m $tag
 git push -u origin main
