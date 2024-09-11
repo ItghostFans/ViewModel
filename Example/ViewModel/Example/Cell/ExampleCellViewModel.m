@@ -41,22 +41,6 @@
     return self;
 }
 
-#pragma mark - TableView
-
-#if __has_include("ExampleTableCellViewModel.h")
-- (Class)tableCellClass {
-    return ExampleTableCellViewModel.class;
-}
-#endif // #if __has_include("ExampleTableCellViewModel.h")
-
-#pragma mark - CollectionView
-
-#if __has_include("ExampleCollectionCellViewModel.h")
-- (Class)collectionCellClass {
-    return ExampleCollectionCellViewModel.class;
-}
-#endif // #if __has_include("ExampleCollectionCellViewModel.h")
-
 #pragma mark - Fowarding
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {

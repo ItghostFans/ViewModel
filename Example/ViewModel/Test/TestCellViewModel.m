@@ -27,18 +27,6 @@
     return self;
 }
 
-#pragma mark - TableView
-
-- (Class)tableCellClass {
-    return TestTableViewModelCell.class;
-}
-
-#pragma mark - CollectionView
-
-- (Class)collectionCellClass {
-    return TestCollectionViewModelCell.class;
-}
-
 #pragma mark - Fowarding
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
