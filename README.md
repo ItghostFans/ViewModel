@@ -97,29 +97,8 @@ It forward invocation to real CellViewModel **tableCellViewModel** or **collecti
 
 Why class CellViewModel exist? That is easy to switching UI between UITableView & UICollectionView. Logical code write here without double in UITableViewCell & UICollectionViewCell.
 
-Cell class of CellViewModel. **TableViewModelCell** for **UITableView**, **CollectionViewModelCell** from **UICollectionView**.
+Cell class of CellViewModel. **TableViewModelCell** for **UITableView** forward to _tableCellViewModel, **CollectionViewModelCell** for **UICollectionView** forward to _collectionCellViewModel.
 
-```Objective-C
-@implementation ExampleCellViewModel
-
-#pragma mark - TableView
-
-#if __has_include("ExampleTableCellViewModel.h")
-- (Class)tableCellClass {
-    return ExampleTableCellViewModel.class;
-}
-#endif // #if __has_include("ExampleTableCellViewModel.h")
-
-#pragma mark - CollectionView
-
-#if __has_include("ExampleCollectionCellViewModel.h")
-- (Class)collectionCellClass {
-    return ExampleCollectionCellViewModel.class;
-}
-#endif // #if __has_include("ExampleCollectionCellViewModel.h")
-
-@end
-```
 
 ### TableViewModelCell
 CellViewModel of TableViewModelCell.
