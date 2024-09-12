@@ -97,8 +97,13 @@
             [self registerCellClass:cellViewModel.collectionCellClass];
         }
     }
-    _collectionView.dataSource = self;
-    _collectionView.delegate = self;
+    
+    if (!_collectionView.delegate) {
+        _collectionView.delegate = self;
+    }
+    if (!_collectionView.dataSource) {
+        _collectionView.dataSource = self;
+    }
 }
 
 #pragma mark - KVO Handler

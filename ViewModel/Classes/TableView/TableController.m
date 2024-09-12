@@ -24,7 +24,6 @@
 
 - (void)setViewModel:(TableControllerViewModel *)viewModel {
     _viewModel = viewModel;
-    _viewModel.tableViewModel.tableView = self.tableView;
 }
 
 #pragma mark - Getter

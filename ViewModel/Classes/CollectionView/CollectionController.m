@@ -26,7 +26,6 @@
 
 - (void)setViewModel:(CollectionControllerViewModel *)viewModel {
     _viewModel = viewModel;
-    _viewModel.collectionViewModel.collectionView = self.collectionView;
 }
 
 #pragma mark - Getter
