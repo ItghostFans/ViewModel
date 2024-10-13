@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CollectionController : UIViewController
 
-@property (strong, nonatomic, nonnull) UICollectionViewFlowLayout *flowLayout;
-@property (strong, nonatomic, readonly) UICollectionView *collectionView;
+@property (weak, nonatomic, readonly) UICollectionViewFlowLayout *flowLayout;
+@property (weak, nonatomic, readonly) UICollectionView *collectionView;
 @property (strong, nonatomic, nullable) CollectionControllerViewModel *viewModel;
 
 @end
