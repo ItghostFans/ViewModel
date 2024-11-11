@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reloadIndexPath;
 
-+ (CGSize)headerSizeForSize:(CGSize *)size viewModel:(SectionViewModel *)viewModel;
++ (CGSize)headerSizeForSize:(CGSize)size viewModel:(SectionViewModel *)viewModel;
 
 @end
 

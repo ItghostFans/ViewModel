@@ -67,22 +67,22 @@
 
 #pragma mark - CollectionHeaderView
 
-+ (CGSize)headerSizeForSize:(CGSize *)size viewModel:(TestSectionViewModel *)viewModel {
++ (CGSize)headerSizeForSize:(CGSize)size viewModel:(TestSectionViewModel *)viewModel {
     if ([viewModel.collectionViewModel.collectionView.collectionViewLayout isKindOfClass:UICollectionViewFlowLayout.class]) {
         UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)viewModel.collectionViewModel.collectionView.collectionViewLayout;
         switch (flowLayout.scrollDirection) {
             case UICollectionViewScrollDirectionVertical: {
-                return CGSizeMake(size->height, 30.0f);
+                return CGSizeMake(size.height, 30.0f);
             }
             case UICollectionViewScrollDirectionHorizontal: {
-                return CGSizeMake(30.0f, size->width);
+                return CGSizeMake(30.0f, size.width);
             }
             default: {
                 break;
             }
         }
     }
-    return CGSizeMake(30.0f, size->width);
+    return CGSizeMake(30.0f, size.width);
 }
 
 @end

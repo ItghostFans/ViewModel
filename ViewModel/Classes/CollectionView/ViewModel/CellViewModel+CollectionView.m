@@ -59,8 +59,7 @@
         NSValue *collectionViewSize = [NSValue valueWithCGSize:size];
         cellSize = self.sizeCellSizes[collectionViewSize];
         if (!cellSize) {
-            CGSize contentSize = size;
-            cellSize = [NSValue valueWithCGSize:[self.collectionCellClass cellSizeForSize:&contentSize viewModel:self]];
+            cellSize = [NSValue valueWithCGSize:[self.collectionCellClass cellSizeForSize:size viewModel:self]];
             self.sizeCellSizes[collectionViewSize] = cellSize;
         }
     }

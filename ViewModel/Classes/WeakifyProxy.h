@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WeakifyProxy : NSProxy
 
-@property (weak, nonatomic, nullable, readonly) id target;
+@property (weak, nonatomic, nullable, readonly) id<NSObject> target;
 
 - (instancetype)initWithTarget:(id)target;
 

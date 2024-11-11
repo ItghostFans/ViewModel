@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reloadIndexPath;
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(SectionViewModel *)viewModel;
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(SectionViewModel *)viewModel;
 
 @end
 

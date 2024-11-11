@@ -88,7 +88,7 @@
         headerSize = self.sizeHeaderSizes[collectionViewSize];
         if (!headerSize) {
             CGSize contentSize = size;
-            headerSize = [NSValue valueWithCGSize:[self.collectionHeaderClass headerSizeForSize:&contentSize viewModel:self]];
+            headerSize = [NSValue valueWithCGSize:[self.collectionHeaderClass headerSizeForSize:contentSize viewModel:self]];
             self.sizeHeaderSizes[collectionViewSize] = headerSize;
         }
     }
@@ -102,7 +102,7 @@
         footerSize = self.sizeFooterSizes[collectionViewSize];
         if (!footerSize) {
             CGSize contentSize = size;
-            footerSize = [NSValue valueWithCGSize:[self.collectionFooterClass footerSizeForSize:&contentSize viewModel:self]];
+            footerSize = [NSValue valueWithCGSize:[self.collectionFooterClass footerSizeForSize:contentSize viewModel:self]];
             self.sizeFooterSizes[collectionViewSize] = footerSize;
         }
     }

@@ -69,7 +69,7 @@
 
 #pragma mark - CollectionViewModelCell
 
-+ (CGSize)cellSizeForSize:(CGSize *)size viewModel:(TestCollectionCellViewModel *)viewModel {
++ (CGSize)cellSizeForSize:(CGSize)size viewModel:(TestCollectionCellViewModel *)viewModel {
 //    return CGSizeZero;
     return CGSizeMake(30.0f, 30.0f);
 }

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) TestSectionViewModel *viewModel;
 #pragma clang diagnostic pop
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestSectionViewModel *)viewModel;
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(TestSectionViewModel *)viewModel;
 
 @end
 

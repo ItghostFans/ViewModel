@@ -46,7 +46,7 @@
 
 #pragma mark - TableViewModelCell
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(AutoTableCellViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(AutoTableCellViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return 0.0f;
 }

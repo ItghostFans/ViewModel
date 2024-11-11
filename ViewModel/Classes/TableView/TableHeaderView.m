@@ -20,7 +20,7 @@
 - (void)reloadIndexPath {
 }
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(SectionViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(SectionViewModel *)viewModel {
     return 0.0f;
 }
 

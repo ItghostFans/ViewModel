@@ -40,7 +40,7 @@
 
 #pragma mark - CollectionViewModelCell
 
-+ (CGSize)cellSizeForSize:(CGSize *)size viewModel:(___VARIABLE_productName___CollectionCellViewModel *)viewModel {
++ (CGSize)cellSizeForSize:(CGSize)size viewModel:(___VARIABLE_productName___CollectionCellViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return CGSizeZero;
 }

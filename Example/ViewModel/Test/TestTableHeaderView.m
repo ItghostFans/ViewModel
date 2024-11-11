@@ -66,7 +66,7 @@
 
 #pragma mark - TableHeaderView
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestSectionViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(TestSectionViewModel *)viewModel {
     return 50.0f;
 }
 

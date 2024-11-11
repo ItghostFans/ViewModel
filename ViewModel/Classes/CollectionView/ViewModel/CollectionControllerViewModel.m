@@ -10,7 +10,7 @@
 @implementation CollectionControllerViewModel
 
 - (instancetype)initWithCollectionViewModel:(CollectionViewModel *)collectionViewModel {
-    if (self = [super init]) {
+    if (self = [self init]) {
         _collectionViewModel = collectionViewModel;
     }
     return self;

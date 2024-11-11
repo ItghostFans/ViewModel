@@ -19,7 +19,7 @@
 - (void)reloadIndexPath {
 }
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(CellViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(CellViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return 0.0f;
 }

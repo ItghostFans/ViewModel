@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reloadIndexPath;
 
-+ (CGSize)cellSizeForSize:(CGSize *)size viewModel:(CellViewModel *)viewModel;
++ (CGSize)cellSizeForSize:(CGSize)size viewModel:(CellViewModel *)viewModel;
 
 @end
 

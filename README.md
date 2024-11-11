@@ -133,7 +133,7 @@ UITableViewCell height calculate by **[TableViewModelCell heightForWidth:viewMod
 
 #pragma mark - TableViewModelCell
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(ExampleTableCellViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(ExampleTableCellViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return 0.0f;
 }
@@ -174,7 +174,7 @@ CollectionViewModelCell size calculate by **[TableViewModelCell heightForWidth:v
 
 #pragma mark - CollectionViewModelCell
 
-+ (CGSize)cellSizeForSize:(CGSize *)size viewModel:(ExampleCollectionCellViewModel *)viewModel {
++ (CGSize)cellSizeForSize:(CGSize)size viewModel:(ExampleCollectionCellViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return CGSizeZero;
 }

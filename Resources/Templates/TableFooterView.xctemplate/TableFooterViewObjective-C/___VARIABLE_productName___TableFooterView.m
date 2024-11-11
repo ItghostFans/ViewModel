@@ -40,7 +40,7 @@
 
 #pragma mark - TableFooterView
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(___VARIABLE_productName___SectionViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(___VARIABLE_productName___SectionViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return 0.0f;
 }

@@ -46,7 +46,7 @@
 
 #pragma mark - CollectionViewModelCell
 
-+ (CGSize)cellSizeForSize:(CGSize *)size viewModel:(ExampleCollectionCellViewModel *)viewModel {
++ (CGSize)cellSizeForSize:(CGSize)size viewModel:(ExampleCollectionCellViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return CGSizeZero;
 }

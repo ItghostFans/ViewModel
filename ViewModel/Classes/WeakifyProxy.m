@@ -7,8 +7,8 @@
 
 #import "WeakifyProxy.h"
 
-@interface WeakifyProxy ()
-@property (weak, nonatomic, nullable) id target;
+@interface WeakifyProxy () <NSObject>
+@property (weak, nonatomic, nullable) id<NSObject> target;
 @end
 
 @implementation WeakifyProxy
@@ -21,6 +21,10 @@
     return self;
 }
 
+- (BOOL)respondsToSelector:(SEL)sel {
+    return [_target respondsToSelector:sel];
+}
+
 - (void)forwardInvocation:(NSInvocation *)invocation {
     if ([_target respondsToSelector:invocation.selector]) {
         [invocation invokeWithTarget:_target];
@@ -28,7 +32,11 @@
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
-    return [_target methodSignatureForSelector:sel];
+    NSMethodSignature *methodSignature;
+    if ([_target respondsToSelector:sel]) {
+        methodSignature = [_target.class instanceMethodSignatureForSelector:sel];
+    }
+    return methodSignature;
 }
 
 @end

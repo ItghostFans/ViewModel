@@ -186,6 +186,16 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     return contentSize;
 }
 
+// 这里的翻转竟然不需要。
+//- (UIUserInterfaceLayoutDirection)developmentLayoutDirection {
+//    return [super developmentLayoutDirection];
+//    return self.flipsHorizontallyInOppositeLayoutDirection ? UIUserInterfaceLayoutDirectionRightToLeft : UIUserInterfaceLayoutDirectionLeftToRight;
+//}
+
+- (BOOL)flipsHorizontallyInOppositeLayoutDirection {
+    return [UIView userInterfaceLayoutDirectionForSemanticContentAttribute:UIView.appearance.semanticContentAttribute] == UIUserInterfaceLayoutDirectionRightToLeft;
+}
+
 #define ASSIGN_IF_LARGE_THAN(value, left) \
     left = !left ? value : [left compare:value] == NSOrderedDescending ? value : left;
 
@@ -404,7 +414,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 }
 
 - (CGSize)pageSize {
-    CGRect pageFrame = CGRectIntersection(self.collectionView.bounds, CGRectMake(0.0f, 0.0f, CGFLOAT_MAX, CGFLOAT_MAX));
+    CGRect pageFrame = CGRectIntersection(self.collectionView.frame, CGRectMake(0.0f, 0.0f, CGFLOAT_MAX, CGFLOAT_MAX));
     return pageFrame.size;
 }
 

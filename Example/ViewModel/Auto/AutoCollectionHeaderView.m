@@ -48,7 +48,7 @@
 
 #pragma mark - CollectionHeaderView
 
-+ (CGSize)headerSizeForSize:(CGSize *)size viewModel:(AutoSectionViewModel *)viewModel {
++ (CGSize)headerSizeForSize:(CGSize)size viewModel:(AutoSectionViewModel *)viewModel {
     NSAssert(NO, @"%@ %s Should Implement By Subclass!", NSStringFromClass(self.class), __FUNCTION__);
     return CGSizeZero;
 }

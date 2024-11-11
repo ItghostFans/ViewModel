@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) ExampleSectionViewModel *viewModel;
 #pragma clang diagnostic pop
 
-+ (CGSize)headerSizeForSize:(CGSize *)size viewModel:(ExampleSectionViewModel *)viewModel;
++ (CGSize)headerSizeForSize:(CGSize)size viewModel:(ExampleSectionViewModel *)viewModel;
 
 @end
 

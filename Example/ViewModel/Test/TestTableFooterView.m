@@ -66,7 +66,7 @@
 
 #pragma mark - TableFooterView
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestSectionViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(TestSectionViewModel *)viewModel {
     return 30.0f;
 }
 

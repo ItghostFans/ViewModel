@@ -10,7 +10,7 @@
 @implementation TableControllerViewModel
 
 - (instancetype)initWithTableViewModel:(TableViewModel *)tableViewModel {
-    if (self = [super init]) {
+    if (self = [self init]) {
         _tableViewModel = tableViewModel;
     }
     return self;

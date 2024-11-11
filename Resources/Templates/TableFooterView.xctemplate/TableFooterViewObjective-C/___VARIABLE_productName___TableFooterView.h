@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) ___VARIABLE_productName___SectionViewModel *viewModel;
 #pragma clang diagnostic pop
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(___VARIABLE_productName___SectionViewModel *)viewModel;
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(___VARIABLE_productName___SectionViewModel *)viewModel;
 
 @end
 

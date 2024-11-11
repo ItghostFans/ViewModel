@@ -65,7 +65,7 @@
 
 #pragma mark - TableViewModelCell
 
-+ (CGFloat)heightForWidth:(CGFloat *)width viewModel:(TestTableCellViewModel *)viewModel {
++ (CGFloat)heightForWidth:(CGFloat)width viewModel:(TestTableCellViewModel *)viewModel {
     return 30.0f;
 }
 

@@ -65,8 +65,7 @@
     @synchronized (self.widthHeights) {
         height = self.widthHeights[@(width)];
         if (!height) {
-            CGFloat contentWidth = width;
-            height = @([self.tableCellClass heightForWidth:&contentWidth viewModel:self]);
+            height = @([self.tableCellClass heightForWidth:width viewModel:self]);
             self.widthHeights[@(width)] = height;
         }
     }
