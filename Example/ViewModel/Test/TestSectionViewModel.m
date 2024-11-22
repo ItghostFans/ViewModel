@@ -19,14 +19,14 @@
 @implementation TestSectionViewModel
 
 #pragma mark - TableView
-
-- (Class)tableHeaderClass {
-    return TestTableHeaderView.class;
-}
-
-- (Class)tableFooterClass {
-    return TestTableFooterView.class;
-}
+//
+//- (Class)tableHeaderClass {
+//    return TestTableHeaderView.class;
+//}
+//
+//- (Class)tableFooterClass {
+//    return TestTableFooterView.class;
+//}
 
 #pragma mark - CollectionView
 

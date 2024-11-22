@@ -42,6 +42,11 @@
 		7868959F2C0C285700F0E842 /* TestTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7868959D2C0C285700F0E842 /* TestTableController.m */; };
 		786895A22C0C286300F0E842 /* TestTableControllerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 786895A12C0C286300F0E842 /* TestTableControllerViewModel.m */; };
 		78705E2D2C0C28F0001DF510 /* TestSectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 78705E2B2C0C28F0001DF510 /* TestSectionViewModel.m */; };
+		788A68402CF0DA5F0074F772 /* TestAnotherCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 788A683E2CF0DA5F0074F772 /* TestAnotherCellViewModel.m */; };
+		788A68432CF0DA720074F772 /* TestAnotherCollectionCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 788A68422CF0DA720074F772 /* TestAnotherCollectionCellViewModel.m */; };
+		788A68462CF0DA850074F772 /* TestAnotherTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 788A68452CF0DA850074F772 /* TestAnotherTableCellViewModel.m */; };
+		788A68492CF0DAAA0074F772 /* TestAnotherCollectionViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 788A68482CF0DAAA0074F772 /* TestAnotherCollectionViewModelCell.m */; };
+		788A684C2CF0DABA0074F772 /* TestAnotherTableViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 788A684B2CF0DABA0074F772 /* TestAnotherTableViewModelCell.m */; };
 		788B94252C36C7C6009157CB /* TestCollectionViewModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 788B94242C36C7C6009157CB /* TestCollectionViewModelCell.m */; };
 		78D0DFE42C36C8D2005AE705 /* TestCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D0DFE32C36C8D2005AE705 /* TestCollectionFooterView.m */; };
 		78D0DFEA2C36C925005AE705 /* TestCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D0DFE82C36C925005AE705 /* TestCollectionHeaderView.m */; };
@@ -140,6 +145,16 @@
 		786895A12C0C286300F0E842 /* TestTableControllerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableControllerViewModel.m; sourceTree = "<group>"; };
 		78705E2B2C0C28F0001DF510 /* TestSectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestSectionViewModel.m; sourceTree = "<group>"; };
 		78705E2C2C0C28F0001DF510 /* TestSectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestSectionViewModel.h; sourceTree = "<group>"; };
+		788A683E2CF0DA5F0074F772 /* TestAnotherCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAnotherCellViewModel.m; sourceTree = "<group>"; };
+		788A683F2CF0DA5F0074F772 /* TestAnotherCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAnotherCellViewModel.h; sourceTree = "<group>"; };
+		788A68412CF0DA720074F772 /* TestAnotherCollectionCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAnotherCollectionCellViewModel.h; sourceTree = "<group>"; };
+		788A68422CF0DA720074F772 /* TestAnotherCollectionCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAnotherCollectionCellViewModel.m; sourceTree = "<group>"; };
+		788A68442CF0DA850074F772 /* TestAnotherTableCellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAnotherTableCellViewModel.h; sourceTree = "<group>"; };
+		788A68452CF0DA850074F772 /* TestAnotherTableCellViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAnotherTableCellViewModel.m; sourceTree = "<group>"; };
+		788A68472CF0DAAA0074F772 /* TestAnotherCollectionViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAnotherCollectionViewModelCell.h; sourceTree = "<group>"; };
+		788A68482CF0DAAA0074F772 /* TestAnotherCollectionViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAnotherCollectionViewModelCell.m; sourceTree = "<group>"; };
+		788A684A2CF0DABA0074F772 /* TestAnotherTableViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAnotherTableViewModelCell.h; sourceTree = "<group>"; };
+		788A684B2CF0DABA0074F772 /* TestAnotherTableViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestAnotherTableViewModelCell.m; sourceTree = "<group>"; };
 		788B94232C36C7C6009157CB /* TestCollectionViewModelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectionViewModelCell.h; sourceTree = "<group>"; };
 		788B94242C36C7C6009157CB /* TestCollectionViewModelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectionViewModelCell.m; sourceTree = "<group>"; };
 		78C189C22C5288E8004F0352 /* ___VARIABLE_productName___CellViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "___VARIABLE_productName___CellViewModel.h"; sourceTree = "<group>"; };
@@ -416,6 +431,16 @@
 				78D0DFEC2C36C9EC005AE705 /* TestTableViewModelCell.m */,
 				78705E2B2C0C28F0001DF510 /* TestSectionViewModel.m */,
 				78705E2C2C0C28F0001DF510 /* TestSectionViewModel.h */,
+				788A683E2CF0DA5F0074F772 /* TestAnotherCellViewModel.m */,
+				788A683F2CF0DA5F0074F772 /* TestAnotherCellViewModel.h */,
+				788A68412CF0DA720074F772 /* TestAnotherCollectionCellViewModel.h */,
+				788A68422CF0DA720074F772 /* TestAnotherCollectionCellViewModel.m */,
+				788A68442CF0DA850074F772 /* TestAnotherTableCellViewModel.h */,
+				788A68452CF0DA850074F772 /* TestAnotherTableCellViewModel.m */,
+				788A68472CF0DAAA0074F772 /* TestAnotherCollectionViewModelCell.h */,
+				788A68482CF0DAAA0074F772 /* TestAnotherCollectionViewModelCell.m */,
+				788A684A2CF0DABA0074F772 /* TestAnotherTableViewModelCell.h */,
+				788A684B2CF0DABA0074F772 /* TestAnotherTableViewModelCell.m */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -861,6 +886,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = fanchunxing1;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 4C39GTGS9D;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -1026,6 +1054,8 @@
 				78E100432C53656600CB8CB3 /* AutoTableHeaderView.m in Sources */,
 				784B3F3D2C9095DE00EEA591 /* ExampleTableFooterView.m in Sources */,
 				78D0DFEA2C36C925005AE705 /* TestCollectionHeaderView.m in Sources */,
+				788A68402CF0DA5F0074F772 /* TestAnotherCellViewModel.m in Sources */,
+				788A68432CF0DA720074F772 /* TestAnotherCollectionCellViewModel.m in Sources */,
 				786895872C0C280F00F0E842 /* TestCollectionCellViewModel.m in Sources */,
 				7868959C2C0C284F00F0E842 /* TestTableCellViewModel.m in Sources */,
 				7868958A2C0C281700F0E842 /* TestCollectionController.m in Sources */,
@@ -1035,14 +1065,17 @@
 				784B3F302C908C5C00EEA591 /* ExampleTableCellViewModel.m in Sources */,
 				78E100402C53655E00CB8CB3 /* AutoTableFooterView.m in Sources */,
 				78D0DFE42C36C8D2005AE705 /* TestCollectionFooterView.m in Sources */,
+				788A684C2CF0DABA0074F772 /* TestAnotherTableViewModelCell.m in Sources */,
 				784B3F372C90949500EEA591 /* ExampleSectionViewModel.m in Sources */,
 				78D0DFED2C36C9EC005AE705 /* TestTableViewModelCell.m in Sources */,
 				78D0DFF32C36CA19005AE705 /* TestTableFooterView.m in Sources */,
 				78D0DFF02C36CA0C005AE705 /* TestTableHeaderView.m in Sources */,
+				788A68462CF0DA850074F772 /* TestAnotherTableCellViewModel.m in Sources */,
 				786895842C0C280600F0E842 /* TestCellViewModel.m in Sources */,
 				78E1003A2C53654C00CB8CB3 /* AutoTableController.m in Sources */,
 				784B3F2A2C908C0800EEA591 /* ExampleTableViewModelCell.m in Sources */,
 				78E100282C53651400CB8CB3 /* AutoCollectionControllerViewModel.m in Sources */,
+				788A68492CF0DAAA0074F772 /* TestAnotherCollectionViewModelCell.m in Sources */,
 				78E1001F2C5364F100CB8CB3 /* AutoCellViewModel.m in Sources */,
 				78E100342C53653A00CB8CB3 /* AutoSectionViewModel.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
@@ -1174,6 +1207,7 @@
 			baseConfigurationReference = E648DA722A3228F3414C3313 /* Pods-ViewModel_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4C39GTGS9D;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ViewModel/ViewModel-Prefix.pch";
 				INFOPLIST_FILE = "ViewModel/ViewModel-Info.plist";
@@ -1191,6 +1225,7 @@
 			baseConfigurationReference = BCC12947A47640DE5566E2A5 /* Pods-ViewModel_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4C39GTGS9D;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ViewModel/ViewModel-Prefix.pch";
 				INFOPLIST_FILE = "ViewModel/ViewModel-Info.plist";

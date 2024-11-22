@@ -17,8 +17,9 @@
 #import "TableViewModel.h"
 #import "TestCellViewModel.h"
 #import "TestSectionViewModel.h"
+#import "TestAnotherCellViewModel.h"
 
-@interface TestTableController ()
+@interface TestTableController () <UITableViewDelegate>
 @property (weak, nonatomic) UIButton *addSectionButton;
 @property (weak, nonatomic) UIButton *addRowButton;
 @property (weak, nonatomic) UIButton *deleteRowButton;
@@ -34,6 +35,7 @@
         make.top.equalTo(self.addSectionButton.mas_bottom);
         make.leading.trailing.bottom.equalTo(self.view);
     }];
+    self.tableView.delegate = self;
     self.viewModel.tableViewModel.tableView = self.tableView;
     
     @weakify(self);
@@ -50,13 +52,21 @@
     }];
     self.addRowButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
         @strongify(self);
+        [UIView setAnimationsEnabled:NO];
         [self.viewModel.tableViewModel.tableView performBatchUpdates:^{
             @strongify(self);
             SectionViewModel *sectionViewModel = self.viewModel.tableViewModel.sectionViewModels.firstViewModel;
             if (sectionViewModel) {
-                [sectionViewModel addViewModel:TestCellViewModel.new];
+                TestCellViewModel *cellViewModel = sectionViewModel.firstViewModel;
+                [sectionViewModel removeViewModel:cellViewModel];
+                if ([cellViewModel isKindOfClass:TestCellViewModel.class]) {
+                    [sectionViewModel insertViewModel:TestAnotherCellViewModel.new atIndex:sectionViewModel.count];
+                } else {
+                    [sectionViewModel insertViewModel:TestCellViewModel.new atIndex:sectionViewModel.count];
+                }
             }
-        } rowAnimation:(UITableViewRowAnimationLeft) completion:^(BOOL finished) {
+        } rowAnimation:(UITableViewRowAnimationNone) completion:^(BOOL finished) {
+            [UIView setAnimationsEnabled:YES];
         }];
         return [RACSignal return:nil];
     }];
@@ -128,6 +138,39 @@
         }];
     }
     return _deleteRowButton;
+}
+
+#pragma mark - Forwarding
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    if ([self.viewModel.tableViewModel respondsToSelector:aSelector]) {
+        return YES;
+    }
+    return [super respondsToSelector:aSelector];
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    NSMethodSignature *methodSignature = [self.viewModel.tableViewModel.class instanceMethodSignatureForSelector:aSelector];
+    return methodSignature;
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    [anInvocation invokeWithTarget:self.viewModel.tableViewModel];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SectionViewModel *sectionViewModel = self.viewModel.tableViewModel.sectionViewModels[indexPath.section];
+    if (sectionViewModel) {
+        TestCellViewModel *cellViewModel = sectionViewModel[indexPath.row];
+        [sectionViewModel removeViewModel:cellViewModel];
+        if ([cellViewModel isKindOfClass:TestCellViewModel.class]) {
+            [sectionViewModel insertViewModel:TestAnotherCellViewModel.new atIndex:sectionViewModel.count];
+        } else {
+            [sectionViewModel insertViewModel:TestCellViewModel.new atIndex:sectionViewModel.count];
+        }
+    }
 }
 
 @end
