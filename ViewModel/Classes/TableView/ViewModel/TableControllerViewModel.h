@@ -19,7 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Update TableView
 
-- (void)tableViewUpdate:(void(^)(void))update completion:(void (^)(BOOL finished))completion;
+/// 更新（增/删/排序等）tableViewModel的Section和Cell都务必在这里操作。
+/// - Parameters:
+///   - update: 更新Section和Cell的代码块
+///   - completion: 更新完成的代码块
+- (void)tableViewUpdate:(void(^ _Nullable)(void))update completion:(void (^ _Nullable)(BOOL finished))completion;
 
 @end
 
