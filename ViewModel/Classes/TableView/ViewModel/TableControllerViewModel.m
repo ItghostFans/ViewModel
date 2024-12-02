@@ -6,6 +6,8 @@
 //
 
 #import "TableControllerViewModel.h"
+#import "UITableView+ViewModel.h"
+#import "TableViewModel.h"
 
 @implementation TableControllerViewModel
 
@@ -14,6 +16,17 @@
         _tableViewModel = tableViewModel;
     }
     return self;
+}
+
+#pragma mark - Update TableView
+
+- (void)tableViewUpdate:(void(^)(void))update completion:(void (^)(BOOL finished))completion {
+    if (self.tableViewModel.tableView) {
+        [self.tableViewModel.tableView performBatchUpdates:update rowAnimation:(UITableViewRowAnimationNone) completion:completion];
+    } else {
+        if (update) {update();}
+        if (completion) {completion(YES);}
+    }
 }
 
 @end

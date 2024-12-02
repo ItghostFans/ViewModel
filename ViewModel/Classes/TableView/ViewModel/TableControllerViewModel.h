@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithTableViewModel:(TableViewModel *)tableViewModel;
 
+#pragma mark - Update TableView
+
+- (void)tableViewUpdate:(void(^)(void))update completion:(void (^)(BOOL finished))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

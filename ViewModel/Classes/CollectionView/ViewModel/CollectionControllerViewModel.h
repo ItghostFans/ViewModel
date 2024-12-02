@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithCollectionViewModel:(CollectionViewModel *)collectionViewModel;
 
+#pragma mark - Update CollectionView
+
+- (void)collectionViewUpdate:(void(^)(void))update completion:(void (^)(BOOL finished))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END
