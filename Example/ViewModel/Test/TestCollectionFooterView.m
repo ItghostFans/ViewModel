@@ -3,7 +3,7 @@
 //  ViewModel_Example
 //
 //  Created by ItghostFan on 2024/7/4.
-//  Copyright © 2024 fanchunxing1. All rights reserved.
+//  Copyright © 2024 ItghostFans. All rights reserved.
 //
 
 #import "TestCollectionFooterView.h"

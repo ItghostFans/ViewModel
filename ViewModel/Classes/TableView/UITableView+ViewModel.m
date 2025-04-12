@@ -48,6 +48,10 @@
                  completion:(void (^)(BOOL finished))completion {
     @weakify(self);
     self.rowAnimation = rowAnimation;
+    if (self.rowAnimation == UITableViewRowAnimationNone) {
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+    }
     [self viewModel_performBatchUpdates:updates completion:^(BOOL finished) {
         @strongify(self);
         [self reloadIfNeed];
@@ -55,6 +59,9 @@
             completion(finished);
         }
     }];
+    if (self.rowAnimation == UITableViewRowAnimationNone) {
+        [CATransaction commit];
+    }
 }
 
 #pragma mark - Property
