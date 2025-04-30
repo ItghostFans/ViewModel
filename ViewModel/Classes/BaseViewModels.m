@@ -21,8 +21,11 @@
 }
 
 - (instancetype)initWithViewModels:(NSArray *)viewModels {
-    if (self = [super init]) {
+    if (viewModels) {
+        self = [super init];
         _viewModels = viewModels.mutableCopy;
+    } else {
+        self = [self init];
     }
     return self;
 }

@@ -21,8 +21,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol UITableViewModelDataSource <UITableViewDataSource>
 @optional
-- (CellViewModel *)tableView:(UITableView *)tableView cellViewModelForIndexPath:(NSIndexPath *)indexPath;
-- (SectionViewModel *)tableView:(UITableView *)tableView sectionViewModelForSection:(NSInteger)section;
+
+- (CellViewModel *)tableView:(UITableView * _Nonnull)tableView
+   cellViewModelForIndexPath:(NSIndexPath * _Nonnull)indexPath;
+
+- (SectionViewModel *)tableView:(UITableView *_Nonnull)tableView
+     sectionViewModelForSection:(NSInteger)section;
 @end
 
 @interface TableViewModel : BaseViewModel
@@ -33,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic, nullable) id<ITableViewModelDelegate> delegate;
 #pragma clang diagnostic pop
 
-@property (strong, nonatomic) BaseViewModels *sectionViewModels;
+@property (strong, nonatomic, nonnull) BaseViewModels *sectionViewModels;
 
 @property (weak, nonatomic, nullable) UITableView *tableView;
 

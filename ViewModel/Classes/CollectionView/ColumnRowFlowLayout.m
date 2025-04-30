@@ -82,7 +82,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 #pragma mark - Super
 
 - (void)prepareLayout {
-    NSAssert(_columnCount || _rowCount, @"%s Should Indicate Column Count Or !");
+    NSAssert(_columnCount || _rowCount, @"%s Should Indicate Column Count Or !", __FUNCTION__);
     if (self.collectionView.pagingEnabled) {
         NSAssert(UIEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, UIEdgeInsetsZero), @"UICollectionView.pagingEnabled Should contentInset == UIEdgeInsetsZero!");
     }
@@ -112,17 +112,17 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attribute = nil;
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
-        _sectionHeaderLayoutAttributes[indexPath];
+//        _sectionHeaderLayoutAttributes[@(indexPath.section)];
         if (!attribute) {
             attribute = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-            _sectionHeaderLayoutAttributes[indexPath] = attribute;
+            _sectionHeaderLayoutAttributes[@(indexPath.section)] = attribute;
         }
     } else
     if ([elementKind isEqualToString:UICollectionElementKindSectionFooter]) {
-        _sectionFooterLayoutAttributes[indexPath];
+//        _sectionFooterLayoutAttributes[@(indexPath.section)];
         if (!attribute) {
             attribute = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-            _sectionFooterLayoutAttributes[indexPath] = attribute;
+            _sectionFooterLayoutAttributes[@(indexPath.section)] = attribute;
         }
     }
     return attribute;
@@ -146,6 +146,9 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         switch (self.scrollDirection) {
             case UICollectionViewScrollDirectionVertical: {
                 return CGSizeMake(pageSize.width, pageSize.height * self.pageCount);
+            }
+            default: {
+                break;
             }
         }
         return CGSizeMake(pageSize.width * self.pageCount, pageSize.height);
@@ -378,7 +381,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     if (CGSizeEqualToSize(cellSize, CGSizeZero)) {
         CGFloat width = self.pageSize.width;
         CGFloat height = self.pageSize.height;
-        SectionViewModel *sectionViewModel = viewModel.collectionSectionViewModel;
+//        SectionViewModel *sectionViewModel = viewModel.collectionSectionViewModel;
         CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
         CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
         switch (self.scrollDirection) {

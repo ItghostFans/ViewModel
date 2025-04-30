@@ -9,4 +9,7 @@
 
 @implementation UICollectionViewFlowLayout (ViewModel)
 
+- (void)reloadIfNeed {
+}
+
 @end

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, nullable, readonly) TableViewModel *tableViewModel;
 
-- (instancetype)initWithTableViewModel:(TableViewModel *)tableViewModel;
+- (instancetype)initWithTableViewModel:(TableViewModel * _Nonnull)tableViewModel;
 
 #pragma mark - Update TableView
 

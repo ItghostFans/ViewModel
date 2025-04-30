@@ -22,6 +22,10 @@
 
 @implementation CellViewModel (CollectionView)
 
+@dynamic collectionIndexPath;
+@dynamic collectionSectionViewModel;
+@dynamic collectionCellClass;
+
 - (NSMutableDictionary<__kindof NSValue *, __kindof NSValue *> *)sizeCellSizes {
     NSMutableDictionary<__kindof NSValue *, __kindof NSValue *> *sizeCellSizes = objc_getAssociatedObject(self, @selector(sizeCellSizes));
     if (sizeCellSizes) {

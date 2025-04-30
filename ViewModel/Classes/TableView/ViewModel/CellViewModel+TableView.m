@@ -20,6 +20,8 @@
 
 @implementation CellViewModel (TableView)
 
+@dynamic tableCellClass;
+
 - (NSMutableDictionary<__kindof NSNumber *, __kindof NSNumber *> *)widthHeights {
     NSMutableDictionary<__kindof NSNumber *, __kindof NSNumber *> *widthHeights = objc_getAssociatedObject(self, @selector(widthHeights));
     if (!widthHeights) {

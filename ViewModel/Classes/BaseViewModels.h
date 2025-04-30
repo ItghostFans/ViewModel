@@ -16,20 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nonnull, readonly) id viewModels;
 @property (assign, nonatomic, readonly) NSUInteger count;
 
-- (instancetype)initWithViewModels:(NSArray *)viewModels;
+- (instancetype)initWithViewModels:(NSArray * _Nullable)viewModels;
 
 - (id)firstViewModel;
 - (id)lastViewModel;
-- (void)addViewModel:(id)viewModel;
-- (void)insertViewModel:(id)viewModel atIndex:(NSUInteger)index;
-- (void)replaceViewModelAtIndex:(NSUInteger)index withViewModel:(id)viewModel;
+- (void)addViewModel:(id _Nonnull)viewModel;
+- (void)insertViewModel:(id _Nonnull)viewModel atIndex:(NSUInteger)index;
+- (void)replaceViewModelAtIndex:(NSUInteger)index withViewModel:(id _Nonnull)viewModel;
 //- (void)insertViewModels:(NSArray *)viewModels atIndexes:(NSIndexSet *)indexes;   // iOS这个地方会导致死循环
-- (void)removeViewModel:(id)viewModel;
-- (void)removeViewModelsAtIndexes:(NSIndexSet *)indexes;
-- (void)removeViewModels:(NSArray *)viewModels;
+- (void)removeViewModel:(id _Nonnull)viewModel;
+- (void)removeViewModelsAtIndexes:(NSIndexSet * _Nonnull)indexes;
+- (void)removeViewModels:(NSArray * _Nonnull)viewModels;
 - (void)removeAllViewModels;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
-- (NSUInteger)indexOfViewModel:(id)viewModel;
+- (NSUInteger)indexOfViewModel:(id _Nonnull)viewModel;
 
 @end
 
