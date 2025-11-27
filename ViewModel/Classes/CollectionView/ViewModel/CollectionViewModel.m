@@ -201,6 +201,10 @@
             break;
         }
         case NSKeyValueChangeReplacement: {
+            for (CellViewModel *cellViewModel in news) {
+                [self registerCellClass:cellViewModel.collectionCellClass];
+                cellViewModel.collectionSectionViewModel = _sectionViewModels[section];
+            }
             [self.collectionView reloadItemsAtIndexPaths:indexPathes];
             break;
         }

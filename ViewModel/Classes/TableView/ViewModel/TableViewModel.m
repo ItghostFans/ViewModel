@@ -172,6 +172,10 @@
             break;
         }
         case NSKeyValueChangeReplacement: {
+            for (CellViewModel *cellViewModel in news) {
+                [self registerCellClass:cellViewModel.tableCellClass];
+                cellViewModel.tableSectionViewModel = _sectionViewModels[section];
+            }
             [self.tableView reloadRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
             break;
         }
