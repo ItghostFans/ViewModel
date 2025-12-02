@@ -7,13 +7,13 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BaseViewModel.h"
-
-#import "SectionViewModel+CollectionView.h"
+#import <ViewModel/BaseViewModel.h>
+#import <ViewModel/SectionViewModel+CollectionView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class CellViewModel;
+@class VMCollectionView;
 
 @protocol ICollectionViewModelDelegate <UICollectionViewDelegate, IBaseViewModelDelegate>
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) BaseViewModels *sectionViewModels;
 
-@property (weak, nonatomic, nullable) UICollectionView *collectionView;
+@property (weak, nonatomic, nullable) VMCollectionView *collectionView;
 
 @end
 

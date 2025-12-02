@@ -7,7 +7,7 @@
 
 #import "TableViewModel+UITableViewDataSource.h"
 
-#import "CellViewModel+TableView.h"
+#import <ViewModel/CellViewModel+TableView.h>
 
 @implementation TableViewModel (UITableViewDataSource)
 

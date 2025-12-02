@@ -5,7 +5,7 @@
 //  Created by ItghostFan on 2024/7/27.
 //
 
-#import "TableViewModel.h"
+#import <ViewModel/TableViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

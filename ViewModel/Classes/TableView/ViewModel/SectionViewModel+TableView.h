@@ -6,7 +6,8 @@
 //
 
 #import "SectionViewModel.h"
-#import "ITableSectionViewModel.h"
+
+#import <ViewModel/ITableSectionViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

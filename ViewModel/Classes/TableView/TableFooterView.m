@@ -6,7 +6,8 @@
 //
 
 #import "TableFooterView.h"
-#import "SectionViewModel+TableView.h"
+
+#import <ViewModel/SectionViewModel+TableView.h>
 
 @implementation TableFooterView
 

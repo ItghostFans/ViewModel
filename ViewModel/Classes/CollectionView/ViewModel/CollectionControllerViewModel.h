@@ -5,7 +5,7 @@
 //  Created by ItghostFan on 2024/6/1.
 //
 
-#import "BaseViewModel.h"
+#import <ViewModel/BaseViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -7,12 +7,12 @@
 
 #import "SectionViewModel+TableView.h"
 
-#import <objc/runtime.h>
+#import <VMOS/VMWeakifyProxy.h>
+#import <ViewModel/TableViewModel.h>
+#import <ViewModel/TableHeaderView.h>
+#import <ViewModel/TableFooterView.h>
 
-#import "WeakifyProxy.h"
-#import "TableViewModel.h"
-#import "TableHeaderView.h"
-#import "TableFooterView.h"
+#import <objc/runtime.h>
 
 @interface SectionViewModel ()
 
@@ -52,7 +52,7 @@
 }
 
 - (void)setTableViewModel:(TableViewModel *)tableViewModel {
-    objc_setAssociatedObject(self, @selector(tableViewModel), [[WeakifyProxy alloc] initWithTarget:tableViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(tableViewModel), [[VMWeakifyProxy alloc] initWithTarget:tableViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (Class)tableHeaderClass {

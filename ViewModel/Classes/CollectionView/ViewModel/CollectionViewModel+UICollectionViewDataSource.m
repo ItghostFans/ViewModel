@@ -7,7 +7,7 @@
 
 #import "CollectionViewModel+UICollectionViewDataSource.h"
 
-#import "CellViewModel+CollectionView.h"
+#import <ViewModel/CellViewModel+CollectionView.h>
 
 @implementation CollectionViewModel (UICollectionViewDataSource)
 

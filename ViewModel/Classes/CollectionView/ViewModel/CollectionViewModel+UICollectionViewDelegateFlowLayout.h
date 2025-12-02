@@ -5,7 +5,7 @@
 //  Created by ItghostFan on 2024/5/31.
 //
 
-#import "CollectionViewModel.h"
+#import <ViewModel/CollectionViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

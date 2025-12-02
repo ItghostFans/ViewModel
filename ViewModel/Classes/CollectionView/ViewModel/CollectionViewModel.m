@@ -5,15 +5,15 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
+#import <VMOS/VMKit.h>
 #import "CollectionViewModel.h"
-#import "CollectionViewModel+UICollectionViewDelegate.h"
-#import "CollectionViewModel+UICollectionViewDataSource.h"
 
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
-
-#import "CellViewModel+CollectionView.h"
-#import "SectionViewModel+CollectionView.h"
+#import <ViewModel/CollectionViewModel+UICollectionViewDelegate.h>
+#import <ViewModel/CollectionViewModel+UICollectionViewDataSource.h>
+#import <ViewModel/CellViewModel+CollectionView.h>
+#import <ViewModel/SectionViewModel+CollectionView.h>
 
 @interface CollectionViewModel ()
 

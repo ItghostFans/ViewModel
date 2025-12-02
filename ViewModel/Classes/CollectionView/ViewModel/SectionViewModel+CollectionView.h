@@ -5,9 +5,8 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import "SectionViewModel.h"
-
-#import "ICollectionSectionViewModel.h"
+#import <ViewModel/SectionViewModel.h>
+#import <ViewModel/ICollectionSectionViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

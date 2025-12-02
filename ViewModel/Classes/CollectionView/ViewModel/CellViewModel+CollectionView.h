@@ -7,7 +7,7 @@
 
 #import "ICollectionCellViewModel.h"
 
-#import "CellViewModel.h"
+#import <ViewModel/CellViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -6,7 +6,9 @@
 //
 
 #import "UICollectionView+ViewModel.h"
-#import "UICollectionViewFlowLayout+ViewModel.h"
+
+#import <ViewModel/UICollectionViewFlowLayout+ViewModel.h>
+#import <VMOS/VMFoundation.h>
 
 #import <objc/runtime.h>
 
@@ -15,9 +17,7 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Method oldMethod = class_getInstanceMethod(self, @selector(performBatchUpdates:completion:));
-        Method currentMethod = class_getInstanceMethod(self, @selector(viewModel_performBatchUpdates:completion:));
-        method_exchangeImplementations(oldMethod, currentMethod);
+        [self runtime_swizzleSel:@selector(performBatchUpdates:completion:) newSel:@selector(viewModel_performBatchUpdates:completion:) cls:self];
     });
 }
 

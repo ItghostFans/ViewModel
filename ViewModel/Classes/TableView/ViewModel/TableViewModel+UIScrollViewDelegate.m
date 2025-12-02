@@ -5,7 +5,7 @@
 //  Created by ItghostFan on 2024/5/30.
 //
 
-#import "TableViewModel+UIScrollViewDelegate.h"
+#import <ViewModel/TableViewModel+UIScrollViewDelegate.h>
 
 @implementation TableViewModel (UIScrollViewDelegate)
 

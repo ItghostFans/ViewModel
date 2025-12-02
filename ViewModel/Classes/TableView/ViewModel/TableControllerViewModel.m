@@ -6,8 +6,9 @@
 //
 
 #import "TableControllerViewModel.h"
-#import "UITableView+ViewModel.h"
-#import "TableViewModel.h"
+
+#import <ViewModel/UITableView+ViewModel.h>
+#import <ViewModel/TableViewModel.h>
 
 @implementation TableControllerViewModel
 

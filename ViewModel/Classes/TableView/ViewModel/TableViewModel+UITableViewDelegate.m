@@ -7,12 +7,11 @@
 
 #import "TableViewModel+UITableViewDelegate.h"
 
-#import "SectionViewModel+TableView.h"
-#import "CellViewModel+TableView.h"
-
-#import "TableViewModelCell.h"
-#import "TableHeaderView.h"
-#import "TableFooterView.h"
+#import <ViewModel/SectionViewModel+TableView.h>
+#import <ViewModel/CellViewModel+TableView.h>
+#import <ViewModel/TableViewModelCell.h>
+#import <ViewModel/TableHeaderView.h>
+#import <ViewModel/TableFooterView.h>
 
 @implementation TableViewModel (UITableViewDelegate)
 

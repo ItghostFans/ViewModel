@@ -7,10 +7,10 @@
 
 #import "CollectionViewModel+UICollectionViewDelegate.h"
 
-#import "CellViewModel+CollectionView.h"
-#import "CollectionViewModelCell.h"
-#import "CollectionHeaderView.h"
-#import "CollectionFooterView.h"
+#import <ViewModel/CellViewModel+CollectionView.h>
+#import <ViewModel/CollectionViewModelCell.h>
+#import <ViewModel/CollectionHeaderView.h>
+#import <ViewModel/CollectionFooterView.h>
 
 @implementation CollectionViewModel (UICollectionViewDelegate)
 

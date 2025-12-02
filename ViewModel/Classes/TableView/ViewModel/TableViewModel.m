@@ -6,15 +6,14 @@
 //
 
 #import "TableViewModel.h"
-#import "TableViewModel+UITableViewDelegate.h"
-#import "TableViewModel+UITableViewDataSource.h"
 
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
-
-#import "CellViewModel+TableView.h"
-#import "SectionViewModel+TableView.h"
-#import "UITableView+ViewModel.h"
+#import <ViewModel/TableViewModel+UITableViewDelegate.h>
+#import <ViewModel/TableViewModel+UITableViewDataSource.h>
+#import <ViewModel/CellViewModel+TableView.h>
+#import <ViewModel/SectionViewModel+TableView.h>
+#import <ViewModel/UITableView+ViewModel.h>
 
 @interface TableViewModel ()
 

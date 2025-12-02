@@ -6,11 +6,12 @@
 //
 
 #import "UITableView+ViewModel.h"
-#import "TableViewModelCell.h"
-#import "TableViewModel+UITableViewModelDataSource.h"
+
+#import <ReactiveObjC/ReactiveObjC.h>
+#import <ViewModel/TableViewModelCell.h>
+#import <ViewModel/TableViewModel+UITableViewModelDataSource.h>
 
 #import <objc/runtime.h>
-#import <ReactiveObjC/ReactiveObjC.h>
 
 @interface UITableView ()
 @property (assign, nonatomic) UITableViewRowAnimation rowAnimation;

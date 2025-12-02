@@ -7,8 +7,8 @@
 
 #import "TableController.h"
 
-#import "TableViewModel.h"
-#import "TableControllerViewModel.h"
+#import <ViewModel/TableViewModel.h>
+#import <ViewModel/TableControllerViewModel.h>
 
 @interface TableController ()
 

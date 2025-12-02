@@ -7,12 +7,12 @@
 
 #import "CellViewModel+CollectionView.h"
 
-#import <objc/runtime.h>
+#import <VMOS/VMWeakifyProxy.h>
+#import <ViewModel/CollectionViewModel.h>
+#import <ViewModel/CollectionViewModelCell.h>
+#import <ViewModel/SectionViewModel+CollectionView.h>
 
-#import "WeakifyProxy.h"
-#import "CollectionViewModel.h"
-#import "CollectionViewModelCell.h"
-#import "SectionViewModel+CollectionView.h"
+#import <objc/runtime.h>
 
 @interface CellViewModel ()
 
@@ -54,7 +54,7 @@
 }
 
 - (void)setCollectionSectionViewModel:(SectionViewModel *)collectionSectionViewModel {
-    objc_setAssociatedObject(self, @selector(collectionSectionViewModel), [[WeakifyProxy alloc] initWithTarget:collectionSectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(collectionSectionViewModel), [[VMWeakifyProxy alloc] initWithTarget:collectionSectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGSize)collectionCellSizeForSize:(CGSize)size {

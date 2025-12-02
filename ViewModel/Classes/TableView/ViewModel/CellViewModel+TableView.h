@@ -5,9 +5,9 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import "CellViewModel.h"
+#import <ViewModel/CellViewModel.h>
 
-#import "ITableCellViewModel.h"
+#import <ViewModel/ITableCellViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

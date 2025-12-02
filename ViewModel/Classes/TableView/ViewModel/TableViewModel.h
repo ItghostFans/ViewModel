@@ -7,9 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BaseViewModel.h"
-
-#import "SectionViewModel+TableView.h"
+#import <ViewModel/BaseViewModel.h>
+#import <ViewModel/SectionViewModel+TableView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

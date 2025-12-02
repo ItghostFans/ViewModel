@@ -7,11 +7,11 @@
 
 #import "CellViewModel+TableView.h"
 
-#import <objc/runtime.h>
+#import <VMOS/VMWeakifyProxy.h>
+#import <ViewModel/TableViewModel.h>
+#import <ViewModel/TableViewModelCell.h>
 
-#import "WeakifyProxy.h"
-#import "TableViewModel.h"
-#import "TableViewModelCell.h"
+#import <objc/runtime.h>
 
 @interface CellViewModel ()
 @property (strong, nonatomic, readonly) NSMutableDictionary<__kindof NSNumber *, __kindof NSNumber *> *widthHeights;
@@ -50,7 +50,7 @@
 }
 
 - (void)setTableSectionViewModel:(SectionViewModel *)tableSectionViewModel {
-    objc_setAssociatedObject(self, @selector(tableSectionViewModel), [[WeakifyProxy alloc] initWithTarget:tableSectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(tableSectionViewModel), [[VMWeakifyProxy alloc] initWithTarget:tableSectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGSize)tableCellSize {

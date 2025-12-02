@@ -5,14 +5,14 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import "SectionViewModel.h"
+#import "SectionViewModel+CollectionView.h"
+
+#import <VMOS/VMWeakifyProxy.h>
+#import <ViewModel/CollectionViewModel.h>
+#import <ViewModel/CollectionHeaderView.h>
+#import <ViewModel/CollectionFooterView.h>
 
 #import <objc/runtime.h>
-
-#import "WeakifyProxy.h"
-#import "CollectionViewModel.h"
-#import "CollectionHeaderView.h"
-#import "CollectionFooterView.h"
 
 @interface SectionViewModel ()
 
@@ -52,7 +52,7 @@
 }
 
 - (void)setCollectionViewModel:(CollectionViewModel *)collectionViewModel {
-    objc_setAssociatedObject(self, @selector(collectionViewModel), [[WeakifyProxy alloc] initWithTarget:collectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(collectionViewModel), [[VMWeakifyProxy alloc] initWithTarget:collectionViewModel], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGFloat)collectionMinimumLineSpacing {
