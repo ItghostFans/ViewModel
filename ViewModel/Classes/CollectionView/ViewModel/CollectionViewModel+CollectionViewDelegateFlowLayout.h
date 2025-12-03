@@ -1,5 +1,5 @@
 //
-//  CollectionViewModel+UICollectionViewDelegateFlowLayout.h
+//  CollectionViewModel+CollectionViewDelegateFlowLayout.h
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/5/31.

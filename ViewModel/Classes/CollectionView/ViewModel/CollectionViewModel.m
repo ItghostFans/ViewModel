@@ -10,8 +10,8 @@
 
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
-#import <ViewModel/CollectionViewModel+UICollectionViewDelegate.h>
-#import <ViewModel/CollectionViewModel+UICollectionViewDataSource.h>
+#import <ViewModel/CollectionViewModel+CollectionViewDelegate.h>
+#import <ViewModel/CollectionViewModel+CollectionViewDataSource.h>
 #import <ViewModel/CellViewModel+CollectionView.h>
 #import <ViewModel/SectionViewModel+CollectionView.h>
 
