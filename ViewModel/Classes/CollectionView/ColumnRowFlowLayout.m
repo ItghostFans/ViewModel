@@ -6,14 +6,15 @@
 //
 
 #import "ColumnRowFlowLayout.h"
-#import "CellViewModel+CollectionView.h"
-#import "SectionViewModel+CollectionView.h"
-#import "CollectionViewModelCell.h"
+
+#import <ViewModel/CellViewModel+CollectionView.h>
+#import <ViewModel/SectionViewModel+CollectionView.h>
+#import <ViewModel/CollectionViewModelCell.h>
 
 #import <ReactiveObjC/ReactiveObjC.h>
 
-typedef NSMutableDictionary<__kindof NSIndexPath *, __kindof UICollectionViewLayoutAttributes *> ItemLayoutAttributes;
-typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayoutAttributes *> SectionLayoutAttributes;
+typedef NSMutableDictionary<__kindof NSIndexPath *, __kindof VMCollectionViewLayoutAttributes *> ItemLayoutAttributes;
+typedef NSMutableDictionary<__kindof NSNumber *, __kindof VMCollectionViewLayoutAttributes *> SectionLayoutAttributes;
 
 @interface ColumnRowFlowLayout ()
 
@@ -71,7 +72,11 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         return;
     }
     // 只更新可见区域的即可。
+#if TARGET_OS_IPHONE
     NSArray<__kindof NSIndexPath *> *indexPathsForVisibleItems = self.collectionView.indexPathsForVisibleItems;
+#elif TARGET_OS_MAC
+    NSArray<__kindof NSIndexPath *> *indexPathsForVisibleItems = self.collectionView.indexPathsForVisibleItems.allObjects;
+#endif // #if TARGET_OS_IPHONE
     for (NSIndexPath *indexPath in indexPathsForVisibleItems) {
         CellViewModel *cellViewModel = _viewModel.sectionViewModels[indexPath.section][indexPath.item];
         [(CollectionViewModelCell *)[self.collectionView cellForItemAtIndexPath:indexPath] setViewModel:cellViewModel];
@@ -84,12 +89,12 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 - (void)prepareLayout {
     NSAssert(_columnCount || _rowCount, @"%s Should Indicate Column Count Or !", __FUNCTION__);
     if (self.collectionView.pagingEnabled) {
-        NSAssert(UIEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, UIEdgeInsetsZero), @"UICollectionView.pagingEnabled Should contentInset == UIEdgeInsetsZero!");
+        NSAssert(VMEdgeInsetsEqualToEdgeInsets(self.collectionView.contentInset, VMEdgeInsetsZero), @"VMCollectionView.pagingEnabled Should contentInset == UIEdgeInsetsZero!");
     }
     [super prepareLayout];
 }
 
-- (NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+- (NSArray<__kindof VMCollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
     if (!self.collectionView || !_viewModel) {
         return nil;
     }
@@ -100,28 +105,28 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     return layoutAttributes;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attribute = _itemLayoutAttributes[indexPath];
+- (VMCollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
+    VMCollectionViewLayoutAttributes *attribute = _itemLayoutAttributes[indexPath];
     if (!attribute) {
-        attribute = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+        attribute = [VMCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         _itemLayoutAttributes[indexPath] = attribute;
     }
     return attribute;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attribute = nil;
-    if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+- (VMCollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+    VMCollectionViewLayoutAttributes *attribute = nil;
+    if ([elementKind isEqualToString:VMCollectionElementKindSectionHeader]) {
 //        _sectionHeaderLayoutAttributes[@(indexPath.section)];
         if (!attribute) {
-            attribute = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+            attribute = [VMCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             _sectionHeaderLayoutAttributes[@(indexPath.section)] = attribute;
         }
     } else
-    if ([elementKind isEqualToString:UICollectionElementKindSectionFooter]) {
+    if ([elementKind isEqualToString:VMCollectionElementKindSectionFooter]) {
 //        _sectionFooterLayoutAttributes[@(indexPath.section)];
         if (!attribute) {
-            attribute = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+            attribute = [VMCollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             _sectionFooterLayoutAttributes[@(indexPath.section)] = attribute;
         }
     }
@@ -144,7 +149,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         pageSize.height -= self.collectionView.contentInset.top + self.collectionView.contentInset.bottom;
         pageSize.width -= self.collectionView.contentInset.left + self.collectionView.contentInset.right;
         switch (self.scrollDirection) {
-            case UICollectionViewScrollDirectionVertical: {
+            case VMCollectionViewScrollDirectionVertical: {
                 return CGSizeMake(pageSize.width, pageSize.height * self.pageCount);
             }
             default: {
@@ -170,12 +175,12 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
     CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
     switch (self.scrollDirection) {
-        case UICollectionViewScrollDirectionVertical: {
+        case VMCollectionViewScrollDirectionVertical: {
             minimumLineSpacing = self.minimumLineSpacing;
             minimumInteritemSpacing = self.minimumInteritemSpacing;
             break;
         }
-        case UICollectionViewScrollDirectionHorizontal: {
+        case VMCollectionViewScrollDirectionHorizontal: {
             minimumLineSpacing = self.minimumInteritemSpacing;
             minimumInteritemSpacing = self.minimumLineSpacing;
             break;
@@ -195,21 +200,24 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
 //    return self.flipsHorizontallyInOppositeLayoutDirection ? UIUserInterfaceLayoutDirectionRightToLeft : UIUserInterfaceLayoutDirectionLeftToRight;
 //}
 
+#if TARGET_OS_IPHONE
 - (BOOL)flipsHorizontallyInOppositeLayoutDirection {
     return [UIView userInterfaceLayoutDirectionForSemanticContentAttribute:UIView.appearance.semanticContentAttribute] == UIUserInterfaceLayoutDirectionRightToLeft;
 }
+#elif TARGET_OS_MAC
+#endif // #if TARGET_OS_IPHONE
 
 #define ASSIGN_IF_LARGE_THAN(value, left) \
     left = !left ? value : [left compare:value] == NSOrderedDescending ? value : left;
 
-- (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
-    for (UICollectionViewUpdateItem *updateItem in updateItems) {
+- (void)prepareForCollectionViewUpdates:(NSArray<VMCollectionViewUpdateItem *> *)updateItems {
+    for (VMCollectionViewUpdateItem *updateItem in updateItems) {
         switch (updateItem.updateAction) {
-            case UICollectionUpdateActionMove: {
+            case VMCollectionUpdateActionMove: {
                 ASSIGN_IF_LARGE_THAN(updateItem.indexPathBeforeUpdate, _invalidateFromIndexPath);
                 break;
             }
-            case UICollectionUpdateActionInsert: {
+            case VMCollectionUpdateActionInsert: {
                 if (updateItem.indexPathAfterUpdate.item == NSNotFound) {
                     ASSIGN_IF_LARGE_THAN([NSIndexPath indexPathForItem:0 inSection:updateItem.indexPathAfterUpdate.section], _invalidateFromIndexPath);
                 } else {
@@ -217,11 +225,11 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
                 }
                 break;
             }
-            case UICollectionUpdateActionDelete: {  // 之前的可以复用。
+            case VMCollectionUpdateActionDelete: {  // 之前的可以复用。
                 ASSIGN_IF_LARGE_THAN(updateItem.indexPathBeforeUpdate, _invalidateFromIndexPath);
                 break;
             }
-            case UICollectionUpdateActionReload: {
+            case VMCollectionUpdateActionReload: {
                 _invalidateFromIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
                 break;
             }
@@ -242,7 +250,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
             }
             if (_invalidateFromIndexPath.section < section || 
                 (_invalidateFromIndexPath.section == section && _invalidateFromIndexPath.item <= item)) { // 变化后面的所有布局需要重新计算。
-                UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
+                VMCollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
                 CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
                 CGPoint point = [self pointOfItem:item section:section page:page];
                 attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
@@ -262,20 +270,20 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     [super finalizeLayoutTransition];
 }
 
-- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
+- (VMCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
     return nil;
 }
 
-- (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
+- (VMCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
     return nil;
 }
 
-- (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind
+- (VMCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind
                                                                                         atIndexPath:(NSIndexPath *)elementIndexPath {
     return nil;
 }
 
-- (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSString *)elementKind
+- (VMCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSString *)elementKind
                                                                                          atIndexPath:(NSIndexPath *)elementIndexPath {
     return nil;
 }
@@ -293,7 +301,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
             if (item > 0 && (item % (_columnCount * _rowCount) == 0)) {
                 page += 1;
             }
-            UICollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
+            VMCollectionViewLayoutAttributes *attribute = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]];
             CGPoint point = [self pointOfItem:item section:section page:page];
             CGSize cellSize = [self cellSizeOfViewModel:cellViewModel];
             attribute.frame = CGRectMake(point.x, point.y, cellSize.width, cellSize.height);
@@ -329,14 +337,14 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
     CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
     CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
     switch (self.scrollDirection) {
-        case UICollectionViewScrollDirectionVertical: {
+        case VMCollectionViewScrollDirectionVertical: {
             point.x = self.contentInset.left;
             point.y = page * self.pageSize.height + self.contentInset.top;
             minimumLineSpacing = self.minimumLineSpacing;
             minimumInteritemSpacing = self.minimumInteritemSpacing;
             break;
         }
-        case UICollectionViewScrollDirectionHorizontal: {
+        case VMCollectionViewScrollDirectionHorizontal: {
             point.x = page * self.pageSize.width + self.contentInset.left;
             point.y = self.contentInset.top;
             minimumLineSpacing = self.minimumInteritemSpacing;
@@ -347,6 +355,7 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
             break;
         }
     }
+    
     if (self.collectionView.pagingEnabled) {
         point.x += (column) * (minimumInteritemSpacing + cellSize.width);
         point.y += (item % (_rowCount * _columnCount)) / _columnCount * (minimumLineSpacing + cellSize.height);
@@ -385,12 +394,12 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof UICollectionViewLayout
         CGFloat minimumInteritemSpacing = 0.0f; // Cell左右间距
         CGFloat minimumLineSpacing = 0.0f;      // Cell上下间距
         switch (self.scrollDirection) {
-            case UICollectionViewScrollDirectionVertical: {
+            case VMCollectionViewScrollDirectionVertical: {
                 minimumLineSpacing = self.minimumLineSpacing;
                 minimumInteritemSpacing = self.minimumInteritemSpacing;
                 break;
             }
-            case UICollectionViewScrollDirectionHorizontal: {
+            case VMCollectionViewScrollDirectionHorizontal: {
                 minimumLineSpacing = self.minimumInteritemSpacing;
                 minimumInteritemSpacing = self.minimumLineSpacing;
                 break;

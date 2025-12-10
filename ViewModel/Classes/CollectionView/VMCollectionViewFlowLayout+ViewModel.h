@@ -1,15 +1,15 @@
 //
-//  UICollectionViewFlowLayout+ViewModel.h
+//  VMCollectionViewFlowLayout+ViewModel.h
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/7/18.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UICollectionViewFlowLayout (ViewModel)
+@interface VMCollectionViewFlowLayout (ViewModel)
 
 - (void)reloadIfNeed;
 

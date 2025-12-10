@@ -8,7 +8,7 @@
 #import "CollectionControllerViewModel.h"
 
 #import <VMOS/VMKit.h>
-#import <ViewModel/UICollectionView+ViewModel.h>
+#import <ViewModel/VMCollectionView+ViewModel.h>
 #import <ViewModel/CollectionViewModel.h>
 
 @implementation CollectionControllerViewModel

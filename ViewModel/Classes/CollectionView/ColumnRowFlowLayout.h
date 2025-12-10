@@ -5,19 +5,19 @@
 //  Created by ItghostFan on 2024/7/3.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
-#import "UICollectionViewFlowLayout+ViewModel.h"
-#import "CollectionViewModel.h"
+#import <ViewModel/VMCollectionViewFlowLayout+ViewModel.h>
+#import <ViewModel/CollectionViewModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ColumnRowFlowLayout : UICollectionViewFlowLayout
+@interface ColumnRowFlowLayout : VMCollectionViewFlowLayout
 
 @property (weak, nonatomic, nullable) CollectionViewModel *viewModel;
 @property (assign, nonatomic) NSUInteger columnCount;
 @property (assign, nonatomic) NSUInteger rowCount;
-@property (assign, nonatomic) UIEdgeInsets contentInset;
+@property (assign, nonatomic) VMEdgeInsets contentInset;
 
 @end
 

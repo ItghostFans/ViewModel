@@ -9,7 +9,7 @@
 
 #import <ViewModel/CellViewModel+CollectionView.h>
 
-@implementation CollectionViewModel (UICollectionViewDelegateFlowLayout)
+@implementation CollectionViewModel (CollectionViewDelegateFlowLayout)
 
 - (CGSize)collectionView:(id)collectionView layout:(id)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];

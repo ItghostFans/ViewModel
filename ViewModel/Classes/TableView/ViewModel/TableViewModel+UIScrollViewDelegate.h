@@ -7,6 +7,8 @@
 
 #import <ViewModel/TableViewModel.h>
 
+#if TARGET_OS_IPHONE
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TableViewModel (UIScrollViewDelegate) <UIScrollViewDelegate>
@@ -14,3 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#elif TARGET_OS_MAC
+#endif // #if TARGET_OS_IPHONE

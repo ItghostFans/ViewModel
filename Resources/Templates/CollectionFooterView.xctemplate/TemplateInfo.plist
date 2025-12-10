@@ -48,7 +48,7 @@
 			<key>Default</key>
 			<string>CollectionFooterView</string>
 			<key>FallbackHeader</key>
-			<string>#import &lt;UIKit/UIKit.h&gt;</string>
+			<string>#import &lt;VMOS/VMKit.h&gt;</string>
 			<key>Values</key>
 			<array>
 				<string>CollectionFooterView</string>

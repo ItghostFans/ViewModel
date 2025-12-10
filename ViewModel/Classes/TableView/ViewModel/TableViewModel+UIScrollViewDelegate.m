@@ -7,9 +7,14 @@
 
 #import <ViewModel/TableViewModel+UIScrollViewDelegate.h>
 
+#if TARGET_OS_IPHONE
+
 @implementation TableViewModel (UIScrollViewDelegate)
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 }
 
 @end
+
+#elif TARGET_OS_MAC
+#endif // #if TARGET_OS_IPHONE

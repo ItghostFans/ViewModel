@@ -38,9 +38,9 @@ Pod::Spec.new do |s|
   # }
   # s.public_header_files = 'Pod/Classes/**/*.h'
   
-  s.frameworks = 'UIKit', 'Foundation'
+#  s.frameworks = 'UIKit', 'Foundation'
   
+  s.dependency 'ReactiveObjC'
   s.dependency 'VMOS/Foundation'
   s.dependency 'VMOS/Kit'
-  s.dependency 'ReactiveObjC'
 end

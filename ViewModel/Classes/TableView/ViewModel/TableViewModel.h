@@ -5,7 +5,7 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
 #import <ViewModel/BaseViewModel.h>
 #import <ViewModel/SectionViewModel+TableView.h>
@@ -18,13 +18,19 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ITableViewModelDelegate <IBaseViewModelDelegate>
 @end
 
-@protocol UITableViewModelDataSource <UITableViewDataSource>
+@protocol ITableViewModelDataSource <
+#if TARGET_OS_IPHONE
+UITableViewDataSource
+#elif TARGET_OS_MAC
+NSTableViewDataSource
+#endif // #if TARGET_OS_IPHONE
+>
 @optional
 
-- (CellViewModel *)tableView:(UITableView * _Nonnull)tableView
+- (CellViewModel *)tableView:(VMTableView * _Nonnull)tableView
    cellViewModelForIndexPath:(NSIndexPath * _Nonnull)indexPath;
 
-- (SectionViewModel *)tableView:(UITableView *_Nonnull)tableView
+- (SectionViewModel *)tableView:(VMTableView *_Nonnull)tableView
      sectionViewModelForSection:(NSInteger)section;
 @end
 
@@ -38,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, nonnull) BaseViewModels *sectionViewModels;
 
-@property (weak, nonatomic, nullable) UITableView *tableView;
+@property (weak, nonatomic, nullable) VMTableView *tableView;
 
 @end
 

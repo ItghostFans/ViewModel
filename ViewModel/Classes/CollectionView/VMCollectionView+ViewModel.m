@@ -1,18 +1,18 @@
 //
-//  UICollectionView+ViewModel.m
+//  VMCollectionView+ViewModel.m
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/7/18.
 //
 
-#import "UICollectionView+ViewModel.h"
+#import "VMCollectionView+ViewModel.h"
 
-#import <ViewModel/UICollectionViewFlowLayout+ViewModel.h>
+#import <ViewModel/VMCollectionViewFlowLayout+ViewModel.h>
 #import <VMOS/VMFoundation.h>
 
 #import <objc/runtime.h>
 
-@implementation UICollectionView (ViewModel)
+@implementation VMCollectionView (ViewModel)
 
 + (void)load {
     static dispatch_once_t onceToken;
@@ -24,20 +24,25 @@
 - (void)performBatchUpdates:(void (^)(void))updates
                  completion:(void (^)(BOOL))completion
           animationsEnabled:(BOOL)animationsEnabled {
-    if (!animationsEnabled) {
-        [UIView setAnimationsEnabled:animationsEnabled];
-    }
-    [self viewModel_performBatchUpdates:updates completion:^(BOOL finished) {
+    void (^updateCompletion)(BOOL finished) = ^(BOOL finished) {
         if ([self.collectionViewLayout respondsToSelector:@selector(reloadIfNeed)]) {
-            [(UICollectionViewFlowLayout *)self.collectionViewLayout reloadIfNeed];
-        }
-        if (!animationsEnabled) {
-            [UIView setAnimationsEnabled:YES];
+            [(VMCollectionViewFlowLayout *)self.collectionViewLayout reloadIfNeed];
         }
         if (completion) {
             completion(finished);
         }
-    }];
+    };
+    if (!animationsEnabled) {
+#if TARGET_OS_IPHONE
+        [VMView performWithoutAnimation:^{
+            [self viewModel_performBatchUpdates:updates completion:updateCompletion];
+        }];
+#elif TARGET_OS_MAC
+        [self viewModel_performBatchUpdates:updates completion:updateCompletion];
+#endif // #if TARGET_OS_IPHONE
+    } else {
+        [self viewModel_performBatchUpdates:updates completion:updateCompletion];
+    }
 }
 
 #pragma mark - Swizzled

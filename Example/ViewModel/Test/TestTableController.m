@@ -12,7 +12,7 @@
 #import <Masonry/Masonry.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 
-#import <ViewModel/UITableView+ViewModel.h>
+#import <ViewModel/VMTableView+ViewModel.h>
 
 #import "TableViewModel.h"
 #import "TestCellViewModel.h"

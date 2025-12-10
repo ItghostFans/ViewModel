@@ -5,13 +5,13 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class SectionViewModel;
 
-@interface TableHeaderView : UITableViewHeaderFooterView
+@interface TableHeaderView : VMTableViewHeaderFooterView
 
 @property (weak, nonatomic, nullable) SectionViewModel *viewModel;
 

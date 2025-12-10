@@ -53,7 +53,7 @@
 - (void)registerHeaderClass:(Class)class {
     NSString *identifier = NSStringFromClass(class);
     if (identifier && ![_registeredHeaderIdentifiers containsObject:identifier]) {
-        [self.collectionView registerClass:class forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:identifier];
+        [self.collectionView registerClass:class forSupplementaryViewOfKind:VMCollectionElementKindSectionHeader withReuseIdentifier:identifier];
         [_registeredHeaderIdentifiers addObject:identifier];
     }
 }
@@ -61,14 +61,14 @@
 - (void)registerFooterClass:(Class)class {
     NSString *identifier = NSStringFromClass(class);
     if (identifier && ![_registeredFooterIdentifiers containsObject:identifier]) {
-        [self.collectionView registerClass:class forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:identifier];
+        [self.collectionView registerClass:class forSupplementaryViewOfKind:VMCollectionElementKindSectionFooter withReuseIdentifier:identifier];
         [_registeredFooterIdentifiers addObject:identifier];
     }
 }
 
 #pragma mark - Setter
 
-- (void)setCollectionView:(UICollectionView *)collectionView {
+- (void)setCollectionView:(VMCollectionView *)collectionView {
     @weakify(self);
     if (_disposableBag) {
         [_disposableBag dispose];

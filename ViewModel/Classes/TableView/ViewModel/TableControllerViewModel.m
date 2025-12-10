@@ -7,7 +7,7 @@
 
 #import "TableControllerViewModel.h"
 
-#import <ViewModel/UITableView+ViewModel.h>
+#import <ViewModel/VMTableView+ViewModel.h>
 #import <ViewModel/TableViewModel.h>
 
 @implementation TableControllerViewModel
@@ -23,7 +23,7 @@
 
 - (void)tableViewUpdate:(void(^)(void))update completion:(void (^)(BOOL finished))completion {
     if (self.tableViewModel.tableView) {
-        [self.tableViewModel.tableView performBatchUpdates:update rowAnimation:(UITableViewRowAnimationNone) completion:completion];
+        [self.tableViewModel.tableView performBatchUpdates:update rowAnimation:(VMTableViewRowAnimationNone) completion:completion];
     } else {
         if (update) {update();}
         if (completion) {completion(YES);}

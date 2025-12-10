@@ -1,15 +1,15 @@
 //
-//  UICollectionView+ViewModel.h
+//  VMCollectionView+ViewModel.h
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/7/18.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UICollectionView (ViewModel)
+@interface VMCollectionView (ViewModel)
 
 - (void)performBatchUpdates:(void (^)(void))updates
                  completion:(void (^)(BOOL))completion

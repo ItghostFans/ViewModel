@@ -1,23 +1,23 @@
 //
-//  UITableView+ViewModel.m
+//  VMTableView+ViewModel.m
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/7/10.
 //
 
-#import "UITableView+ViewModel.h"
+#import "VMTableView+ViewModel.h"
 
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ViewModel/TableViewModelCell.h>
-#import <ViewModel/TableViewModel+UITableViewModelDataSource.h>
+#import <ViewModel/TableViewModel+ITableViewModelDataSource.h>
 
 #import <objc/runtime.h>
 
-@interface UITableView ()
-@property (assign, nonatomic) UITableViewRowAnimation rowAnimation;
+@interface VMTableView ()
+@property (assign, nonatomic) VMTableViewRowAnimation rowAnimation;
 @end
 
-@implementation UITableView (ViewModel)
+@implementation VMTableView (ViewModel)
 
 + (void)load {
     static dispatch_once_t onceToken;
@@ -32,7 +32,7 @@
 
 - (void)viewModel_performBatchUpdates:(void (^)(void))updates completion:(void (^)(BOOL finished))completion {
     @weakify(self);
-    self.rowAnimation = UITableViewRowAnimationNone;
+    self.rowAnimation = VMTableViewRowAnimationNone;
     [self viewModel_performBatchUpdates:updates completion:^(BOOL finished) {
         @strongify(self);
         [self reloadIfNeed];
@@ -45,11 +45,15 @@
 #pragma mark - Public
 
 - (void)performBatchUpdates:(void (^)(void))updates
-               rowAnimation:(UITableViewRowAnimation)rowAnimation
+               rowAnimation:(VMTableViewRowAnimation)rowAnimation
                  completion:(void (^)(BOOL finished))completion {
     @weakify(self);
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
     self.rowAnimation = rowAnimation;
-    if (self.rowAnimation == UITableViewRowAnimationNone) {
+#pragma clang diagnostic pop
+    if (self.rowAnimation == VMTableViewRowAnimationNone) {
         [CATransaction begin];
         [CATransaction setDisableActions:YES];
     }
@@ -60,31 +64,34 @@
             completion(finished);
         }
     }];
-    if (self.rowAnimation == UITableViewRowAnimationNone) {
+    if (self.rowAnimation == VMTableViewRowAnimationNone) {
         [CATransaction commit];
     }
 }
 
 #pragma mark - Property
 
-- (UITableViewRowAnimation)rowAnimation {
+- (VMTableViewRowAnimation)rowAnimation {
     return [objc_getAssociatedObject(self, @selector(rowAnimation)) integerValue];
 }
 
-- (void)setRowAnimation:(UITableViewRowAnimation)rowAnimation {
+- (void)setRowAnimation:(VMTableViewRowAnimation)rowAnimation {
     objc_setAssociatedObject(self, @selector(rowAnimation), @(rowAnimation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - Layout
 
 - (void)reloadIfNeed {
+#if TARGET_OS_IPHONE
     NSArray<__kindof NSIndexPath *> *indexPathsForVisibleRows = self.indexPathsForVisibleRows;
     if ([self.dataSource respondsToSelector:@selector(tableView:cellViewModelForIndexPath:)]) {
         for (NSIndexPath *indexPath in indexPathsForVisibleRows) {
-            CellViewModel *cellViewModel = [(id<UITableViewModelDataSource>)self.dataSource tableView:self cellViewModelForIndexPath:indexPath];
+            CellViewModel *cellViewModel = [(id<ITableViewModelDataSource>)self.dataSource tableView:self cellViewModelForIndexPath:indexPath];
             [(TableViewModelCell *)[self cellForRowAtIndexPath:indexPath] setViewModel:cellViewModel];
         }
     }
+#elif TARGET_OS_MAC
+#endif // #if TARGET_OS_IPHONE
 }
 
 @end

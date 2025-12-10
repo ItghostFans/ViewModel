@@ -1,5 +1,5 @@
 //
-//  CollectionViewModel+UICollectionViewDelegate.h
+//  CollectionViewModel+CollectionViewDelegate.h
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/5/31.
@@ -9,12 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CollectionViewModel (CollectionViewDelegate)
+@interface CollectionViewModel (CollectionViewDelegate) <
 #if TARGET_OS_IPHONE
-<UICollectionViewDelegate>
+UICollectionViewDelegate
 #elif TARGET_OS_MAC
-<NSCollectionViewDelegate>
+NSCollectionViewDelegate
 #endif // #if TARGET_OS_IPHONE
+>
 
 @end
 

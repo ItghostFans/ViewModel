@@ -5,15 +5,15 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class TableControllerViewModel;
 
-@interface TableController : UIViewController
+@interface TableController : VMViewController
 
-@property (weak, nonatomic, readonly) UITableView *tableView;
+@property (weak, nonatomic, readonly) VMTableView *tableView;
 @property (strong, nonatomic, nullable) TableControllerViewModel *viewModel;
 
 @end

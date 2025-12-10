@@ -1,20 +1,20 @@
 //
-//  UITableView+ViewModel.h
+//  VMTableView+ViewModel.h
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/7/10.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UITableView (ViewModel)
+@interface VMTableView (ViewModel)
 
-@property (assign, nonatomic, readonly) UITableViewRowAnimation rowAnimation;
+@property (assign, nonatomic, readonly) VMTableViewRowAnimation rowAnimation;
 
 - (void)performBatchUpdates:(void (^)(void))updates
-               rowAnimation:(UITableViewRowAnimation)rowAnimation
+               rowAnimation:(VMTableViewRowAnimation)rowAnimation
                  completion:(void (^)(BOOL finished))completion;
 
 @end

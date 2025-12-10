@@ -5,7 +5,7 @@
 //  Created by ItghostFan on 2024/2/4.
 //
 
-#import <UIKit/UIKit.h>
+#import <VMOS/VMKit.h>
 
 #import <ViewModel/BaseViewModel.h>
 #import <ViewModel/SectionViewModel+CollectionView.h>
@@ -15,7 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class CellViewModel;
 @class VMCollectionView;
 
-@protocol ICollectionViewModelDelegate <UICollectionViewDelegate, IBaseViewModelDelegate>
+@protocol ICollectionViewModelDelegate <
+#if TARGET_OS_IPHONE
+UICollectionViewDelegate,
+#elif TARGET_OS_MAC
+NSCollectionViewDelegate,
+#endif // #if TARGET_OS_IPHONE
+IBaseViewModelDelegate>
 
 @end
 

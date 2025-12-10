@@ -9,11 +9,11 @@
 
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <ReactiveObjC/NSObject+RACKVOWrapper.h>
-#import <ViewModel/TableViewModel+UITableViewDelegate.h>
-#import <ViewModel/TableViewModel+UITableViewDataSource.h>
+#import <ViewModel/TableViewModel+TableViewDelegate.h>
+#import <ViewModel/TableViewModel+TableViewDataSource.h>
 #import <ViewModel/CellViewModel+TableView.h>
 #import <ViewModel/SectionViewModel+TableView.h>
-#import <ViewModel/UITableView+ViewModel.h>
+#import <ViewModel/VMTableView+ViewModel.h>
 
 @interface TableViewModel ()
 
@@ -38,7 +38,7 @@
 - (void)dealloc {
 }
 
-- (void)setTableView:(UITableView *)tableView {
+- (void)setTableView:(VMTableView *)tableView {
     @weakify(self);
     if (_disposableBag) {
         [_disposableBag dispose];
@@ -95,7 +95,6 @@
     NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
     NSArray *news = change[NSKeyValueChangeNewKey];
 //    NSArray *olds = change[NSKeyValueChangeOldKey];
-    [self.tableView beginUpdates];
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
             for (SectionViewModel *sectionViewModel in news) {
@@ -110,7 +109,11 @@
                 [self addKvoSectionViewModel:sectionViewModel];
                 sectionViewModel.tableViewModel = self;
             }
-            [self.tableView insertSections:indexes withRowAnimation:self.tableView.rowAnimation];
+            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
+                [self.tableView insertSections:indexes withRowAnimation:self.tableView.rowAnimation];
+#pragma clang diagnostic pop
             break;
         }
         case NSKeyValueChangeRemoval: {
@@ -118,7 +121,10 @@
                 SectionViewModel *sectionViewModel = self.sectionViewModels[idx];
                 sectionViewModel.tableViewModel = nil;
             }];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
             [self.tableView deleteSections:indexes withRowAnimation:self.tableView.rowAnimation];
+#pragma clang diagnostic pop
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -126,14 +132,16 @@
 //                [self addKvoSectionViewModel:sectionViewModel];
 //                sectionViewModel.tableViewModel = self;
 //            }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
             [self.tableView reloadSections:indexes withRowAnimation:self.tableView.rowAnimation];
+#pragma clang diagnostic pop
             break;
         }
         default: {
             break;
         }
     }
-    [self.tableView endUpdates];
 }
 
 - (void)onRowsChange:(NSDictionary<NSKeyValueChangeKey,id> *)change object:(id)object observer:(id)observer {
@@ -152,7 +160,6 @@
                 [self registerCellClass:cellViewModel.tableCellClass];
                 cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
-//            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:self.tableView.rowAnimation];
             break;
         }
         case NSKeyValueChangeInsertion: {
@@ -160,14 +167,20 @@
                 [self registerCellClass:cellViewModel.tableCellClass];
                 cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
             [self.tableView insertRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
+#pragma clang diagnostic pop
             break;
         }
         case NSKeyValueChangeRemoval: {
             for (CellViewModel *cellViewModel in olds) {
                 cellViewModel.tableSectionViewModel = nil;
             }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
             [self.tableView deleteRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
+#pragma clang diagnostic pop
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -175,7 +188,11 @@
                 [self registerCellClass:cellViewModel.tableCellClass];
                 cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
             [self.tableView reloadRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
+#pragma clang diagnostic pop
             break;
         }
         default: {

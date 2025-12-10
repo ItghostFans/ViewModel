@@ -12,7 +12,7 @@
 
 @interface TableController ()
 
-@property (weak, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) VMTableView *tableView;
 
 @end
 
@@ -28,18 +28,22 @@
 
 #pragma mark - Getter
 
-- (UITableView *)tableView {
+- (VMTableView *)tableView {
     if (_tableView) {
         return _tableView;
     }
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
+    VMTableView *tableView = [[VMTableView alloc] initWithFrame:CGRectZero style:VMTableViewStyleGrouped];
+    tableView.separatorStyle = VMTableViewCellSeparatorStyleNone;
+#pragma clang diagnostic pop
     _tableView = tableView;
     // 为了兼容部分iOS系统会有35像素的tableHeaderView的height占位。
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(UIScreen.mainScreen.bounds), 0.0001f)];
+    _tableView.tableHeaderView = [[VMTableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth([VMScreen mainScreen].bounds), 0.0001f)];
     // 为了兼容部分iOS系统会有20像素的tableFooterView的height占位。
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(UIScreen.mainScreen.bounds), 0.0001f)];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.tableFooterView = [[VMView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth([VMScreen mainScreen].bounds), 0.0001f)];
+    _tableView.backgroundColor = [VMColor clearColor];
     _tableView.allowsSelection = YES;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;

@@ -7,13 +7,13 @@
 
 #import "CollectionController.h"
 
-#import "CollectionViewModel.h"
-#import "CollectionControllerViewModel.h"
+#import <ViewModel/CollectionViewModel.h>
+#import <ViewModel/CollectionControllerViewModel.h>
 
 @interface CollectionController ()
 
-@property (weak, nonatomic) UICollectionViewFlowLayout *flowLayout;
-@property (weak, nonatomic) UICollectionView *collectionView;
+@property (weak, nonatomic) VMCollectionViewFlowLayout *flowLayout;
+@property (weak, nonatomic) VMCollectionView *collectionView;
 
 @end
 
@@ -31,27 +31,30 @@
 
 #pragma mark - Getter
 
-- (UICollectionViewFlowLayout *)flowLayout {
+- (VMCollectionViewFlowLayout *)flowLayout {
     if (_flowLayout) {
         return _flowLayout;
     }
-    UICollectionViewFlowLayout *flowLayout = UICollectionViewFlowLayout.new;
+    VMCollectionViewFlowLayout *flowLayout = [VMCollectionViewFlowLayout new];
     _flowLayout = flowLayout;
     _flowLayout.minimumLineSpacing = 0.0f;
     _flowLayout.itemSize = CGSizeMake(1.0f, 1.0f);
     _flowLayout.minimumInteritemSpacing = 5.0f;
     _flowLayout.minimumLineSpacing = 5.0f;
-    _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wenum-conversion"
+    _flowLayout.scrollDirection = VMCollectionViewScrollDirectionHorizontal;
+#pragma clang diagnostic pop
     return flowLayout;
 }
 
-- (UICollectionView *)collectionView {
+- (VMCollectionView *)collectionView {
     if (_collectionView) {
         return _collectionView;
     }
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
+    VMCollectionView *collectionView = [[VMCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.flowLayout];
     _collectionView = collectionView;
-    _collectionView.backgroundColor = UIColor.clearColor;
+    _collectionView.backgroundColor = [VMColor clearColor];
     return collectionView;
 }
 

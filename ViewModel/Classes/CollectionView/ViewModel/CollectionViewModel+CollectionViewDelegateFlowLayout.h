@@ -9,7 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CollectionViewModel (UICollectionViewDelegateFlowLayout) <UICollectionViewDelegateFlowLayout>
+@interface CollectionViewModel (CollectionViewDelegateFlowLayout) <
+#if TARGET_OS_IPHONE
+UICollectionViewDelegateFlowLayout
+#elif TARGET_OS_MAC
+NSCollectionViewDelegateFlowLayout
+#endif // #if TARGET_OS_IPHONE
+>
 
 @end
 

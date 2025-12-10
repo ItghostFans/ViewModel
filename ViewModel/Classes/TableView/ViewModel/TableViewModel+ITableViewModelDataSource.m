@@ -1,23 +1,23 @@
 //
-//  TableViewModel+UITableViewModelDataSource.m
+//  TableViewModel+ITableViewModelDataSource.m
 //  ViewModel
 //
 //  Created by ItghostFan on 2024/7/27.
 //
 
-#import "TableViewModel+UITableViewModelDataSource.h"
+#import "TableViewModel+ITableViewModelDataSource.h"
 
 #import <ViewModel/CellViewModel+TableView.h>
 
-@implementation TableViewModel (UITableViewModelDataSource)
+@implementation TableViewModel (ITableViewModelDataSource)
 
-- (CellViewModel *)tableView:(UITableView *)tableView cellViewModelForIndexPath:(NSIndexPath *)indexPath {
+- (CellViewModel *)tableView:(VMTableView *)tableView cellViewModelForIndexPath:(NSIndexPath *)indexPath {
     SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
     CellViewModel *cellViewModel = sectionViewModel[indexPath.row];
     return cellViewModel;
 }
 
-- (SectionViewModel *)tableView:(UITableView *)tableView sectionViewModelForSection:(NSInteger)section {
+- (SectionViewModel *)tableView:(VMTableView *)tableView sectionViewModelForSection:(NSInteger)section {
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
     return sectionViewModel;
 }

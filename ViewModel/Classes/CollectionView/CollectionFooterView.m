@@ -6,7 +6,8 @@
 //
 
 #import "CollectionFooterView.h"
-#import "SectionViewModel+CollectionView.h"
+
+#import <ViewModel/SectionViewModel+CollectionView.h>
 
 @implementation CollectionFooterView
 

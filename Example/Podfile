@@ -6,6 +6,7 @@ inhibit_all_warnings!
 platform :ios, ios_deployment_target
 
 target 'ViewModel_Example' do
+  pod 'VMOS/iOS', :path => '../../VMOS'
   pod 'ViewModel', :path => '../'
   pod 'Masonry'
 
