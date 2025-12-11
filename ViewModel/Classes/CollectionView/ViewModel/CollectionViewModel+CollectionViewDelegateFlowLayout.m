@@ -11,29 +11,29 @@
 
 @implementation CollectionViewModel (CollectionViewDelegateFlowLayout)
 
-- (CGSize)collectionView:(id)collectionView layout:(id)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(VMCollectionView *)collectionView layout:(VMCollectionView *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CellViewModel *cellViewModel = self.sectionViewModels[indexPath.section][indexPath.item];
-    return [cellViewModel collectionCellSizeForSize:[collectionView frame].size];
+    return [cellViewModel collectionCellSizeForSize:collectionView.frame.size];
 }
 
-- (CGFloat)collectionView:(id)collectionView layout:(id)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(VMCollectionView *)collectionView layout:(VMCollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
     return sectionViewModel.collectionMinimumInteritemSpacing;
 }
 
-- (CGFloat)collectionView:(id)collectionView layout:(id)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(VMCollectionView *)collectionView layout:(VMCollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
     return sectionViewModel.collectionMinimumLineSpacing;
 }
 
-- (CGSize)collectionView:(id)collectionView layout:(id)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+- (CGSize)collectionView:(VMCollectionView *)collectionView layout:(VMCollectionView *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return [sectionViewModel collectionHeaderSizeForSize:[collectionView frame].size];
+    return [sectionViewModel collectionHeaderSizeForSize:collectionView.frame.size];
 }
 
-- (CGSize)collectionView:(id)collectionView layout:(id)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+- (CGSize)collectionView:(VMCollectionView *)collectionView layout:(VMCollectionView *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     SectionViewModel *sectionViewModel = self.sectionViewModels[section];
-    return [sectionViewModel collectionFooterSizeForSize:[collectionView frame].size];
+    return [sectionViewModel collectionFooterSizeForSize:collectionView.frame.size];
 }
 
 @end
