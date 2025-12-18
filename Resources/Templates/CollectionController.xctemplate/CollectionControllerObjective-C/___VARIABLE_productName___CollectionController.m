@@ -12,9 +12,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = UIColor.whiteColor;
-    [self.view addSubview:self.collectionView];
-    self.collectionView.frame = self.view.bounds;
+    self.view.backgroundColor = [VMColor whiteColor];
+    [self.collectionView addToSuperview:(VMView *)self.view];
+    self.collectionView.scrollView.frame = self.view.bounds;
     self.viewModel.collectionViewModel.collectionView = self.collectionView;
 }
 

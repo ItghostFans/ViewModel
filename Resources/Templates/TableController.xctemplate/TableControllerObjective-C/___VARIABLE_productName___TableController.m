@@ -12,9 +12,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = UIColor.whiteColor;
-    [self.view addSubview:self.tableView];
-    self.tableView.frame = self.view.bounds;
+    self.view.backgroundColor = [VMColor whiteColor];
+    [self.tableView addToSuperview:(VMView *)self.view];
+    self.tableView.scrollView.frame = self.view.bounds;
     self.viewModel.tableViewModel.tableView = self.tableView;
 }
 

@@ -48,7 +48,7 @@
 			<key>Default</key>
 			<string>CollectionController</string>
 			<key>FallbackHeader</key>
-			<string>#import &lt;VMOS/VMKit.h&gt;</string>
+			<string>#import &lt;UIKit/UIKit.h&gt;</string>
 			<key>Values</key>
 			<array>
 				<string>CollectionController</string>

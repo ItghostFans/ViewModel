@@ -93,12 +93,14 @@
     if (column == NSNotFound) {
         return nil;
     }
-    return [tableView viewAtColumn:column row:row makeIfNecessary:NO];
+    CellViewModel *cellViewModel = self.sectionViewModels[column][row];
+    VMView *cell = [tableView makeViewWithIdentifier:NSStringFromClass(cellViewModel.tableCellClass) owner:nil];
+    return cell;
 }
-
-- (nullable NSTableRowView *)tableView:(VMTableView *)tableView rowViewForRow:(NSInteger)row {
-    return [tableView rowViewAtRow:row makeIfNecessary:NO];
-}
+//
+//- (nullable NSTableRowView *)tableView:(VMTableView *)tableView rowViewForRow:(NSInteger)row {
+//    return [tableView rowViewAtRow:row makeIfNecessary:NO];
+//}
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     return [self.sectionViewModels[0][row] tableCellHeightForWidth:CGRectGetWidth(tableView.frame)];

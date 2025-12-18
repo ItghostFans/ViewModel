@@ -11,7 +11,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
+        self.backgroundColor = [VMColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
                                                green:((self.hash & 0x0000FF00) >> 8)  / 255.0f
                                                 blue:((self.hash & 0x000000FF) >> 0)  / 255.0f
                                                alpha:1.0f];

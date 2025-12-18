@@ -8,10 +8,13 @@
 @end
 
 @implementation ___VARIABLE_productName___TableViewModelCell
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmismatched-parameter-types"
+- (instancetype)initWithStyle:(VMTableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+#pragma clang diagnostic ignored "-Wenum-conversion"
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.contentView.backgroundColor = [UIColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
+#pragma clang diagnostic pop
+        self.contentView.backgroundColor = [VMColor colorWithRed:((self.hash & 0x00FF0000) >> 16) / 255.0f
                                                            green:((self.hash & 0x0000FF00) >> 8)  / 255.0f
                                                             blue:((self.hash & 0x000000FF) >> 0)  / 255.0f
                                                            alpha:1.0f];
