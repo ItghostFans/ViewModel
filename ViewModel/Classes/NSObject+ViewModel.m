@@ -7,6 +7,7 @@
 
 #import "NSObject+ViewModel.h"
 
+#import <VMOS/VMWeakifyProxy.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 
 @implementation NSObject (ViewModel)
@@ -19,10 +20,13 @@
                                 insertionSel:(SEL)insertionSel
                                   removalSel:(SEL)removalSel
                               replacementSel:(SEL)replacementSel {
+    @weakify(observer, context);
+    /// observer会导致强引用，所以退出时，一定要dispose。
     return [[[object rac_valuesAndChangesForKeyPath:keyPath
-                                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial
-                                      observer:observer] takeUntil:observer.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+                                            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial
+                                           observer:observer] takeUntil:observer.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         RACTupleUnpack(id object OS_UNUSED, NSDictionary *change) = x;
+        @strongify(observer, context);
         NSKeyValueChange valueChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSMutableArray<__kindof NSNumber *> *indexes = NSMutableArray.new;
         [(NSIndexSet *)change[NSKeyValueChangeIndexesKey] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
