@@ -25,6 +25,16 @@ IBaseViewModelDelegate>
 
 @end
 
+@protocol ICollectionViewModelDataSource <
+#if TARGET_OS_IPHONE
+UICollectionViewDataSource
+#elif TARGET_OS_MAC
+NSCollectionViewDataSource
+#endif // #if TARGET_OS_IPHONE
+>
+
+@end
+
 @interface CollectionViewModel : BaseViewModel
 
 #pragma clang diagnostic push
