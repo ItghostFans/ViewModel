@@ -91,4 +91,27 @@
     return invocation;
 }
 
+- (void)vm_settingSel:(NSArray *)elements
+              context:(__weak NSObject * _Nullable)context {
+    NSAssert(NO, @"Check!");
+}
+
+- (void)vm_insertionSel:(NSArray *)elements
+                context:(__weak NSObject * _Nullable)context
+                indexes:(NSMutableArray<__kindof NSNumber *> *)indexes {
+    NSAssert(NO, @"Check!");
+}
+
+- (void)vm_removalSel:(NSArray *)elements
+              context:(__weak NSObject * _Nullable)context
+              indexes:(NSMutableArray<__kindof NSNumber *> *)indexes {
+    NSAssert(NO, @"Check!");
+}
+
+- (void)vm_replacementSel:(NSArray *)elements
+                  context:(__weak NSObject * _Nullable)context
+                  indexes:(NSMutableArray<__kindof NSNumber *> *)indexes {
+    NSAssert(NO, @"Check!");
+}
+
 @end

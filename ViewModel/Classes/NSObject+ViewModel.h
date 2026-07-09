@@ -23,19 +23,19 @@ NS_ASSUME_NONNULL_BEGIN
                               replacementSel:(SEL)replacementSel;
 
 - (void)vm_settingSel:(NSArray *)elements
-              context:(__weak NSObject * _Nullable)context;
+              context:(__weak NSObject * _Nullable)context NS_UNAVAILABLE;
 
 - (void)vm_insertionSel:(NSArray *)elements
                 context:(__weak NSObject * _Nullable)context
-                indexes:(NSMutableArray<__kindof NSNumber *> *)indexes;
+                indexes:(NSMutableArray<__kindof NSNumber *> *)indexes NS_UNAVAILABLE;
 
 - (void)vm_removalSel:(NSArray *)elements
               context:(__weak NSObject * _Nullable)context
-              indexes:(NSMutableArray<__kindof NSNumber *> *)indexes;
+              indexes:(NSMutableArray<__kindof NSNumber *> *)indexes NS_UNAVAILABLE;
 
 - (void)vm_replacementSel:(NSArray *)elements
                   context:(__weak NSObject * _Nullable)context
-                  indexes:(NSMutableArray<__kindof NSNumber *> *)indexes;
+                  indexes:(NSMutableArray<__kindof NSNumber *> *)indexes NS_UNAVAILABLE;
 
 @end
 

@@ -190,14 +190,22 @@
                 [self registerCellClass:cellViewModel.collectionCellClass];
                 cellViewModel.collectionSectionViewModel = _sectionViewModels[section];
             }
+#if TARGET_OS_IPHONE
             [self.collectionView insertItemsAtIndexPaths:indexPathes];
+#elif TARGET_OS_MAC
+            [self.collectionView insertItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
+#endif // #if TARGET_OS_IPHONE
             break;
         }
         case NSKeyValueChangeRemoval: {
             for (CellViewModel *cellViewModel in olds) {
                 cellViewModel.collectionSectionViewModel = nil;
             }
+#if TARGET_OS_IPHONE
             [self.collectionView deleteItemsAtIndexPaths:indexPathes];
+#elif TARGET_OS_MAC
+            [self.collectionView deleteItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
+#endif // #if TARGET_OS_IPHONE
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -205,7 +213,11 @@
                 [self registerCellClass:cellViewModel.collectionCellClass];
                 cellViewModel.collectionSectionViewModel = _sectionViewModels[section];
             }
+#if TARGET_OS_IPHONE
             [self.collectionView reloadItemsAtIndexPaths:indexPathes];
+#elif TARGET_OS_MAC
+            [self.collectionView reloadItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
+#endif // #if TARGET_OS_IPHONE
             break;
         }
         default: {
