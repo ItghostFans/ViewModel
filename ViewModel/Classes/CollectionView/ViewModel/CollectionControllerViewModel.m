@@ -22,9 +22,11 @@
 
 #pragma mark - Update CollectionView
 
-- (void)collectionViewUpdate:(void(^)(void))update completion:(void (^)(BOOL finished))completion {
+- (void)collectionViewUpdate:(void(^)(void))update
+           animationsEnabled:(BOOL)animationsEnabled
+                  completion:(void (^)(BOOL finished))completion {
     if (self.collectionViewModel.collectionView) {
-        [self.collectionViewModel.collectionView performBatchUpdates:update completion:completion animationsEnabled:NO];
+        [self.collectionViewModel.collectionView performBatchUpdates:update completion:completion animationsEnabled:animationsEnabled];
     } else {
         if (update) {update();}
         if (completion) {completion(YES);}

@@ -23,7 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameters:
 ///   - update: 更新Section和Cell的代码块
 ///   - completion: 更新完成的代码块
-- (void)collectionViewUpdate:(void(^ _Nullable)(void))update completion:(void (^ _Nullable)(BOOL finished))completion;
+///   - animationsEnabled: YES 带动画，NO 无动画。
+- (void)collectionViewUpdate:(void(^)(void))update
+           animationsEnabled:(BOOL)animationsEnabled
+                  completion:(void (^)(BOOL finished))completion;
 
 @end
 

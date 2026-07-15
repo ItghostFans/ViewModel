@@ -12,21 +12,19 @@
 
 @implementation NSObject (ViewModel)
 
-- (RACDisposable *)vm_arrayChangesForKeyPath:(NSString *)keyPath
-                                      object:(NSObject *)object
-                                    observer:(__weak NSObject *)observer
-                                     context:(__weak NSObject * _Nullable)context
-                                  settingSel:(SEL)settingSel
-                                insertionSel:(SEL)insertionSel
-                                  removalSel:(SEL)removalSel
-                              replacementSel:(SEL)replacementSel {
-    @weakify(observer, context);
-    /// observer会导致强引用，所以退出时，一定要dispose。
+- (RACDisposable *)vm_valuesAndChangesForKeyPath:(NSString *)keyPath
+                                          object:(NSObject *)object
+                                         context:(__weak NSObject * _Nullable)context
+                                      settingSel:(SEL)settingSel
+                                    insertionSel:(SEL)insertionSel
+                                      removalSel:(SEL)removalSel
+                                  replacementSel:(SEL)replacementSel {
+    @weakify(self, context);
     return [[[object rac_valuesAndChangesForKeyPath:keyPath
                                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial
-                                           observer:observer] takeUntil:observer.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
+                                           observer:self] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(RACTwoTuple<id,NSDictionary *> * _Nullable x) {
         RACTupleUnpack(id object OS_UNUSED, NSDictionary *change) = x;
-        @strongify(observer, context);
+        @strongify(self, context);
         NSKeyValueChange valueChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSMutableArray<__kindof NSNumber *> *indexes = NSMutableArray.new;
         [(NSIndexSet *)change[NSKeyValueChangeIndexesKey] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
@@ -44,27 +42,27 @@
         NSInvocation *invocation = nil;
         switch (valueChange) {
             case NSKeyValueChangeSetting: {
-                invocation = [self vm_invocationOfObject:observer selector:settingSel];
+                invocation = [self vm_invocationOfObject:self selector:settingSel];
                 [invocation setArgument:(void *)&news atIndex:paramIndex++];
                 [invocation setArgument:(void *)&context atIndex:paramIndex++];
                 break;
             }
             case NSKeyValueChangeInsertion: {
-                invocation = [self vm_invocationOfObject:observer selector:insertionSel];
+                invocation = [self vm_invocationOfObject:self selector:insertionSel];
                 [invocation setArgument:(void *)&news atIndex:paramIndex++];
                 [invocation setArgument:(void *)&context atIndex:paramIndex++];
                 [invocation setArgument:(void *)&indexes atIndex:paramIndex++];
                 break;
             }
             case NSKeyValueChangeRemoval: {
-                invocation = [self vm_invocationOfObject:observer selector:removalSel];
+                invocation = [self vm_invocationOfObject:self selector:removalSel];
                 [invocation setArgument:(void *)&olds atIndex:paramIndex++];
                 [invocation setArgument:(void *)&context atIndex:paramIndex++];
                 [invocation setArgument:(void *)&indexes atIndex:paramIndex++];
                 break;
             }
             case NSKeyValueChangeReplacement: {
-                invocation = [self vm_invocationOfObject:observer selector:replacementSel];
+                invocation = [self vm_invocationOfObject:self selector:replacementSel];
                 [invocation setArgument:(void *)&news atIndex:paramIndex++];
                 [invocation setArgument:(void *)&context atIndex:paramIndex++];
                 [invocation setArgument:(void *)&indexes atIndex:paramIndex++];

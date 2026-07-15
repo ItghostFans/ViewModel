@@ -14,14 +14,21 @@
 
 - (instancetype)initWithTableViewModel:(TableViewModel *)tableViewModel {
     if (self = [self init]) {
-        _tableViewModel = tableViewModel;
+        if (!tableViewModel) {
+            _tableViewModel = TableViewModel.new;
+        } else {
+            _tableViewModel = tableViewModel;
+        }
+        [_tableViewModel.sectionViewModels addViewModel:SectionViewModel.new];
     }
     return self;
 }
 
 #pragma mark - Update TableView
 
-- (void)tableViewUpdate:(void(^)(void))update completion:(void (^)(BOOL finished))completion {
+- (void)tableViewUpdate:(void(^)(void))update
+           rowAnimation:(VMTableViewRowAnimation)rowAnimation
+             completion:(void (^)(BOOL finished))completion {
     if (self.tableViewModel.tableView) {
         [self.tableViewModel.tableView performBatchUpdates:update rowAnimation:(VMTableViewRowAnimationNone) completion:completion];
     } else {
