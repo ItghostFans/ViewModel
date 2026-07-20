@@ -16,10 +16,10 @@
     if (self = [self init]) {
         if (!tableViewModel) {
             _tableViewModel = TableViewModel.new;
+            [_tableViewModel.sectionViewModels addViewModel:SectionViewModel.new];
         } else {
             _tableViewModel = tableViewModel;
         }
-        [_tableViewModel.sectionViewModels addViewModel:SectionViewModel.new];
     }
     return self;
 }

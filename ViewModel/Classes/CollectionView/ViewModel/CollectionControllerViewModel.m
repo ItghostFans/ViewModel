@@ -13,9 +13,14 @@
 
 @implementation CollectionControllerViewModel
 
-- (instancetype)initWithCollectionViewModel:(CollectionViewModel *)collectionViewModel {
+- (instancetype)initWithCollectionViewModel:(CollectionViewModel * _Nullable)collectionViewModel {
     if (self = [self init]) {
-        _collectionViewModel = collectionViewModel;
+        if (!collectionViewModel) {
+            _collectionViewModel = CollectionViewModel.new;
+            [_collectionViewModel.sectionViewModels addViewModel:SectionViewModel.new];
+        } else {
+            _collectionViewModel = collectionViewModel;
+        }
     }
     return self;
 }

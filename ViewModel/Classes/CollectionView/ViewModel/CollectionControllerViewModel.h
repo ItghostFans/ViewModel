@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, nullable, readonly) CollectionViewModel *collectionViewModel;
 
-- (instancetype)initWithCollectionViewModel:(CollectionViewModel *)collectionViewModel;
+- (instancetype)initWithCollectionViewModel:(CollectionViewModel * _Nullable)collectionViewModel;
 
 #pragma mark - Update CollectionView
 
