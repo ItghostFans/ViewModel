@@ -57,9 +57,9 @@
     [[self mutableArrayValueForKey:NSStringFromSelector(@selector(viewModels))] replaceObjectAtIndex:index withObject:viewModel];
 }
 
-//- (void)insertViewModels:(NSArray *)viewModels atIndexes:(NSIndexSet *)indexes {
-//    [[self mutableArrayValueForKey:NSStringFromSelector(@selector(viewModels))] insertObjects:viewModels atIndexes:indexes];
-//}
+- (void)insertViewModels:(NSArray *)viewModels toIndexes:(NSIndexSet *)indexes {
+    [[self mutableArrayValueForKey:NSStringFromSelector(@selector(viewModels))] insertObjects:viewModels atIndexes:indexes];
+}
 
 - (void)removeViewModel:(id)viewModel {
     [[self mutableArrayValueForKey:NSStringFromSelector(@selector(viewModels))] removeObject:viewModel];

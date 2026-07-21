@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addViewModel:(id _Nonnull)viewModel;
 - (void)insertViewModel:(id _Nonnull)viewModel atIndex:(NSUInteger)index;
 - (void)replaceViewModelAtIndex:(NSUInteger)index withViewModel:(id _Nonnull)viewModel;
-//- (void)insertViewModels:(NSArray *)viewModels atIndexes:(NSIndexSet *)indexes;   // iOS这个地方会导致死循环
+- (void)insertViewModels:(NSArray * _Nonnull)viewModels toIndexes:(NSIndexSet *)indexes;
 - (void)removeViewModel:(id _Nonnull)viewModel;
 - (void)removeViewModelsAtIndexes:(NSIndexSet * _Nonnull)indexes;
 - (void)removeViewModels:(NSArray * _Nonnull)viewModels;
