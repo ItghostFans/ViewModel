@@ -26,13 +26,13 @@
 
 #pragma mark - Update TableView
 
-- (void)tableViewUpdate:(void(^)(void))update
-           rowAnimation:(VMTableViewRowAnimation)rowAnimation
-             completion:(void (^)(BOOL finished))completion {
+- (void)tableViewUpdates:(void(^)(void))updates
+            rowAnimation:(VMTableViewRowAnimation)rowAnimation
+              completion:(void (^)(BOOL finished))completion {
     if (self.tableViewModel.tableView) {
-        [self.tableViewModel.tableView performBatchUpdates:update rowAnimation:(VMTableViewRowAnimationNone) completion:completion];
+        [self.tableViewModel.tableView performBatchUpdates:updates rowAnimation:(VMTableViewRowAnimationNone) completion:completion];
     } else {
-        if (update) {update();}
+        if (updates) {updates();}
         if (completion) {completion(YES);}
     }
 }

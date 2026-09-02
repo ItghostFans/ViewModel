@@ -95,8 +95,12 @@ typedef NSMutableDictionary<__kindof NSNumber *, __kindof VMCollectionViewLayout
 }
 
 - (NSArray<__kindof VMCollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
-    if (!self.collectionView || !_viewModel) {
+    if (nil == self.collectionView || nil == _viewModel) {
+#if TARGET_OS_IPHONE
         return nil;
+#elif TARGET_OS_MAC
+        return @[];
+#endif // #if TARGET_OS_IPHONE
     }
     NSMutableArray *layoutAttributes = NSMutableArray.new;
     [layoutAttributes addObjectsFromArray:_itemLayoutAttributes.allValues];

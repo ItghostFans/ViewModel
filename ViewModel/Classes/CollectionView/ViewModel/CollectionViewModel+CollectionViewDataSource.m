@@ -38,7 +38,7 @@
         SectionViewModel *sectionViewModel = self.sectionViewModels[indexPath.section];
         return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(sectionViewModel.collectionFooterClass) forIndexPath:indexPath];
     }
-    return nil;
+    return VMCollectionReusableView.new;
 }
 
 @end

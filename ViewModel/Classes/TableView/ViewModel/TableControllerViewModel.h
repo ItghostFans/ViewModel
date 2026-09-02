@@ -26,9 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - update: 更新Section和Cell的代码块。
 ///   - rowAnimation: 动画效果。
 ///   - completion: 更新完成的代码块。
-- (void)tableViewUpdate:(void(^ _Nullable)(void))update
-           rowAnimation:(VMTableViewRowAnimation)rowAnimation
-             completion:(void (^ _Nullable)(BOOL finished))completion;
+- (void)tableViewUpdates:(void(^ _Nullable)(void))update
+            rowAnimation:(VMTableViewRowAnimation)rowAnimation
+              completion:(void (^ _Nullable)(BOOL finished))completion;
 
 @end
 

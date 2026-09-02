@@ -69,7 +69,7 @@
     NSNumber *height;
     @synchronized (self.headerWidthHeights) {
         height = self.headerWidthHeights[@(width)];
-        if (!height) {
+        if (nil == height) {
             CGFloat headerHeight = [self.tableHeaderClass heightForWidth:width viewModel:self];
             height = @(headerHeight > 0.0f ? headerHeight : 0.0001f);
             self.headerWidthHeights[@(width)] = height;
@@ -83,7 +83,7 @@
     NSNumber *height;
     @synchronized (self.footerWidthHeights) {
         height = self.footerWidthHeights[@(width)];
-        if (!height) {
+        if (nil == height) {
             CGFloat footerHeight = [self.tableFooterClass heightForWidth:width viewModel:self];
             height = @(footerHeight > 0.0f ? footerHeight : 0.0001f);
             self.footerWidthHeights[@(width)] = height;

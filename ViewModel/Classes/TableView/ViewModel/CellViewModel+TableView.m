@@ -66,7 +66,7 @@
     NSNumber *height;
     @synchronized (self.widthHeights) {
         height = self.widthHeights[@(width)];
-        if (!height) {
+        if (nil == height) {
             height = @([self.tableCellClass heightForWidth:width viewModel:self]);
             self.widthHeights[@(width)] = height;
         }

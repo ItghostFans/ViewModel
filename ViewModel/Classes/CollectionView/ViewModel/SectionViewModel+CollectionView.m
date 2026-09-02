@@ -25,7 +25,7 @@
 
 - (NSMutableDictionary<__kindof NSValue *, __kindof NSValue *> *)sizeHeaderSizes {
     NSMutableDictionary<__kindof NSValue *, __kindof NSValue *> *sizeHeaderSizes = objc_getAssociatedObject(self, @selector(sizeHeaderSizes));
-    if (sizeHeaderSizes) {
+    if (nil == sizeHeaderSizes) {
         sizeHeaderSizes = NSMutableDictionary.new;
         objc_setAssociatedObject(self, @selector(sizeHeaderSizes), sizeHeaderSizes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
@@ -34,7 +34,7 @@
 
 - (NSMutableDictionary<__kindof NSValue *, __kindof NSValue *> *)sizeFooterSizes {
     NSMutableDictionary<__kindof NSValue *, __kindof NSValue *> *sizeFooterSizes = objc_getAssociatedObject(self, @selector(sizeFooterSizes));
-    if (sizeFooterSizes) {
+    if (nil == sizeFooterSizes) {
         sizeFooterSizes = NSMutableDictionary.new;
         objc_setAssociatedObject(self, @selector(sizeFooterSizes), sizeFooterSizes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
