@@ -57,6 +57,10 @@
     [[self mutableArrayValueForKey:NSStringFromSelector(@selector(viewModels))] replaceObjectAtIndex:index withObject:viewModel];
 }
 
+- (void)replaceViewModelsAtIndexes:(NSIndexSet *)indexes withViewModels:(NSArray * _Nonnull)viewModels {
+    [[self mutableArrayValueForKey:NSStringFromSelector(@selector(viewModels))] replaceObjectsAtIndexes:indexes withObjects:viewModels];
+}
+
 - (void)insertViewModels:(NSArray *)viewModels toIndexes:(NSIndexSet *)indexes {
     [[self mutableArrayValueForKey:NSStringFromSelector(@selector(viewModels))] insertObjects:viewModels atIndexes:indexes];
 }
@@ -83,6 +87,34 @@
 
 - (NSUInteger)indexOfViewModel:(id)viewModel {
     return [self.viewModels indexOfObject:viewModel];
+}
+
+- (void)enumerateViewModelsUsingBlock:(void (NS_NOESCAPE ^)(id viewModel, NSUInteger index, BOOL *stop))block {
+    [self.viewModels enumerateObjectsUsingBlock:block];
+}
+
+- (void)enumerateViewModelsWithOptions:(NSEnumerationOptions)options
+                            usingBlock:(void (NS_NOESCAPE ^)(id viewModel, NSUInteger index, BOOL *stop))block {
+    [self.viewModels enumerateObjectsWithOptions:options
+                                      usingBlock:block];
+}
+
+- (void)enumerateViewModelsAtIndexes:(NSIndexSet *)indexes
+                             options:(NSEnumerationOptions)options
+                          usingBlock:(void (NS_NOESCAPE ^)(id viewModel, NSUInteger index, BOOL *stop))block {
+    [self.viewModels enumerateObjectsAtIndexes:indexes
+                                       options:options
+                                    usingBlock:block];
+}
+
+- (NSUInteger)indexOfViewModelPassingTest:(BOOL (NS_NOESCAPE ^)(id viewModel, NSUInteger index, BOOL *stop))predicate {
+    return [self.viewModels indexOfObjectPassingTest:predicate];
+}
+
+- (NSUInteger)indexOfViewModelWithOptions:(NSEnumerationOptions)options
+                              passingTest:(BOOL (NS_NOESCAPE ^)(id viewModel, NSUInteger index, BOOL *stop))predicate {
+    return [self.viewModels indexOfObjectWithOptions:options
+                                         passingTest:predicate];
 }
 
 @end

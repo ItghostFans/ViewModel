@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 更新（增/删/排序等）collectionViewModel的Section和Cell都务必在这里操作。
 /// - Parameters:
-///   - update: 更新Section和Cell的代码块
-///   - completion: 更新完成的代码块
+///   - update: 更新Section和Cell的代码块，里面最好只执行SectionViewModel的一个更新方法，避免出现更新异常问题。
+///   - completion: 更新完成的代码块。
 ///   - animationsEnabled: YES 带动画，NO 无动画。
 - (void)collectionViewUpdates:(void(^)(void))updates
             animationsEnabled:(BOOL)animationsEnabled
