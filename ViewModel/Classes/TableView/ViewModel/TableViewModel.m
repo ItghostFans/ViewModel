@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSMutableSet *registeredCellIdentifiers;
 @property (strong, nonatomic) NSMutableSet *registeredHeaderFooterIdentifiers;
 
+@property (assign, nonatomic) VMTableViewRowAnimation rowAnimation;
+@property (copy, nonatomic, nullable) void(^batchCompletion)(BOOL finished);
 @property (strong, nonatomic, nullable) RACCompoundDisposable *disposableBag;
 
 @end
@@ -95,6 +97,9 @@
     NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
     NSArray *news = change[NSKeyValueChangeNewKey];
 //    NSArray *olds = change[NSKeyValueChangeOldKey];
+    
+    __weak __typeof__(self) weakify_self = self;
+    void (^updates)(void) = nil;
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
             for (SectionViewModel *sectionViewModel in news) {
@@ -109,11 +114,13 @@
                 [self addKvoSectionViewModel:sectionViewModel];
                 sectionViewModel.tableViewModel = self;
             }
-            
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wenum-conversion"
-                [self.tableView insertSections:indexes withRowAnimation:self.tableView.rowAnimation];
+                [self.tableView insertSections:indexes withRowAnimation:self.rowAnimation];
 #pragma clang diagnostic pop
+            };
             break;
         }
         case NSKeyValueChangeRemoval: {
@@ -121,10 +128,13 @@
                 SectionViewModel *sectionViewModel = self.sectionViewModels[idx];
                 sectionViewModel.tableViewModel = nil;
             }];
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wenum-conversion"
-            [self.tableView deleteSections:indexes withRowAnimation:self.tableView.rowAnimation];
+                [self.tableView deleteSections:indexes withRowAnimation:self.rowAnimation];
 #pragma clang diagnostic pop
+            };
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -132,16 +142,20 @@
 //                [self addKvoSectionViewModel:sectionViewModel];
 //                sectionViewModel.tableViewModel = self;
 //            }
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wenum-conversion"
-            [self.tableView reloadSections:indexes withRowAnimation:self.tableView.rowAnimation];
+                [self.tableView reloadSections:indexes withRowAnimation:self.rowAnimation];
 #pragma clang diagnostic pop
+            };
             break;
         }
         default: {
             break;
         }
     }
+    [self.tableView performBatchUpdates:updates rowAnimation:_rowAnimation completion:_batchCompletion];
 }
 
 - (void)onRowsChange:(NSDictionary<NSKeyValueChangeKey,id> *)change object:(id)object observer:(id)observer {
@@ -154,6 +168,8 @@
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
         [indexPathes addObject:[NSIndexPath indexPathForRow:idx inSection:section]];
     }];
+    __weak __typeof__(self) weakify_self = self;
+    void (^updates)(void) = nil;
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
             for (CellViewModel *cellViewModel in news) {
@@ -167,20 +183,26 @@
                 [self registerCellClass:cellViewModel.tableCellClass];
                 cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wenum-conversion"
-            [self.tableView insertRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
+                [self.tableView insertRowsAtIndexPaths:indexPathes withRowAnimation:self.rowAnimation];
 #pragma clang diagnostic pop
+            };
             break;
         }
         case NSKeyValueChangeRemoval: {
             for (CellViewModel *cellViewModel in olds) {
                 cellViewModel.tableSectionViewModel = nil;
             }
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wenum-conversion"
-            [self.tableView deleteRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
+                [self.tableView deleteRowsAtIndexPaths:indexPathes withRowAnimation:self.rowAnimation];
 #pragma clang diagnostic pop
+            };
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -188,17 +210,20 @@
                 [self registerCellClass:cellViewModel.tableCellClass];
                 cellViewModel.tableSectionViewModel = _sectionViewModels[section];
             }
-
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wenum-conversion"
-            [self.tableView reloadRowsAtIndexPaths:indexPathes withRowAnimation:self.tableView.rowAnimation];
+                [self.tableView reloadRowsAtIndexPaths:indexPathes withRowAnimation:self.rowAnimation];
 #pragma clang diagnostic pop
+            };
             break;
         }
         default: {
             break;
         }
     }
+    [self.tableView performBatchUpdates:updates rowAnimation:_rowAnimation completion:_batchCompletion];
 }
 
 #pragma mark - Private

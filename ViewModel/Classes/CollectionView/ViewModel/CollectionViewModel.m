@@ -21,6 +21,7 @@
 @property (strong, nonatomic, nonnull) NSMutableSet *registeredHeaderIdentifiers;
 @property (strong, nonatomic, nonnull) NSMutableSet *registeredFooterIdentifiers;
 
+@property (copy, nonatomic, nullable) void(^batchCompletion)(BOOL finished);
 @property (strong, nonatomic, nullable) RACCompoundDisposable *disposableBag;
 
 @end
@@ -127,6 +128,9 @@
     NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
     NSArray *news = change[NSKeyValueChangeNewKey];
 //    NSArray *olds = change[NSKeyValueChangeOldKey];
+    
+    __weak __typeof__(self) weakify_self = self;
+    void (^updates)(void) = nil;
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
             for (SectionViewModel *sectionViewModel in news) {
@@ -141,7 +145,10 @@
                 [self addKvoSectionViewModel:sectionViewModel];
                 sectionViewModel.collectionViewModel = self;
             }
-            [self.collectionView insertSections:indexes];
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
+                [self.collectionView insertSections:indexes];
+            };
             break;
         }
         case NSKeyValueChangeRemoval: {
@@ -149,7 +156,10 @@
                 SectionViewModel *sectionViewModel = self.sectionViewModels[idx];
                 sectionViewModel.collectionViewModel = nil;
             }];
-            [self.collectionView deleteSections:indexes];
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
+                [self.collectionView deleteSections:indexes];
+            };
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -157,13 +167,17 @@
 //                [self addKvoSectionViewModel:sectionViewModel];
 //                sectionViewModel.collectionViewModel = self;
 //            }
-            [self.collectionView reloadSections:indexes];
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
+                [self.collectionView reloadSections:indexes];
+            };
             break;
         }
         default: {
             break;
         }
     }
+    [self.collectionView performBatchUpdates:updates completion:_batchCompletion];
 }
 
 - (void)onItemsChange:(NSDictionary<NSKeyValueChangeKey,id> *)change object:(id)object observer:(id)observer {
@@ -176,6 +190,9 @@
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
         [indexPathes addObject:[NSIndexPath indexPathForRow:idx inSection:section]];
     }];
+    
+    __weak __typeof__(self) weakify_self = self;
+    void (^updates)(void) = nil;
     switch (valueChange) {
         case NSKeyValueChangeSetting: {
             for (CellViewModel *cellViewModel in news) {
@@ -190,22 +207,28 @@
                 [self registerCellClass:cellViewModel.collectionCellClass];
                 cellViewModel.collectionSectionViewModel = _sectionViewModels[section];
             }
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #if TARGET_OS_IPHONE
-            [self.collectionView insertItemsAtIndexPaths:indexPathes];
+                [self.collectionView insertItemsAtIndexPaths:indexPathes];
 #elif TARGET_OS_MAC
-            [self.collectionView insertItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
+                [self.collectionView insertItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
 #endif // #if TARGET_OS_IPHONE
+            };
             break;
         }
         case NSKeyValueChangeRemoval: {
             for (CellViewModel *cellViewModel in olds) {
                 cellViewModel.collectionSectionViewModel = nil;
             }
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #if TARGET_OS_IPHONE
-            [self.collectionView deleteItemsAtIndexPaths:indexPathes];
+                [self.collectionView deleteItemsAtIndexPaths:indexPathes];
 #elif TARGET_OS_MAC
-            [self.collectionView deleteItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
+                [self.collectionView deleteItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
 #endif // #if TARGET_OS_IPHONE
+            };
             break;
         }
         case NSKeyValueChangeReplacement: {
@@ -213,17 +236,21 @@
                 [self registerCellClass:cellViewModel.collectionCellClass];
                 cellViewModel.collectionSectionViewModel = _sectionViewModels[section];
             }
+            updates = ^{
+                __strong __typeof__(weakify_self) self = weakify_self;
 #if TARGET_OS_IPHONE
-            [self.collectionView reloadItemsAtIndexPaths:indexPathes];
+                [self.collectionView reloadItemsAtIndexPaths:indexPathes];
 #elif TARGET_OS_MAC
-            [self.collectionView reloadItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
+                [self.collectionView reloadItemsAtIndexPaths:[NSSet setWithArray:indexPathes]];
 #endif // #if TARGET_OS_IPHONE
+            };
             break;
         }
         default: {
             break;
         }
     }
+    [self.collectionView performBatchUpdates:updates completion:_batchCompletion];
 }
 
 @end

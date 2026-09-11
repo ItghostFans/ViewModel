@@ -19,9 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///       注意不要在不要在这里触发TableView的数据刷新，否则会导致Exception。
 ///   - rowAnimation: 执行更新想要执行的动画方式。
 ///   - completion: 更新回调。
-- (void)performBatchUpdates:(void (^)(void))updates
+- (void)performBatchUpdates:(void (^ _Nullable)(void))updates
                rowAnimation:(VMTableViewRowAnimation)rowAnimation
-                 completion:(void (^)(BOOL finished))completion;
+                 completion:(void (^ _Nullable)(BOOL finished))completion;
 
 @end
 

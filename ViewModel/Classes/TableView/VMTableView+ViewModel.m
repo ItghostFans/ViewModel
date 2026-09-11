@@ -44,9 +44,9 @@
 
 #pragma mark - Public
 
-- (void)performBatchUpdates:(void (^)(void))updates
+- (void)performBatchUpdates:(void (^ _Nullable)(void))updates
                rowAnimation:(VMTableViewRowAnimation)rowAnimation
-                 completion:(void (^)(BOOL finished))completion {
+                 completion:(void (^ _Nullable)(BOOL finished))completion {
     @weakify(self);
     
 #pragma clang diagnostic push

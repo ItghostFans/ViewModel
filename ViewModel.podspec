@@ -32,6 +32,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '12.0'
 
   s.source_files = 'ViewModel/Classes/**/*'
+  s.private_header_files = 'ViewModel/Classes/Private/**/*.h'
   
   # s.resource_bundles = {
   #   'ViewModel' => ['ViewModel/Assets/*.png']

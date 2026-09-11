@@ -9,7 +9,7 @@
 
 #import <VMOS/VMKit.h>
 #import <ViewModel/VMCollectionView+ViewModel.h>
-#import <ViewModel/CollectionViewModel.h>
+#import <ViewModel/CollectionViewModel+Private.h>
 
 @implementation CollectionControllerViewModel
 
@@ -30,12 +30,13 @@
 - (void)collectionViewUpdates:(void(^)(void))updates
             animationsEnabled:(BOOL)animationsEnabled
                    completion:(void (^)(BOOL finished))completion {
-    if (self.collectionViewModel.collectionView) {
-        [self.collectionViewModel.collectionView performBatchUpdates:updates completion:completion animationsEnabled:animationsEnabled];
-    } else {
-        if (updates) {updates();}
-        if (completion) {completion(YES);}
-    }
+//    if (self.collectionViewModel.collectionView) {
+//        [self.collectionViewModel.collectionView performBatchUpdates:updates completion:completion animationsEnabled:animationsEnabled];
+//    } else {
+    self.collectionViewModel.batchCompletion = completion;
+    if (updates) {updates();}
+//    if (completion) {completion(YES);}
+//    }
 }
 
 @end
