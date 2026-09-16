@@ -178,6 +178,7 @@
         }
     }
     [self.collectionView performBatchUpdates:updates completion:_batchCompletion];
+    _batchCompletion = nil;
 }
 
 - (void)onItemsChange:(NSDictionary<NSKeyValueChangeKey,id> *)change object:(id)object observer:(id)observer {
@@ -251,6 +252,7 @@
         }
     }
     [self.collectionView performBatchUpdates:updates completion:_batchCompletion];
+    _batchCompletion = nil;
 }
 
 @end

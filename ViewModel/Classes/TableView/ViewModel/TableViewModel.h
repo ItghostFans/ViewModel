@@ -15,7 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class CellViewModel;
 @class TableViewModel;
 
-@protocol ITableViewModelDelegate <IBaseViewModelDelegate>
+@protocol ITableViewModelDelegate <
+#if TARGET_OS_IPHONE
+UITableViewDelegate,
+#elif TARGET_OS_MAC
+NSTableViewDelegate,
+#endif // #if TARGET_OS_IPHONE
+IBaseViewModelDelegate>
 @end
 
 @protocol ITableViewModelDataSource <

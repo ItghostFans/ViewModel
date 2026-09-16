@@ -103,6 +103,19 @@
     return [self.sectionViewModels[0][row] tableCellHeightForWidth:CGRectGetWidth(tableView.frame)];
 }
 
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    NSTableView *tableView = notification.object;
+    if (self.tableView == tableView) {
+        NSIndexSet *selectedRowIndexes = tableView.selectedRowIndexes;
+        if (selectedRowIndexes.count == 1) {
+            CellViewModel *cellViewModel = self.sectionViewModels[0][selectedRowIndexes.firstIndex];
+            if (cellViewModel.deselectAfterDidSelect) {
+                [tableView deselectRow:selectedRowIndexes.firstIndex];
+            }
+        }
+    }
+}
+
 #endif // #if TARGET_OS_IPHONE
 
 @end
